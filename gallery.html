@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - YOUR NAME</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="gallery-page">
+    <!-- Navigation Header -->
+    <nav class="main-nav">
+        <div class="nav-content">
+            <h1 class="nav-name">YifanStudio</h1>
+            <div class="nav-links">
+                <a href="gallery.html" class="nav-link active">GALLERY</a>
+                <a href="about.html" class="nav-link">ABOUT</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Gallery Signature Section -->
+    <section class="gallery-signature">
+        <div class="signature-content">
+            <!--<h1 class="signature-name">YOUR NAME</h1>-->
+            <img src="yifanzhao-signature.png" alt="Yifan Zhao Signature" class="signature-img" style="margin-bottom: 1.5rem;" />
+        </div>
+    </section>
+
+    <!-- Works Carousel Section -->
+    <section class="works-carousel-section">
+        <!-- Central Focused Carousel -->
+        <div class="centered-carousel-container">
+            <!-- Hidden Navigation Areas -->
+            <div class="carousel-nav-areas">
+                <div class="nav-area nav-area-left" id="navLeft"></div>
+                <div class="nav-area nav-area-right" id="navRight"></div>
+            </div>
+            
+            <div class="carousel-track" id="carouselTrack">
+                <!-- 项目将通过JavaScript动态加载 -->
+            </div>
+        </div>
+
+        <!-- Carousel Indicators Only -->
+        <div class="carousel-indicators-container">
+            <div class="carousel-indicators" id="carouselIndicators"></div>
+        </div>
+    </section>
+
+    <!-- View All Works Section -->
+    <section class="view-all-works">
+        <a href="index.html" class="view-all-link">
+            <div class="view-all-content">
+                <div class="view-all-main">
+                    <h3>Explore Complete Portfolio</h3>
+                    <p>Browse all projects in a comprehensive archive view with detailed categorization and search functionality.</p>
+                </div>
+                <div class="view-all-indicator">
+                    <span class="indicator-text">View All Works</span>
+                    <span class="indicator-arrow">→</span>
+                </div>
+            </div>
+        </a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="mailto:yzhao09@risd.edu">EMAIL</a>
+                <a href="https://www.linkedin.com/in/yifan-zhao-bb7b652b6" target="_blank">LINKEDIN</a>
+                <a href="resume.pdf" download>RESUME</a>
+            </div>
+            <p class="footer-text">© 2025 YiFanStudio. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script src="projects-data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 

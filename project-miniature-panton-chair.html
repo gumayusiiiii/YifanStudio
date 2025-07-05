@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miniature Panton Chair - YOUR NAME</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .project-page {
+            background: var(--bg-color);
+            color: var(--text-color);
+            padding-top: 80px;
+            opacity: 0;
+            transform: translateX(50px);
+            animation: slideInFromRight 0.8s ease-out forwards;
+        }
+        
+        @keyframes slideInFromRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .project-page.slide-out {
+            animation: slideOutToLeft 0.6s ease-in forwards;
+        }
+        
+        @keyframes slideOutToLeft {
+            to {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+        }
+        
+        .content-section {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        .content-section:nth-child(1) { animation-delay: 0.2s; }
+        .content-section:nth-child(2) { animation-delay: 0.4s; }
+        .content-section:nth-child(3) { animation-delay: 0.6s; }
+        .content-section:nth-child(4) { animation-delay: 0.8s; }
+        .content-section:nth-child(5) { animation-delay: 1.0s; }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .project-header {
+            padding: 4rem 8rem 2rem 2rem;
+            text-align: left;
+            max-width: 1400px;
+            margin: 0 auto;
+            border-bottom: 1px solid var(--border-color);
+            opacity: 0;
+            transform: translateY(-30px);
+            animation: fadeInDown 0.8s ease-out 0.1s forwards;
+            position: relative;
+        }
+        
+        @media (max-width: 768px) {
+            .project-header {
+                padding: 4rem 2rem 2rem;
+            }
+        }
+        
+        @keyframes fadeInDown {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .project-title {
+            font-size: 4rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            color: var(--text-color);
+        }
+        
+        .project-subtitle {
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 3rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .project-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .meta-item {
+            text-align: left;
+        }
+        
+        .meta-label {
+            font-weight: 400;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+        
+        .meta-value {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-color);
+        }
+        
+        .project-tags {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .tag {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+        
+        .tag:hover {
+            border-color: var(--text-color);
+            color: var(--text-color);
+        }
+        
+        .project-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 8rem 4rem 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .project-content {
+                padding: 4rem 2rem;
+            }
+        }
+        
+        .content-section {
+            margin-bottom: 6rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--text-color);
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .hero-image {
+            width: 100%;
+            max-width: 100%;
+            margin: 3rem 0;
+            display: block;
+            height: 600px;
+            object-fit: cover;
+            border: 1px solid var(--border-color);
+        }
+        
+        .project-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 0 4rem 0;
+            font-weight: 300;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin: 4rem 0;
+        }
+        
+        .feature-item {
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+        
+        .feature-item:hover {
+            border-color: var(--text-color);
+        }
+        
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .feature-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-light);
+            font-weight: 300;
+        }
+        
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 1rem;
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+        
+        .back-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.8rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .back-button:hover {
+            background: var(--text-color);
+            color: var(--bg-color);
+        }
+        
+        .materials-section {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 3rem;
+            border: 1px solid var(--border-color);
+            margin: 4rem 0;
+        }
+        
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .material-item {
+            text-align: center;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+        
+        .material-item:hover {
+            border-color: var(--text-color);
+        }
+        
+        .material-name {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .material-purpose {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 300;
+        }
+        
+        .process-timeline {
+            margin: 4rem 0;
+        }
+        
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+        
+        .timeline-item:hover {
+            border-color: var(--text-color);
+        }
+        
+        .timeline-step {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--text-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .timeline-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-light);
+            font-weight: 300;
+        }
+        
+        .quote-section {
+            background: rgba(139, 0, 0, 0.05);
+            padding: 4rem;
+            border-left: 4px solid #8B0000;
+            margin: 4rem 0;
+            font-style: italic;
+        }
+        
+        .quote-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-color);
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+        
+        .quote-author {
+            font-size: 1rem;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+        
+        /* 新增并排图片样式 */
+        .parallel-img-row {
+            display: flex;
+            gap: 3rem;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 3rem 0 4rem 0;
+            flex-wrap: wrap;
+        }
+        .parallel-img-row img {
+            max-width: 480px;
+            width: 100%;
+            height: auto;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+            border: 1px solid var(--border-color);
+            background: #fff;
+            object-fit: contain;
+            transition: none;
+        }
+        @media (max-width: 1100px) {
+            .parallel-img-row {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            .parallel-img-row img {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="project-page">
+        <a href="index.html" class="back-button">← Back</a>
+        
+        <header class="project-header">
+            <h1 class="project-title">Miniature Panton Chair</h1>
+            <p class="project-subtitle">Hand-Carved Tribute / Wood Sculpture / Design Homage</p>
+            
+            <div class="project-meta">
+                <div class="meta-item">
+                    <div class="meta-label">Category</div>
+                    <div class="meta-value">Craftsmanship & Sculpture</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Year</div>
+                    <div class="meta-value">2023</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Duration</div>
+                    <div class="meta-value">1 Month</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Role</div>
+                    <div class="meta-value">Sculptor & Craftsman</div>
+                </div>
+            </div>
+            
+            <div class="project-tags">
+                <span class="tag">Wood Carving</span>
+                <span class="tag">Sculpture</span>
+                <span class="tag">Design Tribute</span>
+                <span class="tag">Maple</span>
+                <span class="tag">Handcraft</span>
+            </div>
+        </header>
+        
+        <main class="project-content">
+            <!-- 页面头部并排hero图 -->
+            <section class="content-section" style="margin-bottom: 0;">
+                <div class="parallel-img-row">
+                    <img src="Miniature Panton Chair/hero1.jpg" alt="Hero 1">
+                    <img src="Miniature Panton Chair/hero2.jpg" alt="Hero 2">
+                </div>
+            </section>
+            
+            <section class="content-section">
+                <div class="project-description">
+                    <p>This project is a hand-carved miniature Panton Chair, paying tribute to Verner Panton's classic single-piece chair design.</p>
+                    <p>Selected maple wood, meticulously hand-carved and polished multiple times, precisely recreating the original "S" curve and ergonomic proportions.</p>
+                    <p>The surface features a high-gloss red lacquer finish, preserving the warmth of the wood while echoing a modernist style.</p>
+                </div>
+            </section>
+            
+            <section class="content-section">
+                <div class="quote-section">
+                    <div class="quote-text">
+                        Verner Panton：<br>"Sitting should be a delight, not a duty."
+                    </div>
+                    <div class="quote-author"></div>
+                </div>
+            </section>
+            
+            <!-- Design Philosophy 和 Materials & Tools 之间插入process图 -->
+            <section class="content-section" style="margin-bottom: 0;">
+                <div class="parallel-img-row">
+                    <img src="Miniature Panton Chair/process1.jpg" alt="Process 1">
+                    <img src="Miniature Panton Chair/process2.jpg" alt="Process 2">
+                </div>
+            </section>
+            
+            <section class="content-section">
+                <h2 class="section-title">Design Philosophy</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <h3 class="feature-title">Design Homage</h3>
+                        <p class="feature-description">A heartfelt tribute to Verner Panton's revolutionary single-piece chair design that forever changed furniture design thinking and manufacturing possibilities.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3 class="feature-title">Precision Craftsmanship</h3>
+                        <p class="feature-description">Meticulous attention to detail using specialized micro-tools and constant reference to full-scale drawings to maintain exact proportions and ergonomic accuracy.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3 class="feature-title">Material Dialogue</h3>
+                        <p class="feature-description">The bold crimson finish creates a conversation between natural wood warmth and avant-garde modernism, honoring Panton's fearless approach to color and form.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="content-section">
+                <h2 class="section-title">Materials & Tools</h2>
+                <div class="materials-section">
+                    <div class="materials-grid">
+                        <div class="material-item">
+                            <div class="material-name">Tight-Grained Maple</div>
+                            <div class="material-purpose">Selected for fine carving and stability</div>
+                        </div>
+                        <div class="material-item">
+                            <div class="material-name">Micro-Gouges</div>
+                            <div class="material-purpose">Precision carving tools for fine detail</div>
+                        </div>
+                        <div class="material-item">
+                            <div class="material-name">Fine Rasps</div>
+                            <div class="material-purpose">Smoothing and shaping surfaces</div>
+                        </div>
+                        <div class="material-item">
+                            <div class="material-name">Sanding Sticks</div>
+                            <div class="material-purpose">1500-3000 grit for final finish</div>
+                        </div>
+                        <div class="material-item">
+                            <div class="material-name">High-Gloss Lacquer</div>
+                            <div class="material-purpose">Bold crimson finish with sealer</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Materials & Tools 和 Crafting Process 之间插入sketch图 -->
+            <section class="content-section" style="margin-bottom: 0;">
+                <div class="parallel-img-row">
+                    <img src="Miniature Panton Chair/sketch1.png" alt="Sketch 1">
+                    <img src="Miniature Panton Chair/sketch2.png" alt="Sketch 2">
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+    <script>
+        // 页面退出动画
+        document.querySelector('.back-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('.project-page').classList.add('slide-out');
+            setTimeout(() => {
+                window.location.href = this.href;
+            }, 600);
+        });
+    </script>
+</body>
+</html> 

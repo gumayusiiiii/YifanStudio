@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Works - YOUR NAME</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="works-archive-page">
+    <!-- Navigation Header -->
+    <nav class="main-nav">
+        <div class="nav-content">
+            <h1 class="nav-name">YifanStudio</h1>
+            <div class="nav-links">
+                <a href="gallery.html" class="nav-link">GALLERY</a>
+                <a href="about.html" class="nav-link">ABOUT</a>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <!-- Archive Header -->
+    <section class="archive-header">
+        <div class="archive-header-content">
+            <h1 class="archive-title">ALL WORKS</h1>
+            <div class="archive-stats">
+                <span class="stat-item">11 PROJECTS</span>
+                <span class="stat-divider">•</span>
+                <span class="stat-item">2020 - 2025</span>
+                <span class="stat-divider">•</span>
+                <span class="stat-item">VARIOUS DISCIPLINES</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Works Archive Grid -->
+    <section class="works-archive">
+        <div class="archive-container">
+            <div class="works-grid-archive">
+                <!-- 项目将通过JavaScript动态加载 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="mailto:yzhao09@risd.edu">EMAIL</a>
+                <a href="https://www.linkedin.com/in/yifan-zhao-bb7b652b6" target="_blank">LINKEDIN</a>
+                <a href="resume.pdf" download>RESUME</a>
+            </div>
+            <p class="footer-text">© 2025 YiFanStudio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="projects-data.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // 添加平滑页面过渡效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const smoothLinks = document.querySelectorAll('.smooth-transition');
+            
+            smoothLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetUrl = this.getAttribute('href');
+                    
+                    // 添加退出动画
+                    document.body.style.opacity = '0';
+                    document.body.style.transform = 'translateX(-30px)';
+                    document.body.style.transition = 'all 0.6s ease';
+                    
+                    // 延迟跳转
+                    setTimeout(() => {
+                        window.location.href = targetUrl;
+                    }, 600);
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

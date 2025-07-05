@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hull Model - YOUR NAME</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .project-page {
+            background: var(--bg-color);
+            color: var(--text-color);
+            padding-top: 80px;
+            opacity: 0;
+            transform: translateX(50px);
+            animation: slideInFromRight 0.8s ease-out forwards;
+        }
+        
+        @keyframes slideInFromRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .project-page.slide-out {
+            animation: slideOutToLeft 0.6s ease-in forwards;
+        }
+        
+        @keyframes slideOutToLeft {
+            to {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+        }
+        
+        .content-section {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        .content-section:nth-child(1) { animation-delay: 0.2s; }
+        .content-section:nth-child(2) { animation-delay: 0.4s; }
+        .content-section:nth-child(3) { animation-delay: 0.6s; }
+        .content-section:nth-child(4) { animation-delay: 0.8s; }
+        .content-section:nth-child(5) { animation-delay: 1.0s; }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .project-header {
+            padding: 4rem 8rem 2rem 2rem;
+            text-align: left;
+            max-width: 1400px;
+            margin: 0 auto;
+            border-bottom: 1px solid var(--border-color);
+            opacity: 0;
+            transform: translateY(-30px);
+            animation: fadeInDown 0.8s ease-out 0.1s forwards;
+            position: relative;
+        }
+        
+        @media (max-width: 768px) {
+            .project-header {
+                padding: 4rem 2rem 2rem;
+            }
+        }
+        
+        @keyframes fadeInDown {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .project-title {
+            font-size: 4rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            color: var(--text-color);
+        }
+        
+        .project-subtitle {
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 3rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .project-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .meta-item {
+            text-align: left;
+        }
+        
+        .meta-label {
+            font-weight: 400;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+        
+        .meta-value {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-color);
+        }
+        
+        .project-tags {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .tag {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+        
+        .tag:hover {
+            border-color: var(--text-color);
+            color: var(--text-color);
+        }
+        
+        .project-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 8rem 4rem 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .project-content {
+                padding: 4rem 2rem;
+            }
+        }
+        
+        .content-section {
+            margin-bottom: 6rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--text-color);
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .hero-image {
+            width: 50%;
+            max-width: 700px;
+            margin: 3rem auto;
+            display: block;
+            /* height: 600px; */
+            object-fit: contain;
+            border: 1px solid var(--border-color);
+        }
+        
+        .project-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 0 4rem 0;
+            font-weight: 300;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin: 4rem 0;
+        }
+        
+        .feature-item {
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+        
+        .feature-item:hover {
+            border-color: var(--text-color);
+        }
+        
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .feature-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-light);
+            font-weight: 300;
+        }
+        
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 1rem;
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+        
+        .back-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.8rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .back-button:hover {
+            background: var(--text-color);
+            color: var(--bg-color);
+        }
+        
+        .materials-section {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 3rem;
+            border: 1px solid var(--border-color);
+            margin: 4rem 0;
+        }
+        
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .material-item {
+            text-align: center;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+        
+        .material-item:hover {
+            border-color: var(--text-color);
+        }
+        
+        .material-name {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .material-purpose {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 300;
+        }
+        
+        .process-timeline {
+            margin: 4rem 0;
+        }
+        
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+        
+        .timeline-item:hover {
+            border-color: var(--text-color);
+        }
+        
+        .timeline-step {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--text-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .timeline-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-light);
+            font-weight: 300;
+        }
+        
+        .upcycling-section {
+            background: rgba(139, 69, 19, 0.05);
+            padding: 4rem;
+            border-left: 4px solid #8B4513;
+            margin: 4rem 0;
+        }
+        
+        .upcycling-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .upcycling-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            font-weight: 300;
+        }
+        
+        .timeline-vertical {
+            position: relative;
+            margin: 4rem 0 4rem 0;
+            padding: 2rem 0;
+            width: 100%;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .timeline-vertical::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--border-color);
+            transform: translateX(-50%);
+            z-index: 0;
+        }
+        .timeline-step-vertical {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin: 2.5rem 0;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 18px;
+            height: 18px;
+            background: var(--bg-color);
+            border: 4px solid var(--text-color);
+            border-radius: 50%;
+            z-index: 2;
+        }
+        .timeline-content {
+            width: 44%;
+            background: rgba(255,255,255,0.01);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem 2rem;
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--text-light);
+            z-index: 1;
+        }
+        .timeline-content.left {
+            margin-right: auto;
+            text-align: right;
+        }
+        .timeline-content.right {
+            margin-left: auto;
+            text-align: left;
+        }
+        .timeline-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-color);
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+        .timeline-desc {
+            font-size: 1rem;
+            color: var(--text-light);
+            font-weight: 300;
+        }
+        @media (max-width: 900px) {
+            .timeline-content {
+                width: 80%;
+                padding: 1rem 1rem;
+            }
+            .timeline-vertical::before {
+                left: 20px;
+                transform: none;
+            }
+            .timeline-dot {
+                left: 20px;
+                transform: none;
+            }
+            .timeline-content.left, .timeline-content.right {
+                margin: 0 0 0 40px;
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="project-page">
+        <a href="index.html" class="back-button">← Back</a>
+        
+        <header class="project-header">
+            <h1 class="project-title">Hull Model</h1>
+            <p class="project-subtitle">Upcycled Wood Craft / Ship Model / Hand Carving</p>
+            
+            <div class="project-meta">
+                <div class="meta-item">
+                    <div class="meta-label">Category</div>
+                    <div class="meta-value">Craftsmanship & Upcycling</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Year</div>
+                    <div class="meta-value">2021</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Duration</div>
+                    <div class="meta-value">2 Weeks</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Role</div>
+                    <div class="meta-value">Craftsman & Model Maker</div>
+                </div>
+            </div>
+            
+            <div class="project-tags">
+                <span class="tag">Wood Carving</span>
+                <span class="tag">Ship Model</span>
+                <span class="tag">Upcycling</span>
+                <span class="tag">Handcraft</span>
+                <span class="tag">Traditional</span>
+            </div>
+        </header>
+        
+        <main class="project-content">
+            <section class="content-section">
+                <img src="Hull Model/hero1.png" alt="Hull Model Hero Image" class="hero-image">
+                
+                <div class="project-description">
+                    <p>Using the discarded wood in the woodshop, polishing and making with a carving knife, sandpaper and hand saw, a model of an ancient sailing ship was finally formed.</p>
+                    
+                    <p>This project transforms waste materials into a beautiful ship model, demonstrating how traditional hand tools can breathe new life into forgotten materials.</p>
+                </div>
+            </section>
+            
+            <section class="content-section" style="margin-bottom: 0;">
+                <div style="display: flex; gap: 1rem; justify-content: center; align-items: flex-start;">
+                    <img src="Hull Model/side1.png" alt="Side View 1" style="width: 90%; max-width: 600px; object-fit: cover;">
+                    <img src="Hull Model/side2.png" alt="Side View 2" style="width: 90%; max-width: 600px; object-fit: cover;">
+                    <img src="Hull Model/side3.png" alt="Side View 3" style="width: 90%; max-width: 600px; object-fit: cover;">
+                </div>
+            </section>
+            
+            <section class="content-section">
+                <h2 class="section-title">Design Philosophy</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <h3 class="feature-title">Sustainable Upcycling</h3>
+                        <p class="feature-description">Transforming discarded wood into meaningful art, demonstrating the potential of waste materials when approached with creativity.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3 class="feature-title">Traditional Craftsmanship</h3>
+                        <p class="feature-description">Using only hand tools—carving knives, sandpaper, and hand saws—to honor traditional shipbuilding methods.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3 class="feature-title">Historical Inspiration</h3>
+                        <p class="feature-description">Drawing from ancient sailing ships to capture the essence and beauty of traditional maritime vessels.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="content-section">
+                <h2 class="section-title">Materials & Tools</h2>
+                <div class="materials-section">
+                    <div class="materials-grid">
+                        <div class="material-item">
+                            <div class="material-name">Discarded Wood</div>
+                            <div class="material-purpose">Upcycled from woodshop waste</div>
+                        </div>
+                        <div class="material-item">
+                            <div class="material-name">Carving Knife</div>
+                            <div class="material-purpose">Precision hand carving</div>
+                        </div>
+                        <div class="material-item">
+                            <div class="material-name">Sandpaper</div>
+                            <div class="material-purpose">Smoothing and polishing</div>
+                        </div>
+                        <div class="material-item">
+                            <div class="material-name">Hand Saw</div>
+                            <div class="material-purpose">Cutting and shaping</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="content-section">
+                <h2 class="section-title">Crafting Process</h2>
+                <div class="timeline-vertical">
+                    <div class="timeline-step-vertical">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content left">
+                            <div class="timeline-title">01. MATERIAL COLLECTION</div>
+                            <div class="timeline-desc">Selected discarded wood pieces from the woodshop, evaluating each for potential use in the ship model.</div>
+                        </div>
+                    </div>
+                    <div class="timeline-step-vertical">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content right">
+                            <div class="timeline-title">02. WOOD PREPARATION</div>
+                            <div class="timeline-desc">Cleaned and prepared reclaimed wood pieces, assessing grain patterns for optimal use.</div>
+                        </div>
+                    </div>
+                    <div class="timeline-step-vertical">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content left">
+                            <div class="timeline-title">03. ROUGH SHAPING</div>
+                            <div class="timeline-desc">Used hand saw to cut and shape basic forms of the ship's hull and structural elements.</div>
+                        </div>
+                    </div>
+                    <div class="timeline-step-vertical">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content right">
+                            <div class="timeline-title">04. PRECISION CARVING</div>
+                            <div class="timeline-desc">Employed carving knife to create detailed features and curves of ancient sailing vessels.</div>
+                        </div>
+                    </div>
+                    <div class="timeline-step-vertical">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content left">
+                            <div class="timeline-title">05. FINAL FINISHING</div>
+                            <div class="timeline-desc">Applied sandpaper for smoothing and polishing, revealing the natural beauty of the wood grain.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="content-section">
+                <h2 class="section-title">Technical Features</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <h3 class="feature-title">Authentic Hull Shape</h3>
+                        <p class="feature-description">Carefully crafted hull contours that accurately represent traditional shipbuilding design principles.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3 class="feature-title">Natural Wood Grain</h3>
+                        <p class="feature-description">Preserved and highlighted natural grain patterns, showcasing the material's inherent beauty.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3 class="feature-title">Hand-Tool Precision</h3>
+                        <p class="feature-description">Achieved fine details using only traditional hand tools, demonstrating authentic craftsmanship.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+    <script>
+        // 页面退出动画
+        document.querySelector('.back-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('.project-page').classList.add('slide-out');
+            setTimeout(() => {
+                window.location.href = this.href;
+            }, 600);
+        });
+    </script>
+</body>
+</html> 

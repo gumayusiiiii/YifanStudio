@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Packaging Design - YOUR NAME</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Three.js for 3D models -->
+    <script src="https://unpkg.com/three@0.150.1/build/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.150.1/examples/js/loaders/STLLoader.js"></script>
+    <script src="https://unpkg.com/three@0.150.1/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body class="project-page">
+    <!-- Navigation Header -->
+    <nav class="main-nav">
+        <div class="nav-content">
+            <h1 class="nav-name">YifanStudio</h1>
+            <div class="nav-links">
+                <a href="gallery.html" class="nav-link">GALLERY</a>
+                <a href="about.html" class="nav-link">ABOUT</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Back to Gallery Button -->
+    <div class="back-button-container">
+        <a href="index.html" class="back-button">
+            <span class="back-arrow">←</span>
+            <span>返回 wallwork</span>
+        </a>
+    </div>
+
+    <!-- Project Header -->
+    <section class="project-header">
+        <div class="project-header-content">
+            <div class="project-title-section">
+                <h1 class="project-title">智能加热器设计</h1>
+                <p class="project-category">[ 产品设计 / 智能硬件 ]</p>
+                <div class="project-year">2025</div>
+            </div>
+            
+            <div class="project-description">
+                <p>一个集成ESP32微控制器的智能加热器系统，具有无线控制、温度监测和触摸操作功能的完整产品设计。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Details -->
+    <section class="project-details">
+        <div class="project-details-content">
+            <div class="project-info-grid">
+                <div class="info-section">
+                    <h3>ROLE</h3>
+                    <p>产品设计师, 硬件工程师, 系统集成</p>
+                </div>
+                
+                <div class="info-section">
+                    <h3>DURATION</h3>
+                    <p>16 weeks</p>
+                </div>
+                
+                <div class="info-section">
+                    <h3>TOOLS</h3>
+                    <p>SolidWorks, Arduino IDE, ESP32, KiCad, 3D打印</p>
+                </div>
+                
+                <div class="info-section">
+                    <h3>TEAM</h3>
+                    <p>1 产品设计师, 1 电子工程师, 1 软件开发</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <section class="project-content">
+        <div class="project-content-container">
+            <div class="content-section">
+                <h2>Overview</h2>
+                <p>This project focused on redesigning packaging for a premium organic food brand, with the goal of reducing environmental impact while enhancing shelf appeal. The challenge was balancing sustainability requirements with the premium positioning and practical needs of food packaging.</p>
+                
+                <p>The new packaging design reduced material usage by 40% and helped the brand achieve carbon-neutral certification.</p>
+            </div>
+
+            <div class="content-section">
+                <h2>Design Elements</h2>
+                <ul class="feature-list">
+                    <li>100% recyclable materials</li>
+                    <li>Minimal ink usage design</li>
+                    <li>Optimized structural design</li>
+                    <li>Clear sustainability messaging</li>
+                    <li>Premium visual appearance</li>
+                    <li>Enhanced product visibility</li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h2>Sustainability Approach</h2>
+                <p>Every design decision was evaluated through the lens of environmental impact. We conducted lifecycle assessments of different material options and printing techniques to minimize the package's carbon footprint while maintaining food safety standards.</p>
+                
+                <p>The design features a modular system that allows for efficient manufacturing and shipping, reducing waste throughout the supply chain.</p>
+            </div>
+
+            <!-- 3D Model Viewer Section -->
+            <div class="content-section">
+                <h2>3D 模型预览</h2>
+                <p>您可以360度查看智能加热器的3D模型（加热器组件）。点击下方区域开始加载模型。</p>
+                <div class="model-info" style="background: #e3f2fd; padding: 12px; border-radius: 6px; margin-bottom: 15px; font-size: 14px;">
+                    <strong>💡 提示：</strong> 模型文件大小约 642KB，首次加载可能需要几秒钟时间。
+                </div>
+                
+                <div class="model-viewer-container">
+                    <div id="threejs-container" style="width: 100%; height: 500px; border-radius: 8px; background: #f5f5f5; position: relative; overflow: hidden;">
+                        <div id="loading-indicator" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: #666; z-index: 10;">
+                            <div style="margin-bottom: 10px; font-size: 24px;">🔄</div>
+                            <div>加载3D模型中...</div>
+                        </div>
+                        <div id="error-indicator" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: #999; z-index: 10; display: none;">
+                            <div style="margin-bottom: 10px; font-size: 24px;">❌</div>
+                            <div>3D模型加载失败</div>
+                            <div style="font-size: 14px; margin-top: 5px;">请检查网络连接或文件路径</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="model-controls-info" style="margin-top: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px; font-size: 14px; color: #666;">
+                    <strong>操作说明：</strong>
+                    <ul style="margin: 8px 0 0 20px; line-height: 1.6;">
+                        <li>点击模型区域：开始加载3D模型</li>
+                        <li>拖拽：旋转模型</li>
+                        <li>滚轮：缩放</li>
+                        <li>双击：重置视角</li>
+                    </ul>
+                </div>
+                
+                <!-- 切换模型按钮 -->
+                <div class="model-switcher" style="margin-top: 20px; text-align: center;">
+                    <button onclick="switchModel('heater')" style="margin: 5px; padding: 8px 16px; background: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                        加热器组件 (642KB)
+                    </button>
+                    <button onclick="switchModel('esp32')" style="margin: 5px; padding: 8px 16px; background: #FF9800; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                        ESP32主板 (19MB)
+                    </button>
+                    <button onclick="switchModel('touchpad')" style="margin: 5px; padding: 8px 16px; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                        触摸控制板 (219KB)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Project Images Placeholder -->
+            <div class="content-section">
+                <div class="project-images">
+                    <div class="image-placeholder large">
+                        <div class="placeholder-content">Packaging Design Showcase</div>
+                    </div>
+                    
+                    <div class="image-grid">
+                        <div class="image-placeholder">
+                            <div class="placeholder-content">Technical Drawings</div>
+                        </div>
+                        <div class="image-placeholder">
+                            <div class="placeholder-content">Material Testing</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Navigation to Next/Previous Projects -->
+    <section class="project-navigation">
+        <div class="project-nav-content">
+            <a href="project-ecommerce.html" class="nav-project prev">
+                <span class="nav-direction">Previous</span>
+                <span class="nav-title">E-commerce</span>
+            </a>
+            
+            <a href="gallery.html" class="nav-gallery">
+                <span>All Projects</span>
+            </a>
+            
+            <a href="project-digital-interface.html" class="nav-project next">
+                <span class="nav-direction">Next</span>
+                <span class="nav-title">Digital Interface</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="mailto:your@email.com">EMAIL</a>
+                <a href="#" target="_blank">LINKEDIN</a>
+                <a href="#" target="_blank">INSTAGRAM</a>
+                <a href="#" target="_blank">RESUME</a>
+            </div>
+            <p class="footer-text">© 2024 Your Name. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <script>
+        let scene, camera, renderer, controls, currentMesh;
+        
+        function initThreeJS() {
+            const container = document.getElementById('threejs-container');
+            
+            // 创建场景
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0xf5f5f5);
+            
+            // 创建相机
+            camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
+            camera.position.set(0, 50, 100);
+            
+            // 创建渲染器
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(container.offsetWidth, container.offsetHeight);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            container.appendChild(renderer.domElement);
+            
+            // 添加控制器
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            
+            // 添加光照
+            const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(100, 100, 50);
+            directionalLight.castShadow = true;
+            scene.add(directionalLight);
+            
+            // 开始渲染循环
+            animate();
+        }
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+        
+        function loadSTL(filePath) {
+            const loadingIndicator = document.getElementById('loading-indicator');
+            const errorIndicator = document.getElementById('error-indicator');
+            
+            loadingIndicator.style.display = 'block';
+            errorIndicator.style.display = 'none';
+            
+            // 移除之前的模型
+            if (currentMesh) {
+                scene.remove(currentMesh);
+            }
+            
+            const loader = new THREE.STLLoader();
+            loader.load(
+                filePath,
+                function (geometry) {
+                    // 加载成功
+                    loadingIndicator.style.display = 'none';
+                    
+                    const material = new THREE.MeshPhongMaterial({ 
+                        color: 0x888888,
+                        shininess: 100 
+                    });
+                    
+                    currentMesh = new THREE.Mesh(geometry, material);
+                    
+                    // 居中模型
+                    geometry.computeBoundingBox();
+                    const center = geometry.boundingBox.getCenter(new THREE.Vector3());
+                    currentMesh.position.sub(center);
+                    
+                    // 调整大小
+                    const size = geometry.boundingBox.getSize(new THREE.Vector3());
+                    const maxDim = Math.max(size.x, size.y, size.z);
+                    const scale = 50 / maxDim;
+                    currentMesh.scale.setScalar(scale);
+                    
+                    scene.add(currentMesh);
+                },
+                function (progress) {
+                    // 加载进度
+                    console.log('Loading progress: ', (progress.loaded / progress.total * 100) + '%');
+                },
+                function (error) {
+                    // 加载错误
+                    console.error('Error loading STL:', error);
+                    loadingIndicator.style.display = 'none';
+                    errorIndicator.style.display = 'block';
+                }
+            );
+        }
+        
+        function switchModel(type) {
+            const modelInfo = document.querySelector('.model-info');
+            
+            let src, info;
+            switch(type) {
+                case 'heater':
+                    src = 'models/heater.stl';
+                    info = '💡 提示：加热器组件模型，文件大小约 642KB，加载快速。';
+                    break;
+                case 'esp32':
+                    src = 'models/加热器总装配体 - ESP32 MB-1.STL';
+                    info = '⚠️ 注意：ESP32主板模型，文件较大(19MB)，加载可能需要30秒-1分钟。';
+                    break;
+                case 'touchpad':
+                    src = 'models/touchpad.stl';
+                    info = '💡 提示：触摸控制板模型，文件大小约 219KB，加载很快。';
+                    break;
+            }
+            
+            modelInfo.innerHTML = '<strong>' + info + '</strong>';
+            loadSTL(src);
+        }
+        
+        // 窗口大小调整
+        function onWindowResize() {
+            const container = document.getElementById('threejs-container');
+            camera.aspect = container.offsetWidth / container.offsetHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.offsetWidth, container.offsetHeight);
+        }
+        
+        window.addEventListener('resize', onWindowResize);
+        
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initThreeJS();
+            // 默认加载加热器组件
+            setTimeout(() => switchModel('heater'), 1000);
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Interface - YOUR NAME</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .project-header {
+            padding: 120px 0 80px;
+            background: var(--bg-color);
+            text-align: center;
+        }
+        
+        .project-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+        
+        .project-meta {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            text-align: center;
+        }
+        
+        .meta-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .meta-value {
+            color: var(--text-light);
+        }
+        
+        .project-tags {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .project-content {
+            padding: 80px 0;
+        }
+        
+        .content-section {
+            margin-bottom: 5rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .project-image {
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem auto;
+            display: block;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-description {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            text-align: center;
+        }
+        
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .process-item {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .process-item h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .process-item p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .result-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .result-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        
+        .result-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 2rem 1.5rem 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .learnings {
+            background: var(--bg-alt);
+            padding: 3rem;
+            border-radius: 20px;
+            margin: 3rem 0;
+        }
+        
+        .learnings h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .learnings ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .learnings li {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+            line-height: 1.6;
+        }
+        
+        .learnings li::before {
+            content: '✦';
+            color: var(--accent-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            transition: var(--transition);
+        }
+        
+        .back-button:hover {
+            color: var(--primary-color);
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .nav-project {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .nav-project:hover {
+            color: var(--accent-color);
+        }
+        
+        @media (max-width: 768px) {
+            .project-title {
+                font-size: 2.5rem;
+            }
+            
+            .project-meta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .process-grid,
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">YOUR NAME</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">HOME</a></li>
+                <li><a href="work.html" class="nav-link">WORK</a></li>
+                <li><a href="about.html" class="nav-link">ABOUT</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 项目头部 -->
+    <section class="project-header">
+        <div class="container">
+            <a href="index.html" class="back-button">
+                ← 返回 wallwork
+            </a>
+            
+            <h1 class="project-title">AI交互界面</h1>
+            
+            <div class="project-meta">
+                <div class="meta-item">
+                    <div class="meta-label">角色</div>
+                    <div class="meta-value">UI/UX设计师，前端开发</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">持续时间</div>
+                    <div class="meta-value">3个月</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">工具</div>
+                    <div class="meta-value">Figma, React, OpenAI API</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">年份</div>
+                    <div class="meta-value">2024</div>
+                </div>
+            </div>
+            
+            <div class="project-tags">
+                <span class="tag">AI / 交互</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 项目内容 -->
+    <section class="project-content">
+        <div class="container">
+            <!-- 概述 -->
+            <div class="content-section">
+                <h2 class="section-title">项目概述</h2>
+                <p class="project-description">
+                    AI交互界面是一个创新的人工智能交互系统，旨在探索人类与AI之间更自然、更直观的交流方式。这个项目结合了先进的AI技术和精心设计的用户界面，创建了一个既功能强大又易于使用的交互平台。
+                </p>
+                <img src="https://via.placeholder.com/800x500/333/fff?text=AI交互界面主界面" alt="AI交互界面主界面" class="project-image">
+                
+                <p class="project-description">
+                    该项目的核心目标是打破传统的人机交互模式，通过智能的对话系统、直观的视觉反馈和个性化的用户体验，让用户能够更轻松地与AI进行深度交流和协作。
+                </p>
+            </div>
+
+            <!-- 开发过程 -->
+            <div class="content-section">
+                <h2 class="section-title">开发过程</h2>
+                
+                <div class="process-grid">
+                    <div class="process-item">
+                        <h3>研究与分析</h3>
+                        <p>深入研究现有的AI交互模式，分析用户需求和痛点，制定项目目标和设计原则。通过用户访谈和竞品分析，确定了项目的核心功能和交互流程。</p>
+                    </div>
+                    
+                    <div class="process-item">
+                        <h3>原型设计</h3>
+                        <p>使用Figma创建低保真和高保真原型，设计直观的用户界面和交互流程。重点关注信息架构、视觉层次和交互的流畅性。</p>
+                    </div>
+                    
+                    <div class="process-item">
+                        <h3>技术实现</h3>
+                        <p>使用React构建前端界面，集成OpenAI API实现智能对话功能。开发了自适应的界面组件和智能的响应系统，确保良好的用户体验。</p>
+                    </div>
+                    
+                    <div class="process-item">
+                        <h3>测试优化</h3>
+                        <p>进行多轮用户测试，收集反馈并持续优化界面设计和交互逻辑。重点改进了AI响应的准确性和界面的响应速度。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 最终成果 -->
+            <div class="content-section">
+                <h2 class="section-title">最终成果</h2>
+                
+                <div class="results-grid">
+                    <div class="result-item">
+                        <img src="https://via.placeholder.com/400x300/555/fff?text=对话界面" alt="智能对话界面">
+                        <div class="result-caption">
+                            智能对话界面 - 提供自然流畅的AI交互体验
+                        </div>
+                    </div>
+                    
+                    <div class="result-item">
+                        <img src="https://via.placeholder.com/400x300/777/fff?text=个性化设置" alt="个性化设置页面">
+                        <div class="result-caption">
+                            个性化设置 - 用户可以自定义AI的行为和偏好
+                        </div>
+                    </div>
+                    
+                    <div class="result-item">
+                        <img src="https://via.placeholder.com/400x300/999/fff?text=数据可视化" alt="交互数据可视化">
+                        <div class="result-caption">
+                            交互数据可视化 - 直观展示用户与AI的交互历史
+                        </div>
+                    </div>
+                    
+                    <div class="result-item">
+                        <img src="https://via.placeholder.com/400x300/AAA/fff?text=移动端适配" alt="移动端界面">
+                        <div class="result-caption">
+                            移动端适配 - 响应式设计确保跨设备体验一致
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="learnings">
+                    <h3>关键收获</h3>
+                    <ul>
+                        <li>如何将AI API集成到交互式Web体验中，创造无缝的用户体验</li>
+                        <li>在新颖性和可用性之间找到平衡点的重要性，通过用户反馈不断优化</li>
+                        <li>通过简约的UI设计和智能的行为逻辑打造独特的数字个性</li>
+                        <li>响应式设计在现代Web应用中的重要性和实现技巧</li>
+                        <li>用户测试在产品迭代过程中的关键作用和价值</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 项目导航 -->
+            <div class="navigation">
+                <a href="project2.html" class="nav-project">
+                    ← 上一个项目<br>
+                    <small>品牌视觉设计</small>
+                </a>
+                <a href="index.html#work" class="nav-project">
+                    查看所有项目
+                </a>
+                <a href="project3.html" class="nav-project">
+                    下一个项目 →<br>
+                    <small>木工雕塑</small>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 您的名字. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medieval Gauntlet - YOUR NAME</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .project-page {
+            background: var(--bg-color);
+            color: var(--text-color);
+            padding-top: 80px;
+            opacity: 0;
+            transform: translateX(50px);
+            animation: slideInFromRight 0.8s ease-out forwards;
+        }
+        
+        /* 页面进入动画 */
+        @keyframes slideInFromRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* 页面退出动画 */
+        .project-page.slide-out {
+            animation: slideOutToLeft 0.6s ease-in forwards;
+        }
+        
+        @keyframes slideOutToLeft {
+            to {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+        }
+        
+        /* 内容区域渐入动画 */
+        .content-section {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        .content-section:nth-child(1) { animation-delay: 0.2s; }
+        .content-section:nth-child(2) { animation-delay: 0.4s; }
+        .content-section:nth-child(3) { animation-delay: 0.6s; }
+        .content-section:nth-child(4) { animation-delay: 0.8s; }
+        .content-section:nth-child(5) { animation-delay: 1.0s; }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .project-header {
+            padding: 4rem 8rem 2rem 2rem;
+            text-align: left;
+            max-width: 1400px;
+            margin: 0 auto;
+            border-bottom: 1px solid var(--border-color);
+            opacity: 0;
+            transform: translateY(-30px);
+            animation: fadeInDown 0.8s ease-out 0.1s forwards;
+            position: relative;
+        }
+        
+        /* 为小屏幕设备调整头部 */
+        @media (max-width: 768px) {
+            .project-header {
+                padding: 4rem 2rem 2rem;
+            }
+        }
+        
+        @keyframes fadeInDown {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .project-title {
+            font-size: 4rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            color: var(--text-color);
+        }
+        
+        .project-subtitle {
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 3rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .project-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .meta-item {
+            text-align: left;
+        }
+        
+        .meta-label {
+            font-weight: 400;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+        
+        .meta-value {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-color);
+        }
+        
+        .project-tags {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .tag {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+        
+        .tag:hover {
+            border-color: var(--text-color);
+            color: var(--text-color);
+        }
+        
+        .project-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 8rem 4rem 2rem;
+        }
+        
+        /* 为小屏幕设备调整主容器 */
+        @media (max-width: 768px) {
+            .project-content {
+                padding: 4rem 2rem;
+            }
+        }
+        
+        .content-section {
+            margin-bottom: 6rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--text-color);
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .hero-image {
+            width: 100%;
+            max-width: 100%;
+            margin: 3rem 0;
+            display: block;
+            height: 600px;
+            object-fit: cover;
+            border: 1px solid var(--border-color);
+        }
+        
+        .project-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 0 4rem 0;
+            font-weight: 300;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin: 4rem 0;
+        }
+        
+        .feature-item {
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+        
+        .feature-item:hover {
+            border-color: var(--text-color);
+        }
+        
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .feature-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-light);
+            font-weight: 300;
+        }
+        
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 1rem;
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+        
+        .back-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.8rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .back-button:hover {
+            background: var(--text-color);
+            color: var(--bg-color);
+        }
+        
+        .materials-section {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 3rem;
+            border: 1px solid var(--border-color);
+            margin: 4rem 0;
+        }
+        
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .material-item {
+            text-align: center;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+        
+        .material-item:hover {
+            border-color: var(--text-color);
+        }
+        
+        .material-name {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .material-purpose {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 300;
+        }
+        
+        .carousel-frame {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            padding: 2rem 1rem;
+            max-width: 1300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 550px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .carousel img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: none;
+            border: none;
+            background: none;
+            box-shadow: none;
+        }
+        .carousel img.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.4);
+            color: #fff;
+            border: none;
+            font-size: 2.2rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 2;
+            transition: background 0.2s;
+        }
+        .carousel-btn:hover {
+            background: rgba(0,0,0,0.7);
+        }
+        .carousel-btn.prev { left: 12px; }
+        .carousel-btn.next { right: 12px; }
+        .carousel-title {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin: 1rem 0 0.5rem 0;
+            letter-spacing: 1px;
+        }
+        .carousel-frame.no-border {
+            background: none;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+            max-width: 1300px;
+            margin: 0 auto 2rem auto;
+        }
+        .sketch-row {
+            display: flex;
+            gap: 3rem;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 3rem 0 4rem 0;
+            flex-wrap: wrap;
+        }
+        .gauntlet-sketch-img {
+            max-width: 480px;
+            width: 100%;
+            height: auto;
+            border-radius: 14px;
+            box-shadow: none;
+            border: none;
+            background: none;
+            object-fit: contain;
+            transition: transform 0.6s cubic-bezier(.4,2,.6,1), box-shadow 0.6s ease;
+        }
+        .gauntlet-sketch-img:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.28);
+            z-index: 2;
+        }
+        @media (max-width: 1100px) {
+            .sketch-row {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            .gauntlet-sketch-img {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="project-page">
+        <a href="index.html" class="back-button">← Back</a>
+        
+        <header class="project-header">
+            <h1 class="project-title">Medieval Gauntlet</h1>
+            <p class="project-subtitle">Handcrafted Wearable Armor / Metalwork / Mechanical Design</p>
+            
+            <div class="project-meta">
+                <div class="meta-item">
+                    <div class="meta-label">Category</div>
+                    <div class="meta-value">Craftsmanship & Mechanical Design</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Year</div>
+                    <div class="meta-value">2023</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Duration</div>
+                    <div class="meta-value">3 Months</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Role</div>
+                    <div class="meta-value">Designer & Craftsman</div>
+                </div>
+            </div>
+            
+            <div class="project-tags">
+                <span class="tag">Armor</span>
+                <span class="tag">Metalwork</span>
+                <span class="tag">Handcraft</span>
+                <span class="tag">Medieval</span>
+                <span class="tag">Mechanical Design</span>
+            </div>
+        </header>
+        
+        <main class="project-content">
+            <!-- 图片转盘区块 -->
+            <section class="content-section">
+                <div class="carousel-frame no-border">
+                    <div class="carousel" id="carousel-gauntlet">
+                        <img src="Gauntlet/Hero image1.jpg" alt="Hero 1" class="active">
+                        <img src="Gauntlet/Hero image2.jpg" alt="Hero 2">
+                        <img src="Gauntlet/Hero image3.jpg" alt="Hero 3">
+                        <img src="Gauntlet/Hero image4.jpg" alt="Hero 4">
+                        <button class="carousel-btn prev" onclick="prevSlide('carousel-gauntlet')">‹</button>
+                        <button class="carousel-btn next" onclick="nextSlide('carousel-gauntlet')">›</button>
+                    </div>
+                </div>
+            </section>
+            <!-- 项目介绍区块 -->
+            <section class="content-section">
+                <div class="project-description">
+                    <p>I handcrafted this wearable medieval gauntlet using iron, aluminum, screws, and a leather glove.</p>
+                    <p>Each joint is carefully designed for flexibility, while the interlocking metal plates provide solid protection.</p>
+                    <p>The combination of aluminum for lightness and iron for strength ensures both functionality and an authentic medieval aesthetic.</p>
+                    <p>This piece is not just a recreation of armor but an exploration of historical craftsmanship and mechanical design.</p>
+                </div>
+            </section>
+            <!-- 设计理念区块 -->
+            <section class="content-section">
+                <h2 class="section-title">Design Philosophy</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <h3 class="feature-title">Historical Accuracy</h3>
+                        <p class="feature-description">Meticulously researched medieval armor construction techniques, ensuring authentic appearance and functionality while maintaining modern safety standards.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3 class="feature-title">Functional Design</h3>
+                        <p class="feature-description">Each joint and plate is engineered for maximum mobility and protection, allowing natural hand movement while providing comprehensive coverage.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3 class="feature-title">Material Innovation</h3>
+                        <p class="feature-description">Strategic use of aluminum for weight reduction and iron for structural integrity creates the perfect balance of protection and wearability.</p>
+                    </div>
+                </div>
+            </section>
+            <!-- 并排sketch图片区块 -->
+            <section class="content-section">
+                <div class="sketch-row">
+                    <img src="Gauntlet/sketch1.png" alt="Sketch 1" class="gauntlet-sketch-img">
+                    <img src="Gauntlet/sketch2.png" alt="Sketch 2" class="gauntlet-sketch-img">
+                </div>
+            </section>
+            <!-- 材料与结构区块 -->
+            <section class="content-section">
+                <h2 class="section-title">Materials & Construction</h2>
+                <div class="materials-section">
+                    <div class="materials-grid">
+                        <div class="material-item">
+                            <div class="material-name">Iron</div>
+                            <div class="material-purpose">Structural strength and protection</div>
+                        </div>
+                        <div class="material-item">
+                            <div class="material-name">Aluminum</div>
+                            <div class="material-purpose">Weight reduction and flexibility</div>
+                        </div>
+                        <div class="material-item">
+                            <div class="material-name">Leather Glove</div>
+                            <div class="material-purpose">Comfort and grip foundation</div>
+                        </div>
+                        <div class="material-item">
+                            <div class="material-name">Screws</div>
+                            <div class="material-purpose">Secure assembly and adjustment</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- 技术特征区块 -->
+            <section class="content-section">
+                <h2 class="section-title">Technical Features</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <h3 class="feature-title">Interlocking Plates</h3>
+                        <p class="feature-description">Carefully designed overlapping metal plates that provide comprehensive protection while allowing natural hand articulation.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3 class="feature-title">Flexible Joints</h3>
+                        <p class="feature-description">Engineered joint systems that maintain full range of motion for fingers, wrist, and thumb while ensuring structural integrity.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3 class="feature-title">Adjustable Fit</h3>
+                        <p class="feature-description">Customizable sizing and adjustment points allow for perfect fit and comfort during extended wear.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+    <script>
+        // 页面退出动画
+        document.querySelector('.back-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('.project-page').classList.add('slide-out');
+            setTimeout(() => {
+                window.location.href = this.href;
+            }, 600);
+        });
+        // 图片转盘切换逻辑
+        function nextSlide(id) {
+            const carousel = document.getElementById(id);
+            const imgs = carousel.querySelectorAll('img');
+            let idx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
+            imgs[idx].classList.remove('active');
+            idx = (idx + 1) % imgs.length;
+            imgs[idx].classList.add('active');
+        }
+        function prevSlide(id) {
+            const carousel = document.getElementById(id);
+            const imgs = carousel.querySelectorAll('img');
+            let idx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
+            imgs[idx].classList.remove('active');
+            idx = (idx - 1 + imgs.length) % imgs.length;
+            imgs[idx].classList.add('active');
+        }
+    </script>
+</body>
+</html> 
