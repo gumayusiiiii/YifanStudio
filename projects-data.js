@@ -78,34 +78,37 @@ const projects = [
     cover: "self portrait/self p.png"
   },
   {
-    title: "Editorial Design",
-    subtitle: "Print Design / Art Publication",
-    category: "Print Design",
-    year: "2025",
-    tags: ["Print", "Layout", "Typography"],
+    title: "Shared Heater",
+    subtitle: "Product Design / Prototyping / Social Innovation",
+    category: "Product Design",
+    year: "2024",
+    tags: ["Product Design", "Prototyping", "Social Innovation"],
     link: "project-editorial-design.html",
-    placeholderText: "EDITORIAL DESIGN",
-    placeholderColor: "#666"
+    placeholderText: "SHARED HEATER",
+    placeholderColor: "#666",
+    cover: "Heater/cover1.png"
   },
   {
-    title: "Mobile App Design",
+    title: "Inclusive, Barrier-Free Mouse Design",
     subtitle: "Health & Wellness / User Experience",
     category: "Mobile App",
     year: "2025",
     tags: ["Mobile", "Health", "UX"],
     link: "project-mobile-app.html",
     placeholderText: "MOBILE APP",
-    placeholderColor: "#777"
+    placeholderColor: "#777",
+    cover: "Mouse/pho1.png"
   },
   {
-    title: "E-commerce Platform",
-    subtitle: "Online Store / Artisan Crafts",
-    category: "E-commerce",
-    year: "2025",
-    tags: ["E-commerce", "Shopify", "UX"],
-    link: "project-ecommerce.html",
-    placeholderText: "E-COMMERCE",
-    placeholderColor: "#888"
+    title: "Gaze",
+    subtitle: "Am I watching you, or are you watching me? Material: Charcoal",
+    category: "Art",
+    year: "2022",
+    tags: ["Charcoal", "Art"],
+    link: "project-gaze.html",
+    placeholderText: "GAZE",
+    placeholderColor: "#888",
+    cover: "paint/Men.jpg"
   },
   {
     title: "Packaging Design",

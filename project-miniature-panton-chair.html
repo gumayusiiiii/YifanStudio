@@ -383,14 +383,14 @@
         /* 新增并排图片样式 */
         .parallel-img-row {
             display: flex;
-            gap: 3rem;
+            gap: 2rem;
             justify-content: center;
             align-items: flex-start;
             margin: 3rem 0 4rem 0;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
         }
         .parallel-img-row img {
-            max-width: 480px;
+            max-width: 320px;
             width: 100%;
             height: auto;
             border-radius: 14px;
@@ -400,9 +400,9 @@
             object-fit: contain;
             transition: none;
         }
-        @media (max-width: 1100px) {
+        @media (max-width: 1000px) {
             .parallel-img-row {
-                flex-direction: column;
+                flex-wrap: wrap;
                 gap: 2rem;
             }
             .parallel-img-row img {
@@ -478,6 +478,7 @@
                 <div class="parallel-img-row">
                     <img src="Miniature Panton Chair/process1.jpg" alt="Process 1">
                     <img src="Miniature Panton Chair/process2.jpg" alt="Process 2">
+                    <img src="Miniature Panton Chair/process3.jpg" alt="Process 3">
                 </div>
             </section>
             
