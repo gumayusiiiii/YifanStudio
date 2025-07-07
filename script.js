@@ -561,13 +561,14 @@ function loadGalleryProjects() {
         slide.className = 'carousel-slide';
         slide.setAttribute('data-index', index);
         
+        const isDND = project.title === 'AI-Driven DND Text Adventure Game';
         const isSharedHeater = project.title === 'Shared Heater';
         const isMouseProject = project.title === 'Inclusive, Barrier-Free Mouse Design';
         slide.innerHTML = `
             <div class="slide-content">
                 <a href="${project.link}" class="project-link">
                     <div class="carousel-image-area">
-                        ${project.cover ? `<img src="${project.cover}" alt="${project.title} Cover" class="work-card-img" style="width:100%;height:280px;object-fit:${isSharedHeater || isMouseProject ? 'contain' : (project.title === 'Miniature Panton Chair' || project.title === 'Hull Model' ? 'contain' : 'cover')};background:${isSharedHeater || isMouseProject ? '#000' : (project.title === 'Miniature Panton Chair' || project.title === 'Hull Model' ? '#000' : '#111')};">` : `<div class=\"placeholder-image\" data-text=\"${project.placeholderText}\" data-color=\"${project.placeholderColor}\"></div>`}
+                        ${project.cover ? `<img src="${project.cover}" alt="${project.title} Cover" class="work-card-img" style="width:100%;height:280px;object-fit:${isDND ? 'contain' : (isSharedHeater || isMouseProject ? 'contain' : (project.title === 'Miniature Panton Chair' || project.title === 'Hull Model' ? 'contain' : 'cover'))};background:${isDND ? '#000' : (isSharedHeater || isMouseProject ? '#000' : (project.title === 'Miniature Panton Chair' || project.title === 'Hull Model' ? '#000' : '#111'))};">` : `<div class=\"placeholder-image\" data-text=\"${project.placeholderText}\" data-color=\"${project.placeholderColor}\"></div>`}
                     </div>
                 </a>
                 <div class="slide-info">
@@ -604,12 +605,13 @@ function loadIndexProjects() {
         const workCard = document.createElement('article');
         workCard.className = 'work-card';
         
+        const isDND = project.title === 'AI-Driven DND Text Adventure Game';
         const isSharedHeater = project.title === 'Shared Heater';
         const isMouseProject = project.title === 'Inclusive, Barrier-Free Mouse Design';
         workCard.innerHTML = `
             <a href="${project.link}" class="work-card-link smooth-transition">
                 <div class="work-card-image">
-                    ${project.cover ? `<img src="${project.cover}" alt="${project.title} Cover" class="work-card-img" style="width:100%;height:100%;object-fit:${isSharedHeater || isMouseProject ? 'contain' : (project.title === 'Miniature Panton Chair' || project.title === 'Hull Model' ? 'contain' : 'cover')};background:${isSharedHeater || isMouseProject ? '#000' : (project.title === 'Miniature Panton Chair' || project.title === 'Hull Model' ? '#000' : '#111')};">` : `<div class="placeholder-image" data-text="${project.placeholderText}" data-color="${project.placeholderColor}"></div>`}
+                    ${project.cover ? `<img src="${project.cover}" alt="${project.title} Cover" class="work-card-img" style="width:100%;height:100%;object-fit:${isDND ? 'contain' : (isSharedHeater || isMouseProject ? 'contain' : (project.title === 'Miniature Panton Chair' || project.title === 'Hull Model' ? 'contain' : 'cover'))};background:${isDND ? '#000' : (isSharedHeater || isMouseProject ? '#000' : (project.title === 'Miniature Panton Chair' || project.title === 'Hull Model' ? '#000' : '#111'))};">` : `<div class="placeholder-image" data-text="${project.placeholderText}" data-color="${project.placeholderColor}"></div>`}
                     <div class="work-card-overlay">
                         <span class="view-project">View Project →</span>
                     </div>

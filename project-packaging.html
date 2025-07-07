@@ -3,341 +3,748 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Packaging Design - YOUR NAME</title>
+    <title>AI-Driven DND Text Adventure Game - Yifan Zhao</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Three.js for 3D models -->
-    <script src="https://unpkg.com/three@0.150.1/build/three.min.js"></script>
-    <script src="https://unpkg.com/three@0.150.1/examples/js/loaders/STLLoader.js"></script>
-    <script src="https://unpkg.com/three@0.150.1/examples/js/controls/OrbitControls.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* 复用 sneakers 页面的样式，直接复制即可 */
+        .project-page {
+            background: var(--bg-color);
+            color: var(--text-color);
+            padding-top: 80px;
+            opacity: 0;
+            transform: translateX(50px);
+            animation: slideInFromRight 0.8s ease-out forwards;
+        }
+        @keyframes slideInFromRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        .project-page.slide-out {
+            animation: slideOutToLeft 0.6s ease-in forwards;
+        }
+        @keyframes slideOutToLeft {
+            to {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+        }
+        .content-section {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease-out forwards;
+            margin-bottom: 6rem;
+        }
+        .content-section:nth-child(1) { animation-delay: 0.2s; }
+        .content-section:nth-child(2) { animation-delay: 0.4s; }
+        .content-section:nth-child(3) { animation-delay: 0.6s; }
+        .content-section:nth-child(4) { animation-delay: 0.8s; }
+        .content-section:nth-child(5) { animation-delay: 1.0s; }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .project-header {
+            padding: 4rem 8rem 2rem 2rem;
+            text-align: left;
+            max-width: 1400px;
+            margin: 0 auto;
+            border-bottom: 1px solid var(--border-color);
+            opacity: 0;
+            transform: translateY(-30px);
+            animation: fadeInDown 0.8s ease-out 0.1s forwards;
+            position: relative;
+        }
+        @media (max-width: 768px) {
+            .project-header {
+                padding: 4rem 2rem 2rem;
+            }
+        }
+        @keyframes fadeInDown {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .project-title {
+            font-size: 4rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            color: var(--text-color);
+        }
+        .project-subtitle {
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 3rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .project-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+        .meta-item {
+            text-align: left;
+        }
+        .meta-label {
+            font-weight: 400;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+        .meta-value {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-color);
+        }
+        .project-tags {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        .tag {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+        .tag:hover {
+            border-color: var(--text-color);
+            color: var(--text-color);
+        }
+        .project-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 8rem 4rem 2rem;
+        }
+        @media (max-width: 768px) {
+            .project-content {
+                padding: 4rem 2rem;
+            }
+        }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        .carousel-frame {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            padding: 2rem 1rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .carousel img {
+            max-height: 340px;
+            max-width: 100%;
+            width: auto;
+            margin: 0 auto;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+            border: 1px solid var(--border-color);
+            display: none;
+        }
+        .carousel img.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.4);
+            color: #fff;
+            border: none;
+            font-size: 2.2rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 2;
+            transition: background 0.2s;
+        }
+        .carousel-btn:hover {
+            background: rgba(0,0,0,0.7);
+        }
+        .carousel-btn.prev { left: 16px; }
+        .carousel-btn.next { right: 16px; }
+        .carousel-title {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin: 1rem 0 0.5rem 0;
+            letter-spacing: 1px;
+        }
+        .back-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.8rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 8px;
+            min-width: unset;
+            width: auto;
+            box-sizing: border-box;
+        }
+        .back-button:hover {
+            background: var(--text-color);
+            color: var(--bg-color);
+        }
+        .module-card {
+            background: rgba(40,40,40,0.7);
+            border-radius: 16px;
+            box-shadow: none;
+            padding: 1.5rem 1.2rem;
+            margin-bottom: 2.2rem;
+            border: 1px solid var(--border-color);
+            max-width: 820px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .project-description p,
+        .project-description ul,
+        .project-description li {
+            font-size: 1.08rem;
+            line-height: 1.85;
+            margin-bottom: 1.1em;
+        }
+        .project-description ul {
+            padding-left: 1.2em;
+            margin-bottom: 0.5em;
+        }
+        .project-description li {
+            margin-bottom: 0.7em;
+        }
+        .timeline-content h3 {
+            margin-top: 0.7em;
+            margin-bottom: 0.5em;
+            font-size: 1.08rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        .timeline-content p, .timeline-content ul {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 0.9em;
+        }
+        @media (max-width: 900px) {
+            .module-card {
+                padding: 1rem 0.5rem;
+            }
+            .section-title {
+                font-size: 1.15rem;
+                margin-bottom: 1rem;
+            }
+            .intro-flex-row {
+                flex-direction: column !important;
+                gap: 1.2rem !important;
+                align-items: center !important;
+            }
+            .intro-img-col {
+                flex-direction: row !important;
+                gap: 0.7rem !important;
+                justify-content: center !important;
+            }
+            .intro-img-col img {
+                width: 28vw !important;
+                max-width: 120px !important;
+            }
+        }
+        .timeline-center {
+            position: relative;
+            padding: 2.5rem 0;
+            min-height: 400px;
+        }
+        .timeline-center-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--border-color);
+            transform: translateX(-50%);
+            z-index: 0;
+        }
+        .timeline-center-item {
+            display: flex;
+            align-items: flex-start;
+            width: 50%;
+            position: relative;
+            margin-bottom: 2.5rem;
+        }
+        .timeline-center-item.left {
+            flex-direction: row-reverse;
+            left: 0;
+            justify-content: flex-end;
+        }
+        .timeline-center-item.right {
+            left: 50%;
+            justify-content: flex-start;
+        }
+        .timeline-center-content {
+            background: rgba(40,40,40,0.85);
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+            padding: 1.2rem 1.5rem;
+            border: 1px solid var(--border-color);
+            max-width: 370px;
+            min-width: 0;
+            z-index: 1;
+        }
+        .timeline-center-dot {
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: var(--bg-color);
+            border: 3px solid var(--border-color);
+            border-radius: 50%;
+            margin: 0 18px;
+            z-index: 2;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.10);
+        }
+        @media (max-width: 900px) {
+            .timeline-center-line {
+                left: 16px;
+                width: 3px;
+                transform: none;
+            }
+            .timeline-center-item,
+            .timeline-center-item.left,
+            .timeline-center-item.right {
+                width: 100%;
+                left: 0;
+                flex-direction: row;
+                justify-content: flex-start;
+                margin-bottom: 2rem;
+            }
+            .timeline-center-content {
+                max-width: 100%;
+                margin-left: 0.5rem;
+                padding: 1rem 0.7rem;
+            }
+            .timeline-center-dot {
+                margin: 0 0.7rem 0 0;
+            }
+        }
+        .img-zoom-overlay {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0; top: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.85);
+            align-items: center;
+            justify-content: center;
+        }
+        .img-zoom-overlay.active {
+            display: flex;
+        }
+        .img-zoom-overlay img {
+            max-width: 98vw;
+            max-height: 98vh;
+            border-radius: 16px;
+            box-shadow: 0 4px 32px rgba(0,0,0,0.25);
+            background: #222;
+        }
+        .img-zoom-close {
+            position: absolute;
+            top: 32px;
+            right: 48px;
+            font-size: 2.2rem;
+            color: #fff;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 10000;
+            opacity: 0.85;
+            transition: opacity 0.2s;
+        }
+        .img-zoom-close:hover {
+            opacity: 1;
+        }
+        .timeline-center-imgbox {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 120px;
+        }
+        .timeline-center-imgbox img {
+            cursor: pointer;
+            transition: box-shadow 0.2s, transform 0.2s;
+            width: 180px !important;
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+        }
+        .timeline-center-imgbox img:hover {
+            box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+            transform: scale(1.04);
+        }
+        @media (max-width: 900px) {
+            .timeline-center-imgbox img {
+                width: 160px !important;
+                max-width: 98vw !important;
+            }
+        }
+        .timeline-mirror {
+            position: relative;
+            width: 100%;
+        }
+        .timeline-mirror-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+            min-height: 180px;
+        }
+        .timeline-mirror-content {
+            flex: 1 1 0;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .timeline-mirror-content.right {
+            justify-content: flex-start;
+        }
+        .timeline-mirror-card {
+            background: rgba(40,40,40,0.85);
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+            padding: 1.2rem 1.5rem;
+            border: 1px solid var(--border-color);
+            max-width: 370px;
+            min-width: 0;
+            z-index: 1;
+        }
+        .timeline-mirror-img {
+            flex: 0 0 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 180px;
+        }
+        .timeline-mirror-img img {
+            width: 180px;
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+            cursor: pointer;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+        .timeline-mirror-img img:hover {
+            box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+            transform: scale(1.04);
+        }
+        .timeline-mirror-center {
+            flex: 0 0 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            height: 100%;
+            z-index: 2;
+        }
+        .timeline-center-dot {
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: var(--bg-color);
+            border: 3px solid var(--border-color);
+            border-radius: 50%;
+            margin: 0 0 8px 0;
+            z-index: 2;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.10);
+        }
+        .timeline-center-line {
+            width: 4px;
+            background: var(--border-color);
+            flex: 1 1 0;
+            min-height: 80px;
+            margin: 0 auto;
+        }
+        @media (max-width: 900px) {
+            .timeline-mirror-row {
+                flex-direction: column;
+                min-height: unset;
+                margin-bottom: 2rem;
+            }
+            .timeline-mirror-content, .timeline-mirror-content.right {
+                justify-content: center;
+                width: 100%;
+            }
+            .timeline-mirror-img {
+                min-width: 0;
+                width: 100%;
+                margin-bottom: 0.7rem;
+            }
+            .timeline-mirror-img img {
+                width: 98vw;
+                max-width: 320px;
+            }
+            .timeline-mirror-center {
+                flex-direction: row;
+                width: 100%;
+                height: auto;
+                margin: 0.5rem 0;
+            }
+            .timeline-center-dot {
+                margin: 0 0.7rem 0 0;
+            }
+            .timeline-center-line {
+                width: 3px;
+                min-height: 40px;
+            }
+        }
+    </style>
 </head>
-<body class="project-page">
-    <!-- Navigation Header -->
-    <nav class="main-nav">
-        <div class="nav-content">
-            <h1 class="nav-name">YifanStudio</h1>
-            <div class="nav-links">
-                <a href="gallery.html" class="nav-link">GALLERY</a>
-                <a href="about.html" class="nav-link">ABOUT</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Back to Gallery Button -->
-    <div class="back-button-container">
-        <a href="index.html" class="back-button">
-            <span class="back-arrow">←</span>
-            <span>返回 wallwork</span>
-        </a>
-    </div>
-
-    <!-- Project Header -->
-    <section class="project-header">
-        <div class="project-header-content">
-            <div class="project-title-section">
-                <h1 class="project-title">智能加热器设计</h1>
-                <p class="project-category">[ 产品设计 / 智能硬件 ]</p>
-                <div class="project-year">2025</div>
-            </div>
-            
-            <div class="project-description">
-                <p>一个集成ESP32微控制器的智能加热器系统，具有无线控制、温度监测和触摸操作功能的完整产品设计。</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Project Details -->
-    <section class="project-details">
-        <div class="project-details-content">
-            <div class="project-info-grid">
-                <div class="info-section">
-                    <h3>ROLE</h3>
-                    <p>产品设计师, 硬件工程师, 系统集成</p>
+<body>
+    <div class="project-page">
+        <a href="index.html" class="back-button">← Back</a>
+        <header class="project-header">
+            <h1 class="project-title">AI-Driven DND Text Adventure Game</h1>
+            <p class="project-subtitle">Custom RAG Engine / Interactive Fiction / AI Storytelling</p>
+            <div class="project-meta">
+                <div class="meta-item">
+                    <div class="meta-label">Category</div>
+                    <div class="meta-value">AI, Game Design, Web Application</div>
                 </div>
-                
-                <div class="info-section">
-                    <h3>DURATION</h3>
-                    <p>16 weeks</p>
+                <div class="meta-item">
+                    <div class="meta-label">Year</div>
+                    <div class="meta-value">2024</div>
                 </div>
-                
-                <div class="info-section">
-                    <h3>TOOLS</h3>
-                    <p>SolidWorks, Arduino IDE, ESP32, KiCad, 3D打印</p>
+                <div class="meta-item">
+                    <div class="meta-label">Duration</div>
+                    <div class="meta-value">Ongoing</div>
                 </div>
-                
-                <div class="info-section">
-                    <h3>TEAM</h3>
-                    <p>1 产品设计师, 1 电子工程师, 1 软件开发</p>
+                <div class="meta-item">
+                    <div class="meta-label">Role</div>
+                    <div class="meta-value">Developer & Designer</div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Project Content -->
-    <section class="project-content">
-        <div class="project-content-container">
-            <div class="content-section">
-                <h2>Overview</h2>
-                <p>This project focused on redesigning packaging for a premium organic food brand, with the goal of reducing environmental impact while enhancing shelf appeal. The challenge was balancing sustainability requirements with the premium positioning and practical needs of food packaging.</p>
-                
-                <p>The new packaging design reduced material usage by 40% and helped the brand achieve carbon-neutral certification.</p>
+            <div class="project-tags">
+                <span class="tag">AI</span>
+                <span class="tag">RAG</span>
+                <span class="tag">Text Adventure</span>
+                <span class="tag">Web App</span>
+                <span class="tag">Interactive Fiction</span>
             </div>
-
-            <div class="content-section">
-                <h2>Design Elements</h2>
-                <ul class="feature-list">
-                    <li>100% recyclable materials</li>
-                    <li>Minimal ink usage design</li>
-                    <li>Optimized structural design</li>
-                    <li>Clear sustainability messaging</li>
-                    <li>Premium visual appearance</li>
-                    <li>Enhanced product visibility</li>
-                </ul>
-            </div>
-
-            <div class="content-section">
-                <h2>Sustainability Approach</h2>
-                <p>Every design decision was evaluated through the lens of environmental impact. We conducted lifecycle assessments of different material options and printing techniques to minimize the package's carbon footprint while maintaining food safety standards.</p>
-                
-                <p>The design features a modular system that allows for efficient manufacturing and shipping, reducing waste throughout the supply chain.</p>
-            </div>
-
-            <!-- 3D Model Viewer Section -->
-            <div class="content-section">
-                <h2>3D 模型预览</h2>
-                <p>您可以360度查看智能加热器的3D模型（加热器组件）。点击下方区域开始加载模型。</p>
-                <div class="model-info" style="background: #e3f2fd; padding: 12px; border-radius: 6px; margin-bottom: 15px; font-size: 14px;">
-                    <strong>💡 提示：</strong> 模型文件大小约 642KB，首次加载可能需要几秒钟时间。
+        </header>
+        <main class="project-content">
+            <!-- Hero Images Carousel (竖向滚动图片窗口) -->
+            <section class="content-section">
+                <div class="carousel-title">Game UI & Art Showcase</div>
+                <div class="vertical-scroll-frame" style="max-width: 700px; height: 700px; margin: 0 auto; overflow-y: auto; border-radius: 24px; border: 2px solid var(--border-color); background: rgba(255,255,255,0.04); box-shadow: 0 4px 24px rgba(0,0,0,0.12); padding: 2rem; display: flex; flex-direction: column; gap: 2.5rem;">
+                    <img src="DND/Cover.png" alt="Cover" style="width: 100%; height: auto; border-radius: 18px; box-shadow: 0 4px 24px rgba(0,0,0,0.18); border: 2px solid var(--border-color);">
+                    <img src="DND/hero1.png" alt="Hero 1" style="width: 100%; height: auto; border-radius: 18px; box-shadow: 0 4px 24px rgba(0,0,0,0.18); border: 2px solid var(--border-color);">
+                    <img src="DND/hero2.png" alt="Hero 2" style="width: 100%; height: auto; border-radius: 18px; box-shadow: 0 4px 24px rgba(0,0,0,0.18); border: 2px solid var(--border-color);">
+                    <img src="DND/hero3.png" alt="Hero 3" style="width: 100%; height: auto; border-radius: 18px; box-shadow: 0 4px 24px rgba(0,0,0,0.18); border: 2px solid var(--border-color);">
+                    <img src="DND/DH1.png" alt="DH 1" style="width: 100%; height: auto; border-radius: 18px; box-shadow: 0 4px 24px rgba(0,0,0,0.18); border: 2px solid var(--border-color);">
+                    <img src="DND/DH2.png" alt="DH 2" style="width: 100%; height: auto; border-radius: 18px; box-shadow: 0 4px 24px rgba(0,0,0,0.18); border: 2px solid var(--border-color);">
                 </div>
-                
-                <div class="model-viewer-container">
-                    <div id="threejs-container" style="width: 100%; height: 500px; border-radius: 8px; background: #f5f5f5; position: relative; overflow: hidden;">
-                        <div id="loading-indicator" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: #666; z-index: 10;">
-                            <div style="margin-bottom: 10px; font-size: 24px;">🔄</div>
-                            <div>加载3D模型中...</div>
+            </section>
+            <!-- Project Introduction -->
+            <section class="content-section features-timeline">
+                <h2 class="section-title">PROJECT INTRODUCTION</h2>
+                <div class="project-description">
+                    <p><b>AI-Driven DND Text Adventure Game with Custom RAG Engine</b></p>
+                    <p>This project is a next-generation, web-based text adventure game inspired by Dungeons & Dragons, Baldur's Gate, and Diablo. It is built around a custom Retrieval-Augmented Generation (RAG) engine, which works in tandem with advanced large language models (OpenAI GPT-4 and GPT-3.5-turbo) to deliver a highly personalized, context-aware, and dramatically engaging narrative experience.</p>
+                </div>
+            </section>
+            <section class="content-section features-timeline module-card">
+                <h2 class="section-title">KEY TECHNOLOGIES & INNOVATIONS</h2>
+                <div class="timeline-mirror" style="position:relative; margin:2.5rem 0 0 0;">
+                    <!-- 节点1：左文本，右图片rw1 -->
+                    <div class="timeline-mirror-row">
+                        <div class="timeline-mirror-content left">
+                            <div class="timeline-mirror-card">
+                                <h3>Custom RAG (Retrieval-Augmented Generation) Engine</h3>
+                                <p>The core of the system is a self-developed RAG module that continuously tracks and manages all player choices, story segments, and game states. This engine dynamically constructs a rich context for every AI prompt, ensuring that the generated narrative is always tightly connected to the player's history, character background, and previous decisions. This enables the AI to produce stories with genuine continuity, emotional arcs, and logical progression—far beyond simple random text generation.</p>
+                            </div>
                         </div>
-                        <div id="error-indicator" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: #999; z-index: 10; display: none;">
-                            <div style="margin-bottom: 10px; font-size: 24px;">❌</div>
-                            <div>3D模型加载失败</div>
-                            <div style="font-size: 14px; margin-top: 5px;">请检查网络连接或文件路径</div>
+                        <div class="timeline-mirror-center">
+                            <span class="timeline-center-dot"></span>
+                            <div class="timeline-center-line"></div>
+                        </div>
+                        <div class="timeline-mirror-img right">
+                            <img src="DND/rw1.png" alt="rw1" onclick="openImgZoom('DND/rw1.png')">
+                        </div>
+                    </div>
+                    <!-- 节点2：左图片rw2，右文本 -->
+                    <div class="timeline-mirror-row">
+                        <div class="timeline-mirror-img left">
+                            <img src="DND/rw2.png" alt="rw2" onclick="openImgZoom('DND/rw2.png')">
+                        </div>
+                        <div class="timeline-mirror-center">
+                            <span class="timeline-center-dot"></span>
+                            <div class="timeline-center-line"></div>
+                        </div>
+                        <div class="timeline-mirror-content right">
+                            <div class="timeline-mirror-card">
+                                <h3>AI-Powered Story Generation</h3>
+                                <p>All story content, branching options, and endings are generated in real time by state-of-the-art language models. The RAG engine feeds the most relevant context to the AI, allowing it to create vivid, immersive scenes, dramatic plot twists, and meaningful consequences for every choice.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 节点3：左文本，右图片rw3 -->
+                    <div class="timeline-mirror-row">
+                        <div class="timeline-mirror-content left">
+                            <div class="timeline-mirror-card">
+                                <h3>Seamless Narrative Flow</h3>
+                                <p>The system ensures that every new story segment not only responds to the player's latest action, but also references earlier events, choices, and character traits. This creates a true sense of narrative momentum, with rising and falling action, foreshadowing, and callbacks—mirroring the structure of expertly crafted interactive fiction.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-mirror-center">
+                            <span class="timeline-center-dot"></span>
+                            <div class="timeline-center-line"></div>
+                        </div>
+                        <div class="timeline-mirror-img right">
+                            <img src="DND/rw3.png" alt="rw3" onclick="openImgZoom('DND/rw3.png')">
+                        </div>
+                    </div>
+                    <!-- 节点4：左图片rw4，右文本 -->
+                    <div class="timeline-mirror-row">
+                        <div class="timeline-mirror-img left">
+                            <img src="DND/rw4.png" alt="rw4" onclick="openImgZoom('DND/rw4.png')">
+                        </div>
+                        <div class="timeline-mirror-center">
+                            <span class="timeline-center-dot"></span>
+                            <div class="timeline-center-line"></div>
+                        </div>
+                        <div class="timeline-mirror-content right">
+                            <div class="timeline-mirror-card">
+                                <h3>Smart Caching & Cost Optimization</h3>
+                                <p>To balance performance and cost, the program implements a local caching mechanism. Identical prompts are instantly served from cache, while only new or unique situations trigger fresh AI calls. Most content is generated using the efficient GPT-3.5-turbo model, with GPT-4 reserved for climactic endings, ensuring both quality and affordability.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 节点5：左文本，右图片rw5 -->
+                    <div class="timeline-mirror-row">
+                        <div class="timeline-mirror-content left">
+                            <div class="timeline-mirror-card">
+                                <h3>Immersive UI & Game Design</h3>
+                                <p>The frontend features a dark-fantasy, game-like interface with animated SVG characters, runic decorations, and responsive design. The user experience is crafted to evoke the atmosphere of classic RPGs, while leveraging modern web technologies for smooth interaction.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-mirror-center">
+                            <span class="timeline-center-dot"></span>
+                            <div class="timeline-center-line"></div>
+                        </div>
+                        <div class="timeline-mirror-img right">
+                            <img src="DND/rw5.png" alt="rw5" onclick="openImgZoom('DND/rw5.png')">
                         </div>
                     </div>
                 </div>
-                
-                <div class="model-controls-info" style="margin-top: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px; font-size: 14px; color: #666;">
-                    <strong>操作说明：</strong>
-                    <ul style="margin: 8px 0 0 20px; line-height: 1.6;">
-                        <li>点击模型区域：开始加载3D模型</li>
-                        <li>拖拽：旋转模型</li>
-                        <li>滚轮：缩放</li>
-                        <li>双击：重置视角</li>
+            </section>
+            <section class="content-section">
+                <h2 class="section-title">CUSTOMIZATION & USER EXPERIENCE</h2>
+                <div class="project-description">
+                    <ul>
+                        <li><b>Deep Personalization:</b> Every playthrough is unique. The RAG engine ensures that the AI "remembers" the player's journey, allowing for highly customized narrative arcs and character development.</li>
+                        <li><b>Replayability:</b> The branching narrative and dynamic context mean that no two adventures are ever the same.</li>
+                        <li><b>Immersive Choices:</b> Every decision matters, with meaningful consequences and callbacks to earlier actions.</li>
+                        <li><b>Atmospheric Presentation:</b> The UI and art direction are designed to immerse players in a dark-fantasy world, with animated elements and responsive layouts.</li>
                     </ul>
                 </div>
-                
-                <!-- 切换模型按钮 -->
-                <div class="model-switcher" style="margin-top: 20px; text-align: center;">
-                    <button onclick="switchModel('heater')" style="margin: 5px; padding: 8px 16px; background: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer;">
-                        加热器组件 (642KB)
-                    </button>
-                    <button onclick="switchModel('esp32')" style="margin: 5px; padding: 8px 16px; background: #FF9800; color: white; border: none; border-radius: 4px; cursor: pointer;">
-                        ESP32主板 (19MB)
-                    </button>
-                    <button onclick="switchModel('touchpad')" style="margin: 5px; padding: 8px 16px; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">
-                        触摸控制板 (219KB)
-                    </button>
+            </section>
+            <section class="content-section">
+                <h2 class="section-title">FUTURE POTENTIAL</h2>
+                <div class="project-description">
+                    <p>This platform opens up possibilities for integrating player-created content, multiplayer storytelling, and advanced AI-driven world simulation. The custom RAG engine can be adapted for other genres, educational tools, or collaborative fiction experiences.</p>
                 </div>
-            </div>
-
-            <!-- Project Images Placeholder -->
-            <div class="content-section">
-                <div class="project-images">
-                    <div class="image-placeholder large">
-                        <div class="placeholder-content">Packaging Design Showcase</div>
-                    </div>
-                    
-                    <div class="image-grid">
-                        <div class="image-placeholder">
-                            <div class="placeholder-content">Technical Drawings</div>
-                        </div>
-                        <div class="image-placeholder">
-                            <div class="placeholder-content">Material Testing</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Navigation to Next/Previous Projects -->
-    <section class="project-navigation">
-        <div class="project-nav-content">
-            <a href="project-ecommerce.html" class="nav-project prev">
-                <span class="nav-direction">Previous</span>
-                <span class="nav-title">E-commerce</span>
-            </a>
-            
-            <a href="gallery.html" class="nav-gallery">
-                <span>All Projects</span>
-            </a>
-            
-            <a href="project-digital-interface.html" class="nav-project next">
-                <span class="nav-direction">Next</span>
-                <span class="nav-title">Digital Interface</span>
-            </a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="main-footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="mailto:your@email.com">EMAIL</a>
-                <a href="#" target="_blank">LINKEDIN</a>
-                <a href="#" target="_blank">INSTAGRAM</a>
-                <a href="#" target="_blank">RESUME</a>
-            </div>
-            <p class="footer-text">© 2024 Your Name. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- JavaScript -->
+            </section>
+        </main>
+    </div>
+    <div class="img-zoom-overlay" id="imgZoomOverlay">
+        <button class="img-zoom-close" onclick="closeImgZoom()">&times;</button>
+        <img id="imgZoomTarget" src="" alt="Zoomed Image">
+    </div>
     <script src="script.js"></script>
     <script>
-        let scene, camera, renderer, controls, currentMesh;
-        
-        function initThreeJS() {
-            const container = document.getElementById('threejs-container');
-            
-            // 创建场景
-            scene = new THREE.Scene();
-            scene.background = new THREE.Color(0xf5f5f5);
-            
-            // 创建相机
-            camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
-            camera.position.set(0, 50, 100);
-            
-            // 创建渲染器
-            renderer = new THREE.WebGLRenderer({ antialias: true });
-            renderer.setSize(container.offsetWidth, container.offsetHeight);
-            renderer.shadowMap.enabled = true;
-            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-            container.appendChild(renderer.domElement);
-            
-            // 添加控制器
-            controls = new THREE.OrbitControls(camera, renderer.domElement);
-            controls.enableDamping = true;
-            controls.dampingFactor = 0.05;
-            
-            // 添加光照
-            const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
-            scene.add(ambientLight);
-            
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-            directionalLight.position.set(100, 100, 50);
-            directionalLight.castShadow = true;
-            scene.add(directionalLight);
-            
-            // 开始渲染循环
-            animate();
-        }
-        
-        function animate() {
-            requestAnimationFrame(animate);
-            controls.update();
-            renderer.render(scene, camera);
-        }
-        
-        function loadSTL(filePath) {
-            const loadingIndicator = document.getElementById('loading-indicator');
-            const errorIndicator = document.getElementById('error-indicator');
-            
-            loadingIndicator.style.display = 'block';
-            errorIndicator.style.display = 'none';
-            
-            // 移除之前的模型
-            if (currentMesh) {
-                scene.remove(currentMesh);
-            }
-            
-            const loader = new THREE.STLLoader();
-            loader.load(
-                filePath,
-                function (geometry) {
-                    // 加载成功
-                    loadingIndicator.style.display = 'none';
-                    
-                    const material = new THREE.MeshPhongMaterial({ 
-                        color: 0x888888,
-                        shininess: 100 
-                    });
-                    
-                    currentMesh = new THREE.Mesh(geometry, material);
-                    
-                    // 居中模型
-                    geometry.computeBoundingBox();
-                    const center = geometry.boundingBox.getCenter(new THREE.Vector3());
-                    currentMesh.position.sub(center);
-                    
-                    // 调整大小
-                    const size = geometry.boundingBox.getSize(new THREE.Vector3());
-                    const maxDim = Math.max(size.x, size.y, size.z);
-                    const scale = 50 / maxDim;
-                    currentMesh.scale.setScalar(scale);
-                    
-                    scene.add(currentMesh);
-                },
-                function (progress) {
-                    // 加载进度
-                    console.log('Loading progress: ', (progress.loaded / progress.total * 100) + '%');
-                },
-                function (error) {
-                    // 加载错误
-                    console.error('Error loading STL:', error);
-                    loadingIndicator.style.display = 'none';
-                    errorIndicator.style.display = 'block';
-                }
-            );
-        }
-        
-        function switchModel(type) {
-            const modelInfo = document.querySelector('.model-info');
-            
-            let src, info;
-            switch(type) {
-                case 'heater':
-                    src = 'models/heater.stl';
-                    info = '💡 提示：加热器组件模型，文件大小约 642KB，加载快速。';
-                    break;
-                case 'esp32':
-                    src = 'models/加热器总装配体 - ESP32 MB-1.STL';
-                    info = '⚠️ 注意：ESP32主板模型，文件较大(19MB)，加载可能需要30秒-1分钟。';
-                    break;
-                case 'touchpad':
-                    src = 'models/touchpad.stl';
-                    info = '💡 提示：触摸控制板模型，文件大小约 219KB，加载很快。';
-                    break;
-            }
-            
-            modelInfo.innerHTML = '<strong>' + info + '</strong>';
-            loadSTL(src);
-        }
-        
-        // 窗口大小调整
-        function onWindowResize() {
-            const container = document.getElementById('threejs-container');
-            camera.aspect = container.offsetWidth / container.offsetHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(container.offsetWidth, container.offsetHeight);
-        }
-        
-        window.addEventListener('resize', onWindowResize);
-        
-        // 页面加载完成后初始化
-        document.addEventListener('DOMContentLoaded', function() {
-            initThreeJS();
-            // 默认加载加热器组件
-            setTimeout(() => switchModel('heater'), 1000);
-        });
+    // 通用轮播逻辑
+    function nextSlide(id) {
+        const carousel = document.getElementById(id);
+        const imgs = carousel.querySelectorAll('img');
+        let idx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
+        if (imgs.length === 0) return;
+        imgs[idx].classList.remove('active');
+        idx = (idx + 1) % imgs.length;
+        imgs[idx].classList.add('active');
+    }
+    function prevSlide(id) {
+        const carousel = document.getElementById(id);
+        const imgs = carousel.querySelectorAll('img');
+        let idx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
+        if (imgs.length === 0) return;
+        imgs[idx].classList.remove('active');
+        idx = (idx - 1 + imgs.length) % imgs.length;
+        imgs[idx].classList.add('active');
+    }
+    // 自动轮播（如有图片时可用）
+    // setInterval(() => { nextSlide('carousel-hero'); }, 3500);
+    // 页面退出动画
+    document.querySelector('.back-button').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector('.project-page').classList.add('slide-out');
+        setTimeout(() => {
+            window.location.href = this.href;
+        }, 600);
+    });
+    function openImgZoom(src) {
+        var overlay = document.getElementById('imgZoomOverlay');
+        var img = document.getElementById('imgZoomTarget');
+        img.src = src;
+        overlay.classList.add('active');
+    }
+    function closeImgZoom() {
+        var overlay = document.getElementById('imgZoomOverlay');
+        var img = document.getElementById('imgZoomTarget');
+        img.src = '';
+        overlay.classList.remove('active');
+    }
+    document.getElementById('imgZoomOverlay').addEventListener('click', function(e) {
+        if (e.target === this) closeImgZoom();
+    });
     </script>
 </body>
 </html> 

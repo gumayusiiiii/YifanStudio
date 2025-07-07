@@ -111,14 +111,16 @@ const projects = [
     cover: "paint/Men.jpg"
   },
   {
-    title: "Packaging Design",
-    subtitle: "Sustainable / Organic Products",
-    category: "Packaging",
-    year: "2025",
-    tags: ["Packaging", "Sustainable", "Branding"],
+    title: "AI-Driven DND Text Adventure Game",
+    subtitle: "AI Text Adventure / Custom RAG Engine / Interactive Fiction",
+    category: "AI, Game Design, Web Application",
+    year: "2024",
+    tags: ["AI", "RAG", "Text Adventure", "Web App", "Interactive Fiction"],
     link: "project-packaging.html",
-    placeholderText: "PACKAGING",
-    placeholderColor: "#999"
+    placeholderText: "AI-DRIVEN DND GAME",
+    placeholderColor: "#000",
+    cover: "DND/Logo.png",
+    coverStyle: "object-fit:contain;background:#000;"
   }
 ];
 
