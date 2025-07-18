@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>背景色修复测试 - YifanStudio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="minimal-cursor.css">
+    <link rel="stylesheet" href="cleanest-transitions.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+        
+        .test-section {
+            margin: 4rem 0;
+            padding: 3rem;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .test-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .test-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .background-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .comparison-box {
+            padding: 2rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            text-align: center;
+            position: relative;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .comparison-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+        
+        .comparison-box p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-good {
+            background: #4CAF50;
+        }
+        
+        .status-bad {
+            background: #f44336;
+        }
+        
+        .text-animation-demo {
+            margin: 3rem 0;
+        }
+        
+        .demo-text {
+            font-size: 2rem;
+            font-weight: 300;
+            margin: 1rem 0;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .demo-text h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .demo-text p {
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+        
+        .background-pattern {
+            position: relative;
+            height: 150px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .background-pattern::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #111, #222, #111);
+            z-index: -1;
+        }
+        
+        .background-pattern h3 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--text-color);
+        }
+        
+        .fix-details {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        
+        .fix-details h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #4CAF50;
+        }
+        
+        .fix-details ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .fix-details li {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .fix-details li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .background-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .test-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body class="page-container">
+    
+        <section class="test-section">
+            <h2 >页面背景色测试</h2>
+            <div class="background-pattern">
+                <h3 >页面实际背景色区域</h3>
+            </div>
+            <p style="text-align: center; color: var(--text-light);">
+                上方区域展示了页面的实际背景色，文字动画背景应该与此完全匹配
+            </p>
+        </section>
+
+        
+        <section class="test-section">
+            <h2 >修复技术细节</h2>
+            <div class="fix-details">
+                <h3>完全修复方案</h3>
+                <ul>
+                    <li>定义明确的页面背景色变量 <code>--page-bg: #000</code></li>
+                    <li>使用 <code>!important</code> 强制应用背景色</li>
+                    <li>优化 z-index 层级，确保动画层在文字上方</li>
+                    <li>文字内容设置相对定位和 z-index: 0</li>
+                    <li>动画遮罩层设置 z-index: 1</li>
+                    <li>统一所有动画元素的背景色</li>
+                    <li>添加无障碍支持，禁用动画时隐藏遮罩</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Navigation Test -->
+        <section class="test-section">
+            <h2 >导航和交互测试</h2>
+            <div style="text-align: center; margin: 2rem 0;">
+                <a href="clean-test.html" class="nav-link nav-link-transition" style="margin: 0 1rem;">简化版测试</a>
+                <a href="text-animation-test.html" class="nav-link nav-link-transition" style="margin: 0 1rem;">原版测试</a>
+                <a href="index.html" class="nav-link nav-link-transition" style="margin: 0 1rem;">返回主页</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="mailto:yzhao09@risd.edu">EMAIL</a>
+                <a href="https://www.linkedin.com/in/yifan-zhao-bb7b652b6" target="_blank">LINKEDIN</a>
+                <a href="resume.pdf" download>RESUME</a>
+            </div>
+            <p class="footer-text">© 2025 YiFanStudio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <script src="cleanest-transitions.js"></script>
+    <script src="minimal-cursor.js"></script>
+</body>
+</html> 

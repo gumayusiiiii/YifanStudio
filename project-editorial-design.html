@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shared Heater</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="minimal-cursor.css">
+    <link rel="stylesheet" href="cleanest-transitions.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="project-page">
+<body class="page-container">
     <!-- Project Header -->
     <section class="project-header">
         <div class="project-header-content">
@@ -48,10 +50,10 @@
     <!-- Project Content -->
     <section class="project-content">
         <div class="project-content-container">
-            <div class="content-section">
+            <div class="content-enter content-section">
                 <h2>Project Narrative</h2>
                 <!-- Hero Images 2x2 Grid -->
-                <div style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 2.5rem; justify-content: center; align-items: center; max-width: 900px; margin: 0 auto 2.5rem auto;">
+                <div style="display: grid; grid-template-rows: 1fr 1fr; gap: 2.5rem; justify-content: center; align-items: center; max-width: 900px; margin: 0 auto 2.5rem auto;">
                     <img src="Heater/hero1.png" alt="Hero 1" style="width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 16px; box-shadow: 0 2px 16px rgba(0,0,0,0.12);">
                     <img src="Heater/hero2.png" alt="Hero 2" style="width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 16px; box-shadow: 0 2px 16px rgba(0,0,0,0.12);">
                     <img src="Heater/hero3.png" alt="Hero 3" style="width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 16px; box-shadow: 0 2px 16px rgba(0,0,0,0.12);">
@@ -125,7 +127,7 @@
                 </div>
             </div>
 
-            <div class="content-section">
+            <div class="content-enter content-section">
                 <h2>Design Philosophy</h2>
                 <p>The design approach emphasized letting the artwork speak while providing a sophisticated framework for content organization. We developed a modular grid system that could adapt to different types of content, from full-bleed artwork to detailed text passages.</p>
                 <p style="margin-bottom: 0.3rem;">Special attention was paid to paper selection and printing techniques to ensure the highest quality reproduction of the featured artworks.</p>
@@ -146,6 +148,7 @@
         </a>
     </div>
     <script src="script.js"></script>
+    <script src="cleanest-transitions.js"></script>
     <script>
     function nextCustomSlide(carouselClass) {
         const carousel = document.querySelector('.' + carouselClass);
@@ -168,5 +171,6 @@
         imgs[idx].style.display = 'block';
     }
     </script>
+    <script src="minimal-cursor.js"></script>
 </body>
 </html> 

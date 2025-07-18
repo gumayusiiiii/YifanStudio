@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inclusive, Barrier-Free Mouse Design</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="minimal-cursor.css">
+    <link rel="stylesheet" href="cleanest-transitions.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         .project-page {
@@ -72,7 +74,6 @@
         }
         .project-meta {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
             margin-bottom: 3rem;
             padding: 2rem 0;
@@ -246,13 +247,13 @@
         }
     </style>
 </head>
-<body>
+<body class="page-container">
     <div class="project-page">
         <a href="index.html" class="back-button">← Back</a>
         <header class="project-header">
             <h1 class="project-title">Inclusive, Barrier-Free Mouse Design</h1>
             <p class="project-subtitle">Assistive Tech / Inclusive Design / Ergonomics</p>
-            <div class="project-meta">
+            <div class="content-enter project-meta">
                 <div class="meta-item">
                     <div class="meta-label">Category</div>
                     <div class="meta-value">Inclusive Product Design</div>
@@ -270,7 +271,7 @@
                     <div class="meta-value">Designer & Engineer</div>
                 </div>
             </div>
-            <div class="project-tags">
+            <div class="content-enter project-tags">
                 <span class="tag">Assistive</span>
                 <span class="tag">Ergonomics</span>
                 <span class="tag">Parametric</span>
@@ -279,7 +280,7 @@
             </div>
         </header>
         <main class="project-content">
-            <section class="content-section">
+            <section class="content-enter content-section">
                 <div style="display: flex; flex-direction: column; align-items: center; gap: 2.2rem; margin: 2.5rem 0;">
                     <img src="Mouse/pho3.png" alt="pho3" style="width: 100%; max-width: 680px; border-radius: 16px; box-shadow: 0 2px 16px rgba(0,0,0,0.10); border: 1.5px solid var(--border-color, #333); margin-bottom: 0.5rem;">
                     <div class="img-row" style="margin: 0;">
@@ -288,7 +289,7 @@
                     </div>
                 </div>
             </section>
-            <section class="content-section">
+            <section class="content-enter content-section">
                 <h2 class="section-title">Project Overview</h2>
                 <p>In this project I set out to <strong>re-imagine the form and interaction logic of the conventional computer mouse</strong> for people with hand impairments. Field research—interviews, observation, and video documentation—revealed three core pain points:</p>
                 <ol>
@@ -297,14 +298,14 @@
                     <li><strong>One-size-fits-all geometry</strong>: commercial shells fail to conform to palms altered by injury or deformity.</li>
                 </ol>
             </section>
-            <section class="content-section">
+            <section class="content-enter content-section">
                 <div class="img-row">
                     <img src="Mouse/xuan1.png" alt="xuan1">
                     <img src="Mouse/xuan2.png" alt="xuan2">
                     <img src="Mouse/xuan3.png" alt="xuan3">
                 </div>
             </section>
-            <section class="content-section">
+            <section class="content-enter content-section">
                 <h2 class="section-title">Prototyping & Validation</h2>
                 <ul>
                     <li><strong>Rapid Iteration</strong>: Four functional prototypes were SLA-printed; each cycle folded in real-time user feedback and cut required actuation force by an average <strong>12 %</strong>.</li>
@@ -312,13 +313,13 @@
                     <li><strong>Material Selection</strong>: H-temperature <strong>ABS-M30</strong> for printing, with plans to shift to injection-molded <strong>PC-ABS</strong> for strength. Buttons are over-molded in <strong>30 A TPE</strong> for a warm, cushioned touch.</li>
                 </ul>
             </section>
-            <section class="content-section">
+            <section class="content-enter content-section">
                 <div class="img-row">
                     <img src="Mouse/skt1.png" alt="skt1">
                     <img src="Mouse/skt2.png" alt="skt2">
                 </div>
             </section>
-            <section class="content-section">
+            <section class="content-enter content-section">
                 <h2 class="section-title">Value & Next Steps</h2>
                 <p>This design meets the fundamental need for <strong>seamless digital interaction</strong> among users with physical disabilities and offers a reusable parametric workflow for inclusive consumer electronics. Future work:</p>
                 <p>Through systematic research, validation, and iteration, the project embodies the principle that <strong>"design is care,"</strong> turning empathy into tangible improvements in everyday life.</p>
@@ -326,6 +327,7 @@
         </main>
     </div>
     <script src="script.js"></script>
+    <script src="cleanest-transitions.js"></script>
     <script>
         // 页面退出动画
         document.querySelector('.back-button').addEventListener('click', function(e) {
@@ -336,5 +338,6 @@
             }, 600);
         });
     </script>
+    <script src="minimal-cursor.js"></script>
 </body>
 </html> 

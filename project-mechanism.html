@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mechanism - YOUR NAME</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="minimal-cursor.css">
+    <link rel="stylesheet" href="cleanest-transitions.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         .project-page {
@@ -98,7 +100,6 @@
         
         .project-meta {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
             margin-bottom: 3rem;
             padding: 2rem 0;
@@ -194,7 +195,6 @@
         
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 3rem;
             margin: 4rem 0;
         }
@@ -227,7 +227,6 @@
         
         .image-gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 2rem;
             margin: 4rem 0;
         }
@@ -294,7 +293,6 @@
         
         .materials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
         }
@@ -331,7 +329,6 @@
         
         .timeline-item {
             display: grid;
-            grid-template-columns: 1fr 2fr;
             gap: 3rem;
             margin-bottom: 3rem;
             padding: 2rem;
@@ -417,7 +414,7 @@
         }
     </style>
 </head>
-<body>
+<body class="page-container">
     <div class="project-page">
         <a href="index.html" class="back-button">← Back</a>
         
@@ -425,7 +422,7 @@
             <h1 class="project-title">Mechanism</h1>
             <p class="project-subtitle">Mechanical Engineering / Metal Fabrication / Linkage Design</p>
             
-            <div class="project-meta">
+            <div class="content-enter project-meta">
                 <div class="meta-item">
                     <div class="meta-label">Category</div>
                     <div class="meta-value">Mechanical Engineering</div>
@@ -444,7 +441,7 @@
                 </div>
             </div>
             
-            <div class="project-tags">
+            <div class="content-enter project-tags">
                 <span class="tag">Mechanism</span>
                 <span class="tag">Aluminum</span>
                 <span class="tag">Iron</span>
@@ -453,7 +450,7 @@
             </div>
         </header>
         <!-- 图片转盘区块（移到最前面） -->
-        <section class="content-section">
+        <section class="content-enter content-section">
             <div class="carousel-frame no-border">
                 <div class="carousel" id="carousel-mechanism">
                     <img src="Mechanism/Hero1.jpg" alt="Hero 1" class="active">
@@ -468,13 +465,13 @@
             </div>
         </section>
         <main class="project-content">
-            <section class="content-section">
+            <section class="content-enter content-section">
                 <h2 class="section-title">Concept Overview</h2>
                 <div class="project-description">
                     <p>This project explores the aesthetics and function of classic mechanical articulation through handcrafted metalwork, celebrating simplicity, strength, and kinetic elegance.</p>
                 </div>
             </section>
-            <section class="content-section">
+            <section class="content-enter content-section">
                 <h2 class="section-title">Materiality and Construction</h2>
                 <div class="project-description">
                     <ul>
@@ -484,7 +481,7 @@
                     </ul>
                 </div>
             </section>
-            <section class="content-section">
+            <section class="content-enter content-section">
                 <h2 class="section-title">Kinetic Behavior</h2>
                 <div class="project-description">
                     <ul>
@@ -494,7 +491,7 @@
                 </div>
             </section>
             <!-- 新增工艺流程图片展示（移动到此处） -->
-            <section class="content-section">
+            <section class="content-enter content-section">
                 <h2 class="section-title">Process</h2>
                 <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin: 2rem 0;">
                     <img src="Mechanism/proc/proc1.png" alt="Process 1" style="max-width: 340px; width: 100%; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.10); border: 1px solid var(--border-color); background: #fff; object-fit: contain;">
@@ -502,13 +499,13 @@
                     <img src="Mechanism/proc/proc3.png" alt="Process 3" style="max-width: 340px; width: 100%; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.10); border: 1px solid var(--border-color); background: #fff; object-fit: contain;">
                 </div>
             </section>
-            <section class="content-section">
+            <section class="content-enter content-section">
                 <h2 class="section-title">Design Intent</h2>
                 <div class="project-description">
                     <p>A study in <b>mechanical minimalism</b>: how basic forms and manual techniques create expressive, functional mechanisms inspired by historical engineering.</p>
                 </div>
             </section>
-            <section class="content-section">
+            <section class="content-enter content-section">
                 <h2 class="section-title">Conceptual Themes</h2>
                 <div class="project-description">
                     <ul>
@@ -519,7 +516,7 @@
                 </div>
             </section>
             
-            <section class="content-section">
+            <section class="content-enter content-section">
                 <h2 class="section-title">Materials & Construction</h2>
                 <div class="materials-section">
                     <div class="materials-grid">
@@ -543,7 +540,7 @@
                 </div>
             </section>
             
-            <section class="content-section">
+            <section class="content-enter content-section">
                 <h2 class="section-title">Technical Features</h2>
                 <div class="features-grid">
                     <div class="feature-item">
@@ -564,17 +561,9 @@
     </div>
     
     <script src="script.js"></script>
+    <script src="cleanest-transitions.js"></script>
     <script>
-        // 页面退出动画
-        document.querySelector('.back-button').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.querySelector('.project-page').classList.add('slide-out');
-            setTimeout(() => {
-                window.location.href = this.href;
-            }, 600);
-        });
-        
-        // 图片转盘切换逻辑
+                // 图片转盘切换逻辑
         function nextSlide(id) {
             const carousel = document.getElementById(id);
             const imgs = carousel.querySelectorAll('img');
@@ -592,5 +581,6 @@
             imgs[idx].classList.add('active');
         }
     </script>
+    <script src="minimal-cursor.js"></script>
 </body>
 </html> 

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>1 Wend1 - 影视作品</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="minimal-cursor.css">
+    <link rel="stylesheet" href="cleanest-transitions.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         .project-page {
@@ -130,7 +132,7 @@
         }
     </style>
 </head>
-<body>
+<body class="page-container">
     <div class="project-page">
         <a href="index.html" class="back-button">← Back</a>
         <header class="project-header">
@@ -138,7 +140,7 @@
             <p class="project-subtitle">Film / Video Streaming / Visual Art</p>
         </header>
         <main class="project-content">
-            <section class="content-section">
+            <section class="content-enter content-section">
                 <div class="video-container">
                     <iframe src="https://player.bilibili.com/player.html?bvid=BV1Eb421z7zm&autoplay=1"
                         scrolling="no" frameborder="no" allowfullscreen="true">
@@ -162,6 +164,7 @@
         </main>
     </div>
     <script src="script.js"></script>
+    <script src="cleanest-transitions.js"></script>
     <script>
         // 页面退出动画
         document.querySelector('.back-button').addEventListener('click', function(e) {
@@ -172,5 +175,6 @@
             }, 600);
         });
     </script>
+    <script src="minimal-cursor.js"></script>
 </body>
 </html> 

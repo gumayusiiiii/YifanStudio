@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动画效果测试 - YifanStudio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="page-transitions.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .test-section {
+            margin-bottom: 4rem;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+        
+        .test-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+        
+        .test-description {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+        
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .demo-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .demo-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        
+        .demo-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #333, #666);
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .demo-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+        
+        .demo-text {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .button-demo {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .demo-button {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .demo-button:hover {
+            background: var(--text-color);
+            color: var(--bg-color);
+            transform: translateY(-2px);
+        }
+        
+        .nav-demo {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .nav-demo a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-demo a:hover {
+            color: var(--text-color);
+        }
+        
+        .nav-demo a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: currentColor;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-demo a:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="page-container">
+    <!-- Navigation Header -->
+    <nav class="main-nav">
+        <div class="nav-content">
+            <h1 class="nav-name">YifanStudio</h1>
+            <div class="nav-links">
+                <a href="gallery.html" class="nav-link nav-link-transition">GALLERY</a>
+                <a href="about.html" class="nav-link nav-link-transition">ABOUT</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="test-container">
+        <section class="test-section content-enter">
+            <h1 class="test-title">🎨 动画效果测试页面</h1>
+            <p class="test-description">
+                这个页面展示了为您的作品集网站添加的所有动画效果。您可以在这里测试各种交互效果。
+            </p>
+            
+            <div class="button-demo">
+                <a href="index.html" class="demo-button">← 返回主页</a>
+                <a href="gallery.html" class="demo-button">查看画廊</a>
+                <a href="about.html" class="demo-button">关于页面</a>
+            </div>
+        </section>
+
+        <section class="test-section content-enter">
+            <h2 class="test-title">📱 项目卡片悬停效果</h2>
+            <p class="test-description">
+                将鼠标悬停在下面的卡片上，体验项目卡片的悬停动画效果。
+            </p>
+            
+            <div class="demo-grid">
+                <div class="demo-card project-card">
+                    <div class="demo-image">项目图片</div>
+                    <h3 class="demo-title">中世纪护手</h3>
+                    <p class="demo-text">手工制作的金属护手，结合了中世纪工艺和现代设计理念。</p>
+                </div>
+                
+                <div class="demo-card project-card">
+                    <div class="demo-image">项目图片</div>
+                    <h3 class="demo-title">模块化运动鞋</h3>
+                    <p class="demo-text">可拆卸组件的运动鞋设计，提供个性化的穿着体验。</p>
+                </div>
+                
+                <div class="demo-card project-card">
+                    <div class="demo-image">项目图片</div>
+                    <h3 class="demo-title">船体模型</h3>
+                    <p class="demo-text">精确的船体比例模型，展示流体动力学设计原理。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="test-section content-enter">
+            <h2 class="test-title">🔗 导航链接效果</h2>
+            <p class="test-description">
+                将鼠标悬停在下面的导航链接上，体验下划线动画效果。
+            </p>
+            
+            <div class="nav-demo">
+                <a href="#" class="nav-link-transition">首页</a>
+                <a href="#" class="nav-link-transition">作品集</a>
+                <a href="#" class="nav-link-transition">关于</a>
+                <a href="#" class="nav-link-transition">联系</a>
+            </div>
+        </section>
+
+        <section class="test-section content-enter">
+            <h2 class="test-title">⬅️ 返回按钮效果</h2>
+            <p class="test-description">
+                将鼠标悬停在返回按钮上，体验滑动和光泽效果。
+            </p>
+            
+            <a href="index.html" class="back-button demo-button">← 返回主页</a>
+        </section>
+
+        <section class="test-section content-enter">
+            <h2 class="test-title">📋 动画系统说明</h2>
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <h3 class="demo-title">页面进入动画</h3>
+                    <p class="demo-text">页面从右侧滑入，同时淡入效果，创造流畅的视觉体验。</p>
+                </div>
+                
+                <div class="demo-card">
+                    <h3 class="demo-title">页面退出动画</h3>
+                    <p class="demo-text">页面向左滑出，同时淡出效果，为下一个页面做准备。</p>
+                </div>
+                
+                <div class="demo-card">
+                    <h3 class="demo-title">内容区域动画</h3>
+                    <p class="demo-text">页面内容依次从下方淡入，创造层次感和节奏感。</p>
+                </div>
+                
+                <div class="demo-card">
+                    <h3 class="demo-title">交互动画</h3>
+                    <p class="demo-text">悬停效果、按钮动画等，提升用户交互体验。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="test-section content-enter">
+            <h2 class="test-title">🎯 测试导航</h2>
+            <p class="test-description">
+                点击下面的链接测试页面间的过渡动画效果：
+            </p>
+            
+            <div class="button-demo">
+                <a href="project-medieval-gauntlet.html" class="demo-button">中世纪护手项目</a>
+                <a href="project-modular-sneakers.html" class="demo-button">模块化运动鞋项目</a>
+                <a href="project-hull-model.html" class="demo-button">船体模型项目</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="mailto:yzhao09@risd.edu">EMAIL</a>
+                <a href="https://www.linkedin.com/in/yifan-zhao-bb7b652b6" target="_blank">LINKEDIN</a>
+                <a href="resume.pdf" download>RESUME</a>
+            </div>
+            <p class="footer-text">© 2025 YiFanStudio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <script src="page-transitions.js"></script>
+</body>
+</html> 

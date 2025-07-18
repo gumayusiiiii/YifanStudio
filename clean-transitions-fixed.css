@@ -1,0 +1,357 @@
+/* 完全修复版页面过渡动画样式 - 确保背景色完全匹配 */
+:root {
+    --transition-duration: 0.8s;
+    --transition-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --slide-distance: 60px;
+    --page-bg: #000; /* 明确定义页面背景色 */
+}
+
+/* 页面容器基础样式 */
+.page-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: var(--page-bg) !important; /* 强制使用黑色背景 */
+}
+
+/* 页面进入动画 */
+.page-enter {
+    opacity: 0;
+    transform: translateX(var(--slide-distance)) scale(0.98);
+    animation: pageEnter var(--transition-duration) var(--transition-easing) forwards;
+}
+
+.page-enter-reverse {
+    opacity: 0;
+    transform: translateX(calc(-1 * var(--slide-distance))) scale(0.98);
+    animation: pageEnterReverse var(--transition-duration) var(--transition-easing) forwards;
+}
+
+/* 页面退出动画 */
+.page-exit {
+    animation: pageExit var(--transition-duration) var(--transition-easing) forwards;
+}
+
+.page-exit-reverse {
+    animation: pageExitReverse var(--transition-duration) var(--transition-easing) forwards;
+}
+
+/* 页面进入动画关键帧 */
+@keyframes pageEnter {
+    0% {
+        opacity: 0;
+        transform: translateX(var(--slide-distance)) scale(0.98);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateX(calc(var(--slide-distance) * 0.3)) scale(0.99);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes pageEnterReverse {
+    0% {
+        opacity: 0;
+        transform: translateX(calc(-1 * var(--slide-distance))) scale(0.98);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateX(calc(-1 * var(--slide-distance) * 0.3)) scale(0.99);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+/* 页面退出动画关键帧 */
+@keyframes pageExit {
+    0% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateX(calc(-1 * var(--slide-distance) * 0.3)) scale(0.99);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(calc(-1 * var(--slide-distance))) scale(0.98);
+    }
+}
+
+@keyframes pageExitReverse {
+    0% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateX(calc(var(--slide-distance) * 0.3)) scale(0.99);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(var(--slide-distance)) scale(0.98);
+    }
+}
+
+/* 内容区域渐入动画 */
+.content-enter {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+    animation: contentEnter 1s var(--transition-easing) forwards;
+}
+
+.content-enter:nth-child(1) { animation-delay: 0.1s; }
+.content-enter:nth-child(2) { animation-delay: 0.2s; }
+.content-enter:nth-child(3) { animation-delay: 0.3s; }
+.content-enter:nth-child(4) { animation-delay: 0.4s; }
+.content-enter:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes contentEnter {
+    0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* 导航链接样式 */
+.nav-link-transition {
+    position: relative;
+    transition: all 0.4s ease;
+    overflow: hidden;
+}
+
+.nav-link-transition::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.nav-link-transition:hover::before {
+    left: 100%;
+}
+
+.nav-link-transition::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--text-color);
+    transition: width 0.4s ease;
+}
+
+.nav-link-transition:hover::after {
+    width: 100%;
+}
+
+/* 加载动画 */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--page-bg) !important; /* 强制使用页面背景色 */
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.8s ease;
+}
+
+.loading-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading-animation {
+    position: relative;
+    width: 60px;
+    height: 60px;
+}
+
+.loading-line {
+    position: absolute;
+    background: var(--text-color);
+    border-radius: 2px;
+}
+
+.loading-line.horizontal {
+    width: 100%;
+    height: 2px;
+    top: 50%;
+    transform: translateY(-50%) scaleX(0);
+    transform-origin: left;
+    animation: loadingLineHorizontal 1.5s ease-in-out infinite;
+}
+
+.loading-line.vertical {
+    width: 2px;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%) scaleY(0);
+    transform-origin: top;
+    animation: loadingLineVertical 1.5s ease-in-out infinite 0.75s;
+}
+
+@keyframes loadingLineHorizontal {
+    0%, 100% { transform: translateY(-50%) scaleX(0); }
+    50% { transform: translateY(-50%) scaleX(1); }
+}
+
+@keyframes loadingLineVertical {
+    0%, 100% { transform: translateX(-50%) scaleY(0); }
+    50% { transform: translateX(-50%) scaleY(1); }
+}
+
+/* 项目卡片悬停动画 */
+.project-card {
+    transition: all 0.5s var(--transition-easing);
+    transform: translateY(0) scale(1);
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.project-card:hover::before {
+    transform: translateX(100%);
+}
+
+.project-card img {
+    transition: transform 0.5s var(--transition-easing);
+}
+
+.project-card:hover img {
+    transform: scale(1.08);
+}
+
+/* 返回按钮动画 */
+.back-button {
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.back-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.back-button:hover::before {
+    left: 100%;
+}
+
+.back-button:hover {
+    transform: translateX(-8px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* 文字动画效果 - 完全修复版 */
+.text-reveal {
+    overflow: hidden;
+    position: relative;
+}
+
+.text-reveal::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--page-bg) !important; /* 强制使用页面背景色 */
+    transform: translateX(0);
+    transition: transform 0.8s var(--transition-easing);
+    z-index: 1; /* 确保在文字上方 */
+}
+
+.text-reveal.animate::after {
+    transform: translateX(100%);
+}
+
+/* 确保文字在动画层下方 */
+.text-reveal > * {
+    position: relative;
+    z-index: 0;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    :root {
+        --slide-distance: 40px;
+        --transition-duration: 0.6s;
+    }
+    
+    .content-enter:nth-child(n) {
+        animation-delay: 0.1s;
+    }
+    
+    .project-card:hover {
+        transform: translateY(-8px) scale(1.01);
+    }
+}
+
+/* 无障碍支持 */
+@media (prefers-reduced-motion: reduce) {
+    .page-enter,
+    .page-enter-reverse,
+    .page-exit,
+    .page-exit-reverse,
+    .content-enter,
+    .loading-line {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+    
+    .project-card:hover {
+        transform: none;
+    }
+    
+    .back-button:hover {
+        transform: none;
+    }
+    
+    .text-reveal::after {
+        display: none; /* 禁用文字动画 */
+    }
+} 

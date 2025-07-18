@@ -1,0 +1,284 @@
+/* 极简页面过渡动画样式 - 仅保留页面切换、卡片悬停、导航等动画，无文字动画 */
+:root {
+    --transition-duration: 0.8s;
+    --transition-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --slide-distance: 60px;
+}
+
+.page-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: #000;
+}
+
+.page-enter {
+    opacity: 0;
+    transform: translateX(var(--slide-distance)) scale(0.98);
+    animation: pageEnter var(--transition-duration) var(--transition-easing) forwards;
+}
+
+.page-enter-reverse {
+    opacity: 0;
+    transform: translateX(calc(-1 * var(--slide-distance))) scale(0.98);
+    animation: pageEnterReverse var(--transition-duration) var(--transition-easing) forwards;
+}
+
+.page-exit {
+    animation: pageExit var(--transition-duration) var(--transition-easing) forwards;
+}
+
+.page-exit-reverse {
+    animation: pageExitReverse var(--transition-duration) var(--transition-easing) forwards;
+}
+
+@keyframes pageEnter {
+    0% {
+        opacity: 0;
+        transform: translateX(var(--slide-distance)) scale(0.98);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateX(calc(var(--slide-distance) * 0.3)) scale(0.99);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes pageEnterReverse {
+    0% {
+        opacity: 0;
+        transform: translateX(calc(-1 * var(--slide-distance))) scale(0.98);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateX(calc(-1 * var(--slide-distance) * 0.3)) scale(0.99);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes pageExit {
+    0% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateX(calc(-1 * var(--slide-distance) * 0.3)) scale(0.99);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(calc(-1 * var(--slide-distance))) scale(0.98);
+    }
+}
+
+@keyframes pageExitReverse {
+    0% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateX(calc(var(--slide-distance) * 0.3)) scale(0.99);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(var(--slide-distance)) scale(0.98);
+    }
+}
+
+/* 卡片悬停动画 */
+.project-card {
+    transition: all 0.5s var(--transition-easing);
+    transform: translateY(0) scale(1);
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.project-card:hover::before {
+    transform: translateX(100%);
+}
+
+.project-card img {
+    transition: transform 0.5s var(--transition-easing);
+}
+
+.project-card:hover img {
+    transform: scale(1.08);
+}
+
+/* 导航链接动画 */
+.nav-link-transition {
+    position: relative;
+    transition: all 0.4s ease;
+    overflow: hidden;
+}
+
+.nav-link-transition::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.nav-link-transition:hover::before {
+    left: 100%;
+}
+
+.nav-link-transition::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #fff;
+    transition: width 0.4s ease;
+}
+
+.nav-link-transition:hover::after {
+    width: 100%;
+}
+
+/* 返回按钮动画 */
+.back-button {
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.back-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.back-button:hover::before {
+    left: 100%;
+}
+
+.back-button:hover {
+    transform: translateX(-8px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* 加载动画 */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.8s ease;
+}
+
+.loading-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading-animation {
+    position: relative;
+    width: 60px;
+    height: 60px;
+}
+
+.loading-line {
+    position: absolute;
+    background: #fff;
+    border-radius: 2px;
+}
+
+.loading-line.horizontal {
+    width: 100%;
+    height: 2px;
+    top: 50%;
+    transform: translateY(-50%) scaleX(0);
+    transform-origin: left;
+    animation: loadingLineHorizontal 1.5s ease-in-out infinite;
+}
+
+.loading-line.vertical {
+    width: 2px;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%) scaleY(0);
+    transform-origin: top;
+    animation: loadingLineVertical 1.5s ease-in-out infinite 0.75s;
+}
+
+@keyframes loadingLineHorizontal {
+    0%, 100% { transform: translateY(-50%) scaleX(0); }
+    50% { transform: translateY(-50%) scaleX(1); }
+}
+
+@keyframes loadingLineVertical {
+    0%, 100% { transform: translateX(-50%) scaleY(0); }
+    50% { transform: translateX(-50%) scaleY(1); }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --slide-distance: 40px;
+        --transition-duration: 0.6s;
+    }
+    .project-card:hover {
+        transform: translateY(-8px) scale(1.01);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-enter,
+    .page-enter-reverse,
+    .page-exit,
+    .page-exit-reverse,
+    .loading-line {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+    .project-card:hover {
+        transform: none;
+    }
+    .back-button:hover {
+        transform: none;
+    }
+} 

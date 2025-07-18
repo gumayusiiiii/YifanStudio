@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hull Model - YOUR NAME</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="minimal-cursor.css">
+    <link rel="stylesheet" href="cleanest-transitions.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         .project-page {
@@ -98,7 +100,6 @@
         
         .project-meta {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
             margin-bottom: 3rem;
             padding: 2rem 0;
@@ -194,7 +195,6 @@
         
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 3rem;
             margin: 4rem 0;
         }
@@ -227,7 +227,6 @@
         
         .image-gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 2rem;
             margin: 4rem 0;
         }
@@ -294,7 +293,6 @@
         
         .materials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
         }
@@ -331,7 +329,6 @@
         
         .timeline-item {
             display: grid;
-            grid-template-columns: 1fr 2fr;
             gap: 3rem;
             margin-bottom: 3rem;
             padding: 2rem;
@@ -469,7 +466,7 @@
         }
     </style>
 </head>
-<body>
+<body class="page-container">
     <div class="project-page">
         <a href="index.html" class="back-button">← Back</a>
         
@@ -477,7 +474,7 @@
             <h1 class="project-title">Hull Model</h1>
             <p class="project-subtitle">Upcycled Wood Craft / Ship Model / Hand Carving</p>
             
-            <div class="project-meta">
+            <div class="content-enter project-meta">
                 <div class="meta-item">
                     <div class="meta-label">Category</div>
                     <div class="meta-value">Craftsmanship & Upcycling</div>
@@ -496,7 +493,7 @@
                 </div>
             </div>
             
-            <div class="project-tags">
+            <div class="content-enter project-tags">
                 <span class="tag">Wood Carving</span>
                 <span class="tag">Ship Model</span>
                 <span class="tag">Upcycling</span>
@@ -506,7 +503,7 @@
         </header>
         
         <main class="project-content">
-            <section class="content-section">
+            <section class="content-enter content-section">
                 <img src="Hull Model/hero1.png" alt="Hull Model Hero Image" class="hero-image">
                 
                 <div class="project-description">
@@ -516,7 +513,7 @@
                 </div>
             </section>
             
-            <section class="content-section" style="margin-bottom: 0;">
+            <section class="content-enter content-section" style="margin-bottom: 0;">
                 <div style="display: flex; gap: 1rem; justify-content: center; align-items: flex-start;">
                     <img src="Hull Model/side1.png" alt="Side View 1" style="width: 90%; max-width: 600px; object-fit: cover;">
                     <img src="Hull Model/side2.png" alt="Side View 2" style="width: 90%; max-width: 600px; object-fit: cover;">
@@ -524,7 +521,7 @@
                 </div>
             </section>
             
-            <section class="content-section">
+            <section class="content-enter content-section">
                 <h2 class="section-title">Design Philosophy</h2>
                 <div class="features-grid">
                     <div class="feature-item">
@@ -542,7 +539,7 @@
                 </div>
             </section>
             
-            <section class="content-section">
+            <section class="content-enter content-section">
                 <h2 class="section-title">Materials & Tools</h2>
                 <div class="materials-section">
                     <div class="materials-grid">
@@ -566,7 +563,7 @@
                 </div>
             </section>
             
-            <section class="content-section">
+            <section class="content-enter content-section">
                 <h2 class="section-title">Crafting Process</h2>
                 <div class="timeline-vertical">
                     <div class="timeline-step-vertical">
@@ -612,6 +609,7 @@
     </div>
     
     <script src="script.js"></script>
+    <script src="cleanest-transitions.js"></script>
     <script>
         // 页面退出动画
         document.querySelector('.back-button').addEventListener('click', function(e) {
@@ -622,5 +620,6 @@
             }, 600);
         });
     </script>
+    <script src="minimal-cursor.js"></script>
 </body>
 </html> 

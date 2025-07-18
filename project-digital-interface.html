@@ -5,16 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Interface Design - YOUR NAME</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="minimal-cursor.css">
+    <link rel="stylesheet" href="cleanest-transitions.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="project-page">
+<body class="page-container">
     <!-- Navigation Header -->
     <nav class="main-nav">
         <div class="nav-content">
             <h1 class="nav-name">YifanStudio</h1>
             <div class="nav-links">
-                <a href="gallery.html" class="nav-link">GALLERY</a>
-                <a href="about.html" class="nav-link">ABOUT</a>
+                <a href="gallery.html" class="nav-link-transition nav-link">GALLERY</a>
+                <a href="about.html" class="nav-link-transition nav-link">ABOUT</a>
             </div>
         </div>
     </nav>
@@ -72,14 +74,14 @@
     <!-- Project Content -->
     <section class="project-content">
         <div class="project-content-container">
-            <div class="content-section">
+            <div class="content-enter content-section">
                 <h2>Overview</h2>
                 <p>This project aimed to redesign the mobile banking experience for a leading fintech company. The challenge was to create an interface that was both sophisticated enough for power users and intuitive enough for banking newcomers.</p>
                 
                 <p>Through extensive user research and iterative design processes, we developed a solution that increased user engagement by 40% and reduced customer support inquiries by 25%.</p>
             </div>
 
-            <div class="content-section">
+            <div class="content-enter content-section">
                 <h2>Key Features</h2>
                 <ul class="feature-list">
                     <li>Biometric authentication system</li>
@@ -90,7 +92,7 @@
                 </ul>
             </div>
 
-            <div class="content-section">
+            <div class="content-enter content-section">
                 <h2>Design Process</h2>
                 <p>The design process began with comprehensive user interviews and competitive analysis. We identified key pain points in existing banking apps and developed personas that guided our design decisions throughout the project.</p>
                 
@@ -98,7 +100,7 @@
             </div>
 
             <!-- Project Images Placeholder -->
-            <div class="content-section">
+            <div class="content-enter content-section">
                 <div class="project-images">
                     <div class="image-placeholder large">
                         <div class="placeholder-content">Main Interface Screenshots</div>
@@ -151,5 +153,7 @@
 
     <!-- JavaScript -->
     <script src="script.js"></script>
+    <script src="cleanest-transitions.js"></script>
+    <script src="minimal-cursor.js"></script>
 </body>
 </html> 

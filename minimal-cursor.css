@@ -1,0 +1,32 @@
+body, html {
+    cursor: none !important;
+}
+
+.minimal-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #fff;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%) scale(1);
+    transition: background 0.2s, transform 0.15s cubic-bezier(0.4,0,0.2,1);
+    box-shadow: none;
+}
+
+.minimal-cursor.active {
+    background: #4af;
+    transform: translate(-50%, -50%) scale(1.5);
+}
+
+@media (pointer: coarse) {
+    .minimal-cursor {
+        display: none !important;
+    }
+    body, html {
+        cursor: auto !important;
+    }
+} 

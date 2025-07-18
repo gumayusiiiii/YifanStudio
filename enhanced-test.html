@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>增强版动画效果测试 - YifanStudio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="enhanced-transitions.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .enhanced-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .hero-section {
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            margin-bottom: 6rem;
+        }
+        
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            letter-spacing: -2px;
+            line-height: 1.1;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-bottom: 6rem;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.03), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--text-color);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .feature-card:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+        
+        .feature-description {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        
+        .demo-section {
+            margin-bottom: 6rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            text-align: center;
+            letter-spacing: -1px;
+        }
+        
+        .project-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .showcase-item {
+            position: relative;
+            height: 400px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: linear-gradient(45deg, #333, #666);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.5s ease;
+        }
+        
+        .showcase-item:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+        }
+        
+        .navigation-demo {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 4rem 0;
+        }
+        
+        .nav-demo-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+            position: relative;
+            padding: 1rem 2rem;
+            border: 1px solid transparent;
+            border-radius: 6px;
+        }
+        
+        .nav-demo-link:hover {
+            color: var(--text-color);
+            border-color: var(--border-color);
+            transform: translateY(-2px);
+        }
+        
+        .button-showcase {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin: 4rem 0;
+        }
+        
+        .demo-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .demo-btn:hover {
+            background: var(--text-color);
+            color: var(--bg-color);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        
+        .text-animation-demo {
+            text-align: center;
+            margin: 4rem 0;
+        }
+        
+        .animated-text {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+        }
+        
+        .animated-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .project-showcase {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-demo {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="page-container">
+    <!-- Navigation Header -->
+    <nav class="main-nav">
+        <div class="nav-content">
+            <h1 class="nav-name">YifanStudio</h1>
+            <div class="nav-links">
+                <a href="gallery.html" class="nav-link nav-link-transition">GALLERY</a>
+                <a href="about.html" class="nav-link nav-link-transition">ABOUT</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="enhanced-container">
+        <!-- Hero Section -->
+        <section class="hero-section content-enter">
+            <h1 class="hero-title text-reveal">增强版动画效果</h1>
+            <p class="hero-subtitle">
+                模仿Tiffany Huang作品集网站的精致动画效果，包含线条交织、网格背景和流畅的页面过渡
+            </p>
+        </section>
+
+        <!-- Features Grid -->
+        <section class="feature-grid">
+            <div class="feature-card project-card content-enter">
+                <div class="feature-icon">🎨</div>
+                <h3 class="feature-title">线条交织效果</h3>
+                <p class="feature-description">
+                    动态网格线条在页面加载时交织出现，创造层次感和深度感，模仿Tiffany Huang网站的视觉风格。
+                </p>
+            </div>
+            
+            <div class="feature-card project-card content-enter">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">流畅页面过渡</h3>
+                <p class="feature-description">
+                    页面间的平滑过渡动画，包含缩放和位移效果，提供更自然的视觉体验。
+                </p>
+            </div>
+            
+            <div class="feature-card project-card content-enter">
+                <div class="feature-icon">🎯</div>
+                <h3 class="feature-title">鼠标跟随效果</h3>
+                <p class="feature-description">
+                    网格线条会根据鼠标位置动态调整透明度，创造交互式的视觉反馈。
+                </p>
+            </div>
+            
+            <div class="feature-card project-card content-enter">
+                <div class="feature-icon">✨</div>
+                <h3 class="feature-title">文字动画</h3>
+                <p class="feature-description">
+                    标题和重要文字元素具有渐显动画效果，增强页面的视觉层次。
+                </p>
+            </div>
+        </section>
+
+        <!-- Project Showcase -->
+        <section class="demo-section">
+            <h2 class="section-title text-reveal">项目展示效果</h2>
+            <div class="project-showcase">
+                <div class="showcase-item project-card">
+                    <span>中世纪护手项目</span>
+                </div>
+                <div class="showcase-item project-card">
+                    <span>模块化运动鞋</span>
+                </div>
+                <div class="showcase-item project-card">
+                    <span>船体模型设计</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation Demo -->
+        <section class="demo-section">
+            <h2 class="section-title text-reveal">导航交互效果</h2>
+            <div class="navigation-demo">
+                <a href="#" class="nav-demo-link nav-link-transition">首页</a>
+                <a href="#" class="nav-demo-link nav-link-transition">作品集</a>
+                <a href="#" class="nav-demo-link nav-link-transition">关于</a>
+                <a href="#" class="nav-demo-link nav-link-transition">联系</a>
+            </div>
+        </section>
+
+        <!-- Button Showcase -->
+        <section class="demo-section">
+            <h2 class="section-title text-reveal">按钮动画效果</h2>
+            <div class="button-showcase">
+                <a href="index.html" class="demo-btn back-button">← 返回主页</a>
+                <a href="gallery.html" class="demo-btn">查看画廊</a>
+                <a href="about.html" class="demo-btn">关于页面</a>
+                <a href="project-medieval-gauntlet.html" class="demo-btn">项目详情</a>
+            </div>
+        </section>
+
+        <!-- Text Animation Demo -->
+        <section class="demo-section">
+            <h2 class="section-title text-reveal">文字动画演示</h2>
+            <div class="text-animation-demo">
+                <div class="animated-text text-reveal">优雅的动画效果</div>
+                <div class="animated-text text-reveal">精致的视觉体验</div>
+                <div class="animated-text text-reveal">流畅的交互反馈</div>
+            </div>
+        </section>
+
+        <!-- Test Navigation -->
+        <section class="demo-section">
+            <h2 class="section-title text-reveal">测试页面跳转</h2>
+            <div class="button-showcase">
+                <a href="project-medieval-gauntlet.html" class="demo-btn">中世纪护手项目</a>
+                <a href="project-modular-sneakers.html" class="demo-btn">模块化运动鞋项目</a>
+                <a href="project-hull-model.html" class="demo-btn">船体模型项目</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="mailto:yzhao09@risd.edu">EMAIL</a>
+                <a href="https://www.linkedin.com/in/yifan-zhao-bb7b652b6" target="_blank">LINKEDIN</a>
+                <a href="resume.pdf" download>RESUME</a>
+            </div>
+            <p class="footer-text">© 2025 YiFanStudio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <script src="enhanced-transitions.js"></script>
+    <script>
+        // 文字动画触发
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedTexts = document.querySelectorAll('.animated-text');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, 200);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animatedTexts.forEach(text => {
+                observer.observe(text);
+            });
+        });
+    </script>
+</body>
+</html> 
