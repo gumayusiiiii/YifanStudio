@@ -3,584 +3,376 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mechanism - YOUR NAME</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="minimal-cursor.css">
-    <link rel="stylesheet" href="cleanest-transitions.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Mechanism Study - Project File</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style-technical.css">
     <style>
-        .project-page {
-            background: var(--bg-color);
-            color: var(--text-color);
-            padding-top: 80px;
-            opacity: 0;
-            transform: translateX(50px);
-            animation: slideInFromRight 0.8s ease-out forwards;
+        .project-hero-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2.5rem;
+            margin: 3rem 0 4rem;
+            align-items: stretch;
         }
-        
-        @keyframes slideInFromRight {
-            to {
-                opacity: 1;
-                transform: translateX(0);
+        @media (max-width: 1024px) {
+            .project-hero-grid {
+                grid-template-columns: 1fr;
             }
         }
-        
-        .project-page.slide-out {
-            animation: slideOutToLeft 0.6s ease-in forwards;
-        }
-        
-        @keyframes slideOutToLeft {
-            to {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-        }
-        
-        .content-section {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.6s ease-out forwards;
-        }
-        
-        .content-section:nth-child(1) { animation-delay: 0.2s; }
-        .content-section:nth-child(2) { animation-delay: 0.4s; }
-        .content-section:nth-child(3) { animation-delay: 0.6s; }
-        .content-section:nth-child(4) { animation-delay: 0.8s; }
-        .content-section:nth-child(5) { animation-delay: 1.0s; }
-        
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .project-header {
-            padding: 4rem 8rem 2rem 2rem;
-            text-align: left;
-            max-width: 1400px;
-            margin: 0 auto;
-            border-bottom: 1px solid var(--border-color);
-            opacity: 0;
-            transform: translateY(-30px);
-            animation: fadeInDown 0.8s ease-out 0.1s forwards;
+        .hero-visual {
             position: relative;
-        }
-        
-        @media (max-width: 768px) {
-            .project-header {
-                padding: 4rem 2rem 2rem;
-            }
-        }
-        
-        @keyframes fadeInDown {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .project-title {
-            font-size: 4rem;
-            font-weight: 300;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: -2px;
-            color: var(--text-color);
-        }
-        
-        .project-subtitle {
-            font-size: 1.1rem;
-            font-weight: 400;
-            margin-bottom: 3rem;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        
-        .project-meta {
-            display: grid;
-            gap: 2rem;
-            margin-bottom: 3rem;
-            padding: 2rem 0;
-            border-top: 1px solid var(--border-color);
-        }
-        
-        .meta-item {
-            text-align: left;
-        }
-        
-        .meta-label {
-            font-weight: 400;
-            font-size: 0.8rem;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-muted);
-        }
-        
-        .meta-value {
-            font-size: 1rem;
-            font-weight: 400;
-            color: var(--text-color);
-        }
-        
-        .project-tags {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-        
-        .tag {
-            background: transparent;
-            border: 1px solid var(--border-color);
-            padding: 0.5rem 1rem;
-            font-size: 0.8rem;
-            font-weight: 400;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: var(--transition);
-        }
-        
-        .tag:hover {
-            border-color: var(--text-color);
-            color: var(--text-color);
-        }
-        
-        .project-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 4rem 8rem 4rem 2rem;
-        }
-        
-        @media (max-width: 768px) {
-            .project-content {
-                padding: 4rem 2rem;
-            }
-        }
-        
-        .content-section {
-            margin-bottom: 6rem;
-        }
-        
-        .section-title {
-            font-size: 2rem;
-            font-weight: 300;
-            color: var(--text-color);
-            margin-bottom: 3rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        
-        .hero-image {
-            width: 100%;
-            max-width: 100%;
-            margin: 3rem 0;
-            display: block;
-            height: 600px;
-            object-fit: cover;
-            border: 1px solid var(--border-color);
-        }
-        
-        .project-description {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--text-light);
-            max-width: 800px;
-            margin: 0 0 4rem 0;
-            font-weight: 300;
-        }
-        
-        .features-grid {
-            display: grid;
-            gap: 3rem;
-            margin: 4rem 0;
-        }
-        
-        .feature-item {
-            padding: 2rem;
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
-        }
-        
-        .feature-item:hover {
-            border-color: var(--text-color);
-        }
-        
-        .feature-title {
-            font-size: 1.2rem;
-            font-weight: 500;
-            margin-bottom: 1rem;
-            color: var(--text-color);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .feature-description {
-            font-size: 1rem;
-            line-height: 1.6;
-            color: var(--text-light);
-            font-weight: 300;
-        }
-        
-        .image-gallery {
-            display: grid;
-            gap: 2rem;
-            margin: 4rem 0;
-        }
-        
-        .gallery-item {
-            position: relative;
+            border: 1px solid var(--line-color);
+            background: #050505;
             overflow: hidden;
-            border: 1px solid var(--border-color);
+            min-height: 420px;
         }
-        
-        .gallery-item img {
+        .hero-visual img {
             width: 100%;
-            height: 300px;
+            height: 100%;
             object-fit: cover;
-            transition: var(--transition);
+            filter: grayscale(40%) contrast(1.1);
         }
-        
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-        
-        .gallery-caption {
+        .hero-overlay {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 1rem;
-            font-size: 0.9rem;
-            font-weight: 300;
-        }
-        
-        .back-button {
-            position: fixed;
-            top: 2rem;
-            left: 2rem;
-            z-index: 1000;
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 0.8rem 1.5rem;
-            font-size: 0.9rem;
-            font-weight: 400;
+            padding: 1.75rem 2rem;
+            background: linear-gradient(180deg, transparent, rgba(0,0,0,0.85));
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            display: flex;
+            justify-content: space-between;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            display: inline-block;
         }
-        
-        .back-button:hover {
-            background: var(--text-color);
-            color: var(--bg-color);
-        }
-        
-        .materials-section {
-            background: rgba(255, 255, 255, 0.02);
-            padding: 3rem;
-            border: 1px solid var(--border-color);
-            margin: 4rem 0;
-        }
-        
-        .materials-grid {
-            display: grid;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .material-item {
-            text-align: center;
-            padding: 1.5rem;
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
-        }
-        
-        .material-item:hover {
-            border-color: var(--text-color);
-        }
-        
-        .material-name {
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            color: var(--text-color);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .material-purpose {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            font-weight: 300;
-        }
-        
-        .process-timeline {
-            margin: 4rem 0;
-        }
-        
-        .timeline-item {
-            display: grid;
-            gap: 3rem;
-            margin-bottom: 3rem;
+        .hero-summary {
+            border: 1px solid var(--line-color);
             padding: 2rem;
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            background: rgba(10,10,10,0.4);
         }
-        
-        .timeline-item:hover {
-            border-color: var(--text-color);
+        .hero-summary h1 {
+            font-size: 2.8rem;
+            margin: 0;
+            letter-spacing: 0.3em;
         }
-        
-        .timeline-step {
-            font-size: 1.5rem;
-            font-weight: 300;
-            color: var(--text-color);
+        .hero-meta-list {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--line-color);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            display: grid;
+            row-gap: 0.4rem;
+        }
+        .hero-meta-list div {
+            display: flex;
+            justify-content: space-between;
+            letter-spacing: 0.18em;
+        }
+        .hero-meta-list span {
+            opacity: 0.8;
+        }
+        .hero-meta-list strong {
+            color: var(--text-main);
+            font-weight: 400;
+        }
+        .descriptor {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-dim);
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 0.25em;
         }
-        
-        .timeline-description {
-            font-size: 1rem;
-            line-height: 1.6;
-            color: var(--text-light);
-            font-weight: 300;
+        .section-header {
+            margin: 4rem 0 2rem;
         }
-        
-        .carousel-frame.no-border {
-            background: none;
-            border: none;
-            box-shadow: none;
-            padding: 0;
-            max-width: 1300px;
-            margin: 0 auto 2rem auto;
+        .section-header h2 {
+            font-size: 1.6rem;
+            letter-spacing: 0.3em;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
         }
-        .carousel {
+        .section-header p {
+            color: var(--text-dim);
+            max-width: 720px;
+            line-height: 1.8;
+        }
+        .text-columns {
+            column-count: 2;
+            column-gap: 3rem;
+            color: var(--text-main);
+            line-height: 1.8;
+        }
+        @media (max-width: 900px) {
+            .text-columns {
+                column-count: 1;
+            }
+        }
+        .mechanism-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin: 1.5rem 0 0;
+        }
+        .mechanism-pills span {
+            border: 1px solid var(--line-color);
+            padding: 0.45rem 1rem;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+        .visual-carousel {
             position: relative;
+            border: 1px solid var(--line-color);
+            background: #050505;
+            overflow: hidden;
+            height: 100%;
+            min-height: 320px;
+        }
+        .visual-track {
+            display: flex;
             width: 100%;
-            height: 550px;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .visual-slide {
+            flex: 0 0 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
         }
-        .carousel img {
+        .visual-slide img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            display: none;
-            border: none;
-            background: none;
-            box-shadow: none;
+            filter: grayscale(10%) contrast(1.05);
         }
-        .carousel img.active {
-            display: block;
-            animation: fadeIn 0.5s;
-        }
-        .carousel-btn {
+        .visual-nav {
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0,0,0,0.4);
-            color: #fff;
-            border: none;
-            font-size: 2.2rem;
-            width: 44px;
-            height: 44px;
+            inset: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.5rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        .visual-carousel:hover .visual-nav {
+            opacity: 1;
+        }
+        .visual-arrow {
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.4);
+            background: rgba(0,0,0,0.55);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
             cursor: pointer;
-            z-index: 2;
-            transition: background 0.2s;
+            pointer-events: auto;
+            transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
         }
-        .carousel-btn:hover {
-            background: rgba(0,0,0,0.7);
+        .visual-arrow:hover {
+            background: rgba(0,0,0,0.85);
+            border-color: #fff;
+            transform: translateY(-1px);
         }
-        .carousel-btn.prev { left: 12px; }
-        .carousel-btn.next { right: 12px; }
-        .carousel-title {
-            text-align: center;
-            font-size: 1.2rem;
-            color: var(--text-light);
-            margin: 1rem 0 0.5rem 0;
-            letter-spacing: 1px;
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+        .process-card {
+            border: 1px solid var(--line-color);
+            padding: 1.5rem;
+        }
+        .process-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            border: 1px solid rgba(255,255,255,0.05);
+            background: #0d0d0d;
+            margin-bottom: 1rem;
+        }
+        .process-card h3 {
+            font-size: 0.9rem;
+            letter-spacing: 0.3em;
+            margin-bottom: 0.4rem;
+        }
+        .material-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        .material-card {
+            border: 1px solid var(--line-color);
+            padding: 1.25rem;
+            background: rgba(255,255,255,0.01);
+        }
+        .material-card h4 {
+            font-size: 0.85rem;
+            letter-spacing: 0.3em;
+            margin-bottom: 0.4rem;
+        }
+        .material-card p {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+        .detail-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+        }
+        .detail-card {
+            border: 1px solid var(--line-color);
+            padding: 1.5rem;
+            min-height: 220px;
+        }
+        .detail-card h3 {
+            font-size: 0.95rem;
+            letter-spacing: 0.3em;
+            margin-bottom: 1rem;
+        }
+        .detail-card p {
+            color: var(--text-dim);
+            line-height: 1.7;
         }
     </style>
 </head>
-<body class="page-container">
-    <div class="project-page">
-        <a href="index.html" class="back-button">← Back</a>
+<body>
+    <div class="system-grid"></div>
+
+    <header class="tech-header">
+        <a href="index.html" class="brand">
+            <h1>YIFAN ZHAO</h1>
+            <span>// PROJECT_FILE</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">INDEX</a>
+            <a href="about.html" class="nav-link">ABOUT</a>
+            <a href="archive.html" class="nav-link">ARCHIVE</a>
+        </div>
+    </header>
+
+    <div class="content-wrapper">
+        <div class="project-hero-grid">
+            <div class="hero-visual">
+                <div class="visual-carousel" id="mechanism-hero-carousel">
+                    <div class="visual-track">
+                        <div class="visual-slide"><img src="Mechanism/Hero2.jpg" alt="Mechanism detail view 1"></div>
+                        <div class="visual-slide"><img src="Mechanism/Hero3.jpg" alt="Mechanism detail view 2"></div>
+                        <div class="visual-slide"><img src="Mechanism/Hero4.jpg" alt="Mechanism detail view 3"></div>
+                        <div class="visual-slide"><img src="Mechanism/Hero5.jpg" alt="Mechanism detail view 4"></div>
+                        <div class="visual-slide"><img src="Mechanism/Hero6.jpg" alt="Mechanism detail view 5"></div>
+                    </div>
+                    <div class="visual-nav">
+                        <button class="visual-arrow" data-dir="-1">‹</button>
+                        <button class="visual-arrow" data-dir="1">›</button>
+                    </div>
+                </div>
+                <div class="hero-overlay">
+                    <span>FIG. 01 / LINKAGE STUDY</span>
+                    <span>ALUMINUM + IRON</span>
+                </div>
+            </div>
+            <div class="hero-summary">
+                <h1>MECHANISM STUDY</h1>
+                <p>Hand-fabricated linkage exploring how force, proportion, and riveted joints choreograph motion without electronics. Every member was cut, drilled, and tuned manually to amplify the tactile qualities of mechanical articulation.</p>
+                <div class="hero-meta-list">
+                    <div><span>CATEGORY</span><strong>MECHANICAL STUDY</strong></div>
+                    <div><span>YEAR</span><strong>2022</strong></div>
+                    <div><span>DURATION</span><strong>8 WEEKS</strong></div>
+                    <div><span>ROLE</span><strong>DESIGN / FABRICATION</strong></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-columns">
+            <p><strong>1 // STRUCTURE</strong><br>Aluminum rails define the neutral axis while iron straps articulate around it. Each strap is manually bent, introducing subtle deviations that give the motion a human cadence.</p>
+            <p><strong>2 // MOTION</strong><br>Riveted pivots create instant centers that hold their geometry even after repeated stress cycles. The absence of bearings makes the tactile feedback audible—every movement has a sound and weight.</p>
+        </div>
+
         
-        <header class="project-header">
-            <h1 class="project-title">Mechanism</h1>
-            <p class="project-subtitle">Mechanical Engineering / Metal Fabrication / Linkage Design</p>
-            
-            <div class="content-enter project-meta">
-                <div class="meta-item">
-                    <div class="meta-label">Category</div>
-                    <div class="meta-value">Mechanical Engineering</div>
-                </div>
-                <div class="meta-item">
-                    <div class="meta-label">Year</div>
-                    <div class="meta-value">2022</div>
-                </div>
-                <div class="meta-item">
-                    <div class="meta-label">Duration</div>
-                    <div class="meta-value">2 Months</div>
-                </div>
-                <div class="meta-item">
-                    <div class="meta-label">Role</div>
-                    <div class="meta-value">Mechanical Engineer</div>
-                </div>
+
+        <div class="section-header">
+            <h2>FABRICATION PROCESS</h2>
+            <p>Every component is fabricated with hand tools—cutoff saw, drill press, custom bending jigs. Edges remain slightly imperfect to keep the evidence of making visible.</p>
+        </div>
+        <div class="process-grid">
+            <div class="process-card">
+                <img src="Mechanism/proc/proc1.png" alt="layout">
+                <h3>LAYOUT</h3>
+                <p>Rail lengths plotted to maintain equal travel while staying within a 400 mm envelope.</p>
             </div>
-            
-            <div class="content-enter project-tags">
-                <span class="tag">Mechanism</span>
-                <span class="tag">Aluminum</span>
-                <span class="tag">Iron</span>
-                <span class="tag">Linkage</span>
-                <span class="tag">Engineering</span>
+            <div class="process-card">
+                <img src="Mechanism/proc/proc2.png" alt="riveting">
+                <h3>RIVETING</h3>
+                <p>Cold rivets hammered in sequence to lock iron straps without warping the aluminum base.</p>
             </div>
-        </header>
-        <!-- 图片转盘区块（移到最前面） -->
-        <section class="content-enter content-section">
-            <div class="carousel-frame no-border">
-                <div class="carousel" id="carousel-mechanism">
-                    <img src="Mechanism/Hero1.jpg" alt="Hero 1" class="active">
-                    <img src="Mechanism/Hero2.jpg" alt="Hero 2">
-                    <img src="Mechanism/Hero3.jpg" alt="Hero 3">
-                    <img src="Mechanism/Hero4.jpg" alt="Hero 4">
-                    <img src="Mechanism/Hero5.jpg" alt="Hero 5">
-                    <img src="Mechanism/Hero6.jpg" alt="Hero 6">
-                    <button class="carousel-btn prev" onclick="prevSlide('carousel-mechanism')">‹</button>
-                    <button class="carousel-btn next" onclick="nextSlide('carousel-mechanism')">›</button>
-                </div>
+            <div class="process-card">
+                <img src="Mechanism/proc/proc3.png" alt="tuning">
+                <h3>TUNING</h3>
+                <p>Fine adjustments of hole diameter and washer stacks to remove backlash and keep the motion parallel.</p>
             </div>
-        </section>
-        <main class="project-content">
-            <section class="content-enter content-section">
-                <h2 class="section-title">Concept Overview</h2>
-                <div class="project-description">
-                    <p>This project explores the aesthetics and function of classic mechanical articulation through handcrafted metalwork, celebrating simplicity, strength, and kinetic elegance.</p>
-                </div>
-            </section>
-            <section class="content-enter content-section">
-                <h2 class="section-title">Materiality and Construction</h2>
-                <div class="project-description">
-                    <ul>
-                        <li><b>Aluminum Rails</b>: Lightweight, rigid frame for smooth motion.</li>
-                        <li><b>Iron Components</b>: Manually shaped for complex linkage movement.</li>
-                        <li><b>Riveted Axes</b>: Metal rivets as both connectors and pivot points.</li>
-                    </ul>
-                </div>
-            </section>
-            <section class="content-enter content-section">
-                <h2 class="section-title">Kinetic Behavior</h2>
-                <div class="project-description">
-                    <ul>
-                        <li>Forms a <b>linkage mechanism</b> capable of controlled extension and contraction.</li>
-                        <li>Relies on pure mechanical interaction—no motors or electronics.</li>
-                    </ul>
-                </div>
-            </section>
-            <!-- 新增工艺流程图片展示（移动到此处） -->
-            <section class="content-enter content-section">
-                <h2 class="section-title">Process</h2>
-                <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin: 2rem 0;">
-                    <img src="Mechanism/proc/proc1.png" alt="Process 1" style="max-width: 340px; width: 100%; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.10); border: 1px solid var(--border-color); background: #fff; object-fit: contain;">
-                    <img src="Mechanism/proc/proc2.png" alt="Process 2" style="max-width: 340px; width: 100%; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.10); border: 1px solid var(--border-color); background: #fff; object-fit: contain;">
-                    <img src="Mechanism/proc/proc3.png" alt="Process 3" style="max-width: 340px; width: 100%; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.10); border: 1px solid var(--border-color); background: #fff; object-fit: contain;">
-                </div>
-            </section>
-            <section class="content-enter content-section">
-                <h2 class="section-title">Design Intent</h2>
-                <div class="project-description">
-                    <p>A study in <b>mechanical minimalism</b>: how basic forms and manual techniques create expressive, functional mechanisms inspired by historical engineering.</p>
-                </div>
-            </section>
-            <section class="content-enter content-section">
-                <h2 class="section-title">Conceptual Themes</h2>
-                <div class="project-description">
-                    <ul>
-                        <li><b>Precision & Imperfection</b>: Manual work gives each joint unique character.</li>
-                        <li><b>Force & Permanence</b>: Rivets create inseparable, lasting joints.</li>
-                        <li><b>Motion as Expression</b>: The act of movement reveals the beauty of mechanics.</li>
-                    </ul>
-                </div>
-            </section>
-            
-            <section class="content-enter content-section">
-                <h2 class="section-title">Materials & Construction</h2>
-                <div class="materials-section">
-                    <div class="materials-grid">
-                        <div class="material-item">
-                            <div class="material-name">Aluminum Rails</div>
-                            <div class="material-purpose">Lightweight structural framework</div>
-                        </div>
-                        <div class="material-item">
-                            <div class="material-name">Iron Parts</div>
-                            <div class="material-purpose">Durable mechanical components</div>
-                        </div>
-                        <div class="material-item">
-                            <div class="material-name">Rivets</div>
-                            <div class="material-purpose">Secure fastening and pivoting</div>
-                        </div>
-                        <div class="material-item">
-                            <div class="material-name">Precision Bearings</div>
-                            <div class="material-purpose">Smooth movement and reduced friction</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <section class="content-enter content-section">
-                <h2 class="section-title">Technical Features</h2>
-                <div class="features-grid">
-                    <div class="feature-item">
-                        <h3 class="feature-title">Linkage System</h3>
-                        <p class="feature-description">Complex mechanical linkage that enables controlled extension and contraction movements with precise geometric relationships.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h3 class="feature-title">Rivet Joints</h3>
-                        <p class="feature-description">Carefully positioned rivets serve as reliable pivot points, allowing smooth rotational movement between components.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h3 class="feature-title">Precision Angles</h3>
-                        <p class="feature-description">Meticulously calculated and manufactured bending angles ensure optimal mechanical advantage and movement efficiency.</p>
-                    </div>
-                </div>
-            </section>
-        </main>
+        </div>
+
     </div>
-    
-    <script src="script.js"></script>
-    <script src="cleanest-transitions.js"></script>
+
+    <footer class="tech-footer">
+        <div>© 2025 YIFAN ZHAO</div>
+        <a href="index.html">RETURN TO ARCHIVE</a>
+    </footer>
+
     <script>
-                // 图片转盘切换逻辑
-        function nextSlide(id) {
-            const carousel = document.getElementById(id);
-            const imgs = carousel.querySelectorAll('img');
-            let idx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
-            imgs[idx].classList.remove('active');
-            idx = (idx + 1) % imgs.length;
-            imgs[idx].classList.add('active');
-        }
-        function prevSlide(id) {
-            const carousel = document.getElementById(id);
-            const imgs = carousel.querySelectorAll('img');
-            let idx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
-            imgs[idx].classList.remove('active');
-            idx = (idx - 1 + imgs.length) % imgs.length;
-            imgs[idx].classList.add('active');
-        }
+        (function() {
+            const carousel = document.getElementById('mechanism-hero-carousel');
+            if (!carousel) return;
+            const track = carousel.querySelector('.visual-track');
+            const slides = Array.from(carousel.querySelectorAll('.visual-slide'));
+            const arrows = Array.from(carousel.querySelectorAll('.visual-arrow'));
+
+            let index = 0;
+            let timer = null;
+
+            function goTo(i) {
+                index = (i + slides.length) % slides.length;
+                track.style.transform = `translateX(-${index * 100}%)`;
+            }
+
+            function startAuto() {
+                stopAuto();
+                timer = setInterval(() => goTo(index + 1), 4000);
+            }
+
+            function stopAuto() {
+                if (timer) clearInterval(timer);
+                timer = null;
+            }
+
+            arrows.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const dir = parseInt(btn.dataset.dir, 10) || 1;
+                    goTo(index + dir);
+                    startAuto();
+                    e.stopPropagation();
+                });
+            });
+
+            carousel.addEventListener('mouseenter', stopAuto);
+            carousel.addEventListener('mouseleave', startAuto);
+
+            goTo(0);
+            startAuto();
+        })();
     </script>
-    <script src="minimal-cursor.js"></script>
 </body>
-</html> 
+</html>

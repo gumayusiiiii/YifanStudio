@@ -1,181 +1,226 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gaze - Charcoal Art</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="minimal-cursor.css">
-    <link rel="stylesheet" href="cleanest-transitions.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Gaze - Charcoal Study</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style-technical.css">
     <style>
-        .project-page {
-            background: var(--bg-color);
-            color: var(--text-color);
-            padding-top: 80px;
-            opacity: 0;
-            transform: translateX(50px);
-            animation: slideInFromRight 0.8s ease-out forwards;
-        }
-        @keyframes slideInFromRight {
-            to { opacity: 1; transform: translateX(0); }
-        }
-        .project-page.slide-out {
-            animation: slideOutToLeft 0.6s ease-in forwards;
-        }
-        @keyframes slideOutToLeft {
-            to { opacity: 0; transform: translateX(-50px); }
-        }
-        .project-header {
-            padding: 4rem 8rem 2rem 2rem;
-            text-align: left;
-            max-width: 1400px;
-            margin: 0 auto;
-            border-bottom: 1px solid var(--border-color);
-            opacity: 0;
-            transform: translateY(-30px);
-            animation: fadeInDown 0.8s ease-out 0.1s forwards;
+        .hero-image {
             position: relative;
-        }
-        @media (max-width: 768px) {
-            .project-header { padding: 4rem 2rem 2rem; }
-        }
-        @keyframes fadeInDown {
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .project-title {
-            font-size: 4rem;
-            font-weight: 300;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: -2px;
-            color: var(--text-color);
-        }
-        .project-subtitle {
-            font-size: 1.1rem;
-            font-weight: 400;
-            margin-bottom: 3rem;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        .project-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 4rem 8rem 4rem 2rem;
-        }
-        @media (max-width: 768px) {
-            .project-content { padding: 4rem 2rem; }
-        }
-        .content-section {
-            margin-bottom: 6rem;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.6s ease-out forwards;
-        }
-        .content-section:nth-child(1) { animation-delay: 0.2s; }
-        .content-section:nth-child(2) { animation-delay: 0.4s; }
-        .content-section:nth-child(3) { animation-delay: 0.6s; }
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .back-button {
-            position: fixed;
-            top: 2rem;
-            left: 2rem;
-            z-index: 1000;
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 0.8rem 1.5rem;
-            font-size: 0.9rem;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            display: inline-block;
-        }
-        .back-button:hover {
-            background: var(--text-color);
-            color: var(--bg-color);
-        }
-        .gaze-img-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
             width: 100%;
-            margin: 0 auto 2rem auto;
-        }
-        .gaze-img-container img {
-            width: 100%;
-            max-width: 480px;
-            border-radius: 14px;
-            box-shadow: 0 2px 18px rgba(0,0,0,0.13);
+            height: 70vh;
+            min-height: 520px;
+            border-bottom: 1px solid var(--line-color);
+            overflow: hidden;
             background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero-media {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            height: 88%;
+            max-height: 640px;
+            cursor: pointer;
+        }
+        .hero-image img,
+        .hero-image video {
+            width: 100%;
+            height: 100%;
             object-fit: contain;
         }
-        .project-info {
-            max-width: 900px;
-            margin: 0 auto 2.5rem auto;
-            padding: 2rem 2.5rem;
-            background: rgba(255,255,255,0.02);
-            border-radius: 10px;
+        .hero-image img {
+            filter: grayscale(100%) contrast(1.1);
+            transition: opacity 0.3s ease;
+            position: absolute;
+            inset: 0;
+            z-index: 1;
         }
-        .gaze-title {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 1.2rem;
-            color: var(--text-color);
-            text-align: center;
+        .hero-image video {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
         }
-        .gaze-material {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            text-align: center;
-            margin-bottom: 1.5rem;
+        .hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem var(--spacing);
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            display: flex;
+            justify-content: space-between;
+            text-transform: uppercase;
         }
-        .gaze-desc {
-            font-size: 1.25rem;
-            color: var(--text-light);
-            text-align: center;
-            margin-bottom: 0.8rem;
+        .gaze-meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+        .gaze-meta-card {
+            border: 1px solid var(--line-color);
+            padding: 1.25rem;
+        }
+        .gaze-meta-card span {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            letter-spacing: 0.2em;
+            margin-bottom: 0.6rem;
+        }
+        .gaze-meta-card strong {
+            font-size: 1.05rem;
+            letter-spacing: 0.1em;
+        }
+        .hero-hint {
+            position: absolute;
+            right: var(--spacing);
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.06em;
+            color: var(--text-dim);
+            opacity: 0.9;
+            pointer-events: none;
+        }
+        .section-header {
+            margin: 4rem 0 2rem;
+        }
+        .section-header h2 {
+            font-size: 1.6rem;
+            letter-spacing: 0.3em;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+        .section-header p {
+            color: var(--text-dim);
+            max-width: 720px;
+            line-height: 1.8;
+        }
+        .gaze-text-block {
+            max-width: 800px;
+            line-height: 1.9;
+            color: var(--text-main);
         }
     </style>
 </head>
-<body class="page-container">
-    <div class="project-page">
-        <a href="index.html" class="back-button">← Back</a>
-        <header class="project-header">
-            <h1 class="project-title">Gaze</h1>
-            <p class="project-subtitle">Charcoal / Drawing / Art</p>
-        </header>
-        <main class="project-content">
-            <section class="content-enter content-section">
-                <div class="gaze-img-container">
-                    <img src="paint/Men.jpg" alt="Gaze Artwork">
-                </div>
-                <div class="project-info">
-                    <div class="gaze-title">Gaze</div>
-                    <div class="gaze-desc">Am I watching you, or are you watching me?</div>
-                    <div class="gaze-material">Material: Charcoal</div>
-                </div>
-            </section>
-        </main>
+<body>
+
+    <div class="system-grid"></div>
+
+    <header class="tech-header">
+        <a href="index.html" class="brand">
+            <h1>YIFAN ZHAO</h1>
+            <span>// PROJECT_FILE</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">INDEX</a>
+            <a href="about.html" class="nav-link">ABOUT</a>
+            <a href="archive.html" class="nav-link">ARCHIVE</a>
+        </div>
+    </header>
+
+    <div class="content-wrapper">
+
+        <!-- Hero -->
+        <div class="hero-image">
+            <div class="hero-media" id="gaze-hero-media">
+                <img src="paint/Men.jpg" alt="Gaze charcoal portrait" id="gaze-hero-image">
+                <video id="gaze-hero-video" src="paint/Menv.mp4" muted loop playsinline></video>
+            </div>
+            <div class="hero-overlay">
+                <span>FIG. 01 / CHARCOAL PORTRAIT</span>
+                <span>TITLE: GAZE</span>
+            </div>
+            <div class="hero-hint">(Long press the center of the image)</div>
+        </div>
+
     </div>
-    <script src="script.js"></script>
-    <script src="cleanest-transitions.js"></script>
+
+    <footer class="tech-footer">
+        <a href="index.html">RETURN TO ARCHIVE</a>
+        <div>© 2025 YIFAN ZHAO</div>
+    </footer>
+
     <script>
-        // 页面退出动画
-        document.querySelector('.back-button').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.querySelector('.project-page').classList.add('slide-out');
-            setTimeout(() => {
-                window.location.href = this.href;
-            }, 600);
+        document.addEventListener('DOMContentLoaded', () => {
+            const hero = document.getElementById('gaze-hero-media');
+            const img = document.getElementById('gaze-hero-image');
+            const video = document.getElementById('gaze-hero-video');
+            if (!hero || !img || !video) return;
+
+            let pressTimer = null;
+            let isPlaying = false;
+
+            const startVideo = () => {
+                img.style.opacity = '0';
+                try {
+                    video.currentTime = 0;
+                    video.play();
+                } catch (e) {}
+                requestAnimationFrame(() => {
+                    video.style.opacity = '1';
+                });
+                isPlaying = true;
+            };
+
+            const stopVideo = () => {
+                if (!isPlaying) return;
+                try {
+                    video.pause();
+                    video.currentTime = 0;
+                } catch (e) {}
+                video.style.opacity = '0';
+                img.style.opacity = '1';
+                isPlaying = false;
+            };
+
+            const isCenterPress = (event) => {
+                const rect = hero.getBoundingClientRect();
+                const x = (event.clientX ?? (event.touches && event.touches[0]?.clientX)) - rect.left;
+                const y = (event.clientY ?? (event.touches && event.touches[0]?.clientY)) - rect.top;
+                if (x == null || y == null) return false;
+                const nx = x / rect.width;
+                const ny = y / rect.height;
+                // 只在中间区域触发（大约中间 50% 区域）
+                return nx > 0.25 && nx < 0.75 && ny > 0.25 && ny < 0.75;
+            };
+
+            const handlePressStart = (event) => {
+                if (!isCenterPress(event)) return;
+                if (pressTimer) clearTimeout(pressTimer);
+                pressTimer = setTimeout(() => {
+                    startVideo();
+                }, 300); // 长按 300ms 后开始播放
+            };
+
+            const handlePressEnd = () => {
+                if (pressTimer) {
+                    clearTimeout(pressTimer);
+                    pressTimer = null;
+                }
+                stopVideo();
+            };
+
+            hero.addEventListener('pointerdown', handlePressStart);
+            hero.addEventListener('pointerup', handlePressEnd);
+            hero.addEventListener('pointerleave', handlePressEnd);
+            hero.addEventListener('pointercancel', handlePressEnd);
         });
     </script>
-    <script src="minimal-cursor.js"></script>
+
 </body>
-</html> 
+</html>
+
+

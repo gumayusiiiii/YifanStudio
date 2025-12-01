@@ -2,10 +2,10 @@
 const projects = [
   {
     title: "Modular Sneakers",
-    subtitle: "Product Design / 3D Modeling / Prototyping",
+    subtitle: "Product Design / 3D Modeling / Interactive Web Experience",
     category: "Product Design",
     year: "2024",
-    tags: ["Product Design", "3D Modeling", "Prototyping"],
+    tags: ["Product Design", "3D Modeling", "Interactive Web", "Modular Design", "Customization"],
     link: "project-modular-sneakers.html",
     placeholderText: "MODULAR SNEAKERS",
     placeholderColor: "#667eea",

@@ -3,739 +3,1097 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modular Sneakers - YOUR NAME</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="minimal-cursor.css">
-    <link rel="stylesheet" href="cleanest-transitions.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Modular Sneakers - Project File</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style-technical.css">
+    <!-- Model Viewer for 3D Models -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
     <style>
-        .project-page {
-            background: var(--bg-color);
-            color: var(--text-color);
-            padding-top: 80px;
-            opacity: 0;
-            transform: translateX(50px);
-            animation: slideInFromRight 0.8s ease-out forwards;
+        /* 本页特定样式 */
+        .hero-image {
+            position: relative;
+            width: 100%;
+            height: 60vh;
+            border-bottom: 1px solid var(--line-color);
+            overflow: hidden;
         }
-        @keyframes slideInFromRight {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        .hero-image img {
+            width: 100%; height: 100%; object-fit: cover;
+            filter: grayscale(50%) contrast(1.1);
         }
-        .project-page.slide-out {
-            animation: slideOutToLeft 0.6s ease-in forwards;
+        .hero-overlay {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            padding: 2rem var(--spacing);
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            /* border-top: 1px solid var(--line-color); */ /* Removed border */
         }
-        @keyframes slideOutToLeft {
-            to {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
+
+        .content-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 4rem;
         }
-        .content-section {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.6s ease-out forwards;
-            margin-bottom: 6rem;
-        }
-        .content-section:nth-child(1) { animation-delay: 0.2s; }
-        .content-section:nth-child(2) { animation-delay: 0.4s; }
-        .content-section:nth-child(3) { animation-delay: 0.6s; }
-        .content-section:nth-child(4) { animation-delay: 0.8s; }
-        .content-section:nth-child(5) { animation-delay: 1.0s; }
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .project-header {
-            padding: 4rem 8rem 2rem 2rem;
-            text-align: left;
-            max-width: 1400px;
-            margin: 0 auto;
-            border-bottom: 1px solid var(--border-color);
-            opacity: 0;
-            transform: translateY(-30px);
-            animation: fadeInDown 0.8s ease-out 0.1s forwards;
+
+        /* === 动态档案夹系统 (Active Folder System) === */
+        .archive-container-fixed {
+            margin-top: 4rem;
             position: relative;
         }
-        @media (max-width: 768px) {
-            .project-header {
-                padding: 4rem 2rem 2rem;
-            }
-        }
-        @keyframes fadeInDown {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .project-title {
-            font-size: 4rem;
-            font-weight: 300;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: -2px;
-            color: var(--text-color);
-        }
-        .project-subtitle {
-            font-size: 1.1rem;
-            font-weight: 400;
-            margin-bottom: 3rem;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        .project-meta {
+        
+        .archive-row {
             display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
-            margin-bottom: 3rem;
-            padding: 2rem 0;
-            border-top: 1px solid var(--border-color);
-        }
-        .meta-item {
-            text-align: left;
-        }
-        .meta-label {
-            font-weight: 400;
-            font-size: 0.8rem;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-muted);
-        }
-        .meta-value {
-            font-size: 1rem;
-            font-weight: 400;
-            color: var(--text-color);
-        }
-        .project-tags {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-        .tag {
-            background: transparent;
-            border: 1px solid var(--border-color);
-            padding: 0.5rem 1rem;
-            font-size: 0.8rem;
-            font-weight: 400;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: var(--transition);
-        }
-        .tag:hover {
-            border-color: var(--text-color);
-            color: var(--text-color);
-        }
-        .project-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 4rem 8rem 4rem 2rem;
-        }
-        @media (max-width: 768px) {
-            .project-content {
-                padding: 4rem 2rem;
-            }
-        }
-        .section-title {
-            font-size: 2rem;
-            font-weight: 300;
-            color: var(--text-color);
-            margin-bottom: 3rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        .carousel-frame {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid var(--border-color);
-            border-radius: 18px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
             margin-bottom: 2rem;
-            padding: 2rem 1rem;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .carousel img {
-            max-height: 340px;
-            max-width: 100%;
-            width: auto;
-            margin: 0 auto;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.12);
-            border: 1px solid var(--border-color);
-            display: none;
-        }
-        .carousel img.active {
-            display: block;
-            animation: fadeIn 0.5s;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0,0,0,0.4);
-            color: #fff;
-            border: none;
-            font-size: 2.2rem;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 2;
-            transition: background 0.2s;
-        }
-        .carousel-btn:hover {
-            background: rgba(0,0,0,0.7);
-        }
-        .carousel-btn.prev { left: 16px; }
-        .carousel-btn.next { right: 16px; }
-        .carousel-title {
-            text-align: center;
-            font-size: 1.2rem;
-            color: var(--text-light);
-            margin: 1rem 0 0.5rem 0;
-            letter-spacing: 1px;
-        }
-        .features-cards-grid {
-            display: grid;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        .feature-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 2rem 1.5rem;
-            display: flex;
-            gap: 1.5rem;
-            align-items: flex-start;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-        }
-        .feature-icon {
-            font-size: 2.2rem;
-            margin-top: 0.2rem;
-        }
-        .features-cards h3 {
-            font-size: 1.15rem;
-            font-weight: 600;
-            margin-bottom: 0.7rem;
-            letter-spacing: 1px;
-            color: var(--text-color);
-            text-transform: none;
-        }
-        .features-cards ul {
-            margin: 0 0 0 1.2rem;
-            padding: 0;
-            color: var(--text-light);
-            font-size: 1rem;
-            font-weight: 300;
-            line-height: 1.7;
-        }
-        .features-cards p {
-            color: var(--text-light);
-            font-size: 1rem;
-            font-weight: 300;
-            line-height: 1.7;
-        }
-        .features-timeline .timeline {
             position: relative;
-            margin: 2.5rem 0 0 0;
-            padding-left: 60px;
-            border-left: 2px solid var(--border-color);
+            transition: z-index 0.3s;
         }
-        .timeline-item {
-            position: relative;
-            margin-bottom: 2.5rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 1.5rem;
-            min-height: 48px;
-        }
-        .timeline-icon {
-            position: absolute;
-            left: -48px;
-            top: 8px;
+
+        .active-folder {
+            border: 1px solid var(--line-color);
             background: var(--bg-color);
-            border: 2px solid var(--border-color);
-            border-radius: 50%;
-            width: 32px;
-            height: 32px;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.25rem;
-            color: var(--text-color);
-            z-index: 1;
-            box-shadow: 0 1px 6px rgba(0,0,0,0.08);
-        }
-        .timeline-content h3 {
-            margin: 0 0 0.5rem 0;
-            font-size: 1.08rem;
-            font-weight: 600;
-            color: var(--text-color);
-            display: flex;
-            align-items: center;
-        }
-        .timeline-content ul, .timeline-content p {
-            margin: 0;
-            color: var(--text-light);
-            font-size: 1rem;
-            font-weight: 300;
-            line-height: 1.7;
-        }
-        .back-button {
-            position: fixed;
-            top: 2rem;
-            left: 2rem;
-            z-index: 1000;
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 0.8rem 1.5rem;
-            font-size: 0.9rem;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            flex-direction: column;
             cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            display: inline-block;
-            border-radius: 8px;
-            min-width: unset;
-            width: auto;
-            box-sizing: border-box;
+            transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            z-index: 1;
         }
-        .back-button:hover {
-            background: var(--text-color);
-            color: var(--bg-color);
+        .active-folder:hover {
+            border-color: var(--accent);
+            z-index: 2;
         }
-        .main-sketch-img, .basic-carousel img {
+        
+        .active-folder.selected {
+            border-color: var(--accent);
+            background: rgba(255,255,255,0.05);
+        }
+        
+        .active-folder.focused {
+            z-index: 101;
+            box-shadow: 0 0 30px rgba(255,255,255,0.1);
+            transform: scale(1.02);
+            border-color: var(--accent);
+        }
+
+        /* 预览窗口 */
+        .folder-preview {
+            position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #000;
+        }
+        .folder-preview img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; opacity: 0; transition: opacity 0.8s ease;
+        }
+        .folder-preview img.active { opacity: 1; }
+
+        .folder-info {
+            padding: 1rem;
+            border-top: 1px solid var(--line-color);
+            font-family: var(--font-mono);
+            display: flex; justify-content: space-between; font-size: 0.8rem;
+            background: rgba(255,255,255,0.02);
+        }
+        .folder-name { color: var(--text-main); font-weight: 600; }
+        .folder-count { color: var(--text-dim); }
+
+        /* === 内联展开区域 === */
+        .folder-expander {
+            grid-column: 1 / -1;
+            width: 100%;
+            background: rgba(10,10,10,0.95);
+            border: 1px solid var(--line-color);
+            border-top: none;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: none; 
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 2rem;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            position: relative;
+        }
+        
+        .folder-expander.active { display: grid; opacity: 1; transform: translateY(0); }
+        .folder-expander.focused {
+            z-index: 101; border: 1px solid var(--accent);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        /* 缩略图卡片 */
+        .expander-item {
+            position: relative;
+            aspect-ratio: 1/1;
+            z-index: 1;
+            cursor: zoom-in;
+            border: 1px solid var(--line-color);
+            overflow: hidden;
+        }
+        
+        .expander-item img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .expander-item:hover img { transform: scale(1.05); }
+        .expander-item:hover { border-color: var(--accent); }
+
+        /* === 聚焦遮罩 === */
+        .focus-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+        .focus-overlay.active { opacity: 1; pointer-events: auto; }
+
+
+        /* === Color Selection Cards Styles === */
+        .color-option-card {
+            position: relative;
+        }
+        
+        .color-option-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            display: block;
-            margin: 0;
-            border-radius: 18px;
-            background: #fff;
-            object-fit: cover;
-            box-shadow: 0 2px 18px rgba(0,0,0,0.18);
+            background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 1;
         }
-        .basic-carousel-frame, .main-sketch-frame {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid var(--border-color);
-            border-radius: 18px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-            padding: 2.5rem 1.5rem;
-            max-width: 440px;
-            margin-left: auto;
-            margin-right: auto;
-            width: 100%;
-            height: 600px;
+        
+        .color-option-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(255,255,255,0.08);
+        }
+        
+        .color-option-card:hover::before {
+            opacity: 1;
+        }
+        
+        .color-option-card.selected {
+            border-color: var(--accent);
+            background: rgba(255,255,255,0.05);
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
+        
+        .color-option-card.focused {
+            z-index: 101;
+            box-shadow: 0 0 30px rgba(255,255,255,0.15);
+            transform: scale(1.03);
+            border-color: var(--accent);
+        }
+        
+        .color-selection-grid .folder-preview {
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        .main-sketch-col, .sketches-col {
-            flex: 1 1 420px;
-            max-width: 480px;
-            min-width: 320px;
+        
+        .color-selection-grid .folder-preview img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+        
+        .color-selection-grid .folder-preview img.active {
+            opacity: 1;
+        }
+
+        @media (max-width: 1200px) {
+            .color-selection-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .archive-row { grid-template-columns: 1fr; }
+            .folder-expander { padding: 1rem; grid-template-columns: repeat(2, 1fr); }
+            .color-selection-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 0 1rem;
+            }
+        }
+
+        /* === 3D Model Viewer Styles === */
+        .model-viewer-section {
+            width: 100%;
+            margin: 4rem 0;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-        @media (max-width: 1100px) {
-            .main-sketch-img, .basic-carousel img {
-                max-height: 400px;
-                max-width: 100%;
-            }
-            .basic-carousel-frame, .main-sketch-frame {
-                min-height: 320px;
-            }
-        }
-        .sketches-col .carousel {
+
+        .model-viewer-container {
+            width: 80%;
+            max-width: 900px;
+            height: 55vh;
+            min-height: 450px;
             position: relative;
-            width: 100%;
-            height: 420px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: transparent;
+            border: 1px solid rgba(51, 51, 51, 0.3);
             overflow: hidden;
-        }
-        .sketches-col .carousel-btn {
-            z-index: 3;
-        }
-        .sketch-row {
-            display: flex;
-            gap: 3rem;
-            justify-content: center;
-            align-items: flex-start;
-            margin-bottom: 4rem;
-            flex-wrap: wrap;
-        }
-        .basic-carousel {
-            position: relative;
-            width: 100%;
-            min-height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: visible;
-        }
-        .basic-carousel img {
-            max-height: 420px;
-            max-width: 320px;
-            width: 100%;
-            height: auto;
-            display: none;
             margin: 0 auto;
-            border-radius: 12px;
-            background: none;
-            object-fit: contain;
-            box-shadow: none;
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.02);
         }
-        .basic-carousel img.active {
-            display: block;
-        }
-        .basic-carousel .carousel-btn {
-            z-index: 3;
-            background: rgba(0,0,0,0.4);
-            color: #fff;
-            border: none;
-            font-size: 2.2rem;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            transition: background 0.2s;
-        }
-        .basic-carousel .carousel-btn.prev { left: -56px; }
-        .basic-carousel .carousel-btn.next { right: -56px; }
-        .basic-carousel .carousel-btn:hover {
-            background: rgba(0,0,0,0.7);
-        }
-        .carousel {
-            position: relative;
+
+        .model-viewer-container model-viewer {
             width: 100%;
-            height: 350px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            height: 100%;
+            background-color: transparent;
+            --poster-color: transparent;
         }
-        .carousel-btn.prev { left: 16px; }
-        .carousel-btn.next { right: 16px; }
+
+        /* 限制交互区域 - 边缘区域阻止交互 */
+        .model-interaction-mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* 顶部边缘 - 阻止交互 */
+        .model-interaction-mask::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 12%;
+            pointer-events: auto;
+            background: transparent;
+        }
+
+        /* 底部边缘 - 阻止交互 */
+        .model-interaction-mask::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 12%;
+            pointer-events: auto;
+            background: transparent;
+        }
+
+        /* 左右边缘 - 使用额外的 div */
+        .model-edge-left,
+        .model-edge-right {
+            position: absolute;
+            top: 12%;
+            width: 12%;
+            height: 76%;
+            pointer-events: auto;
+            background: transparent;
+            z-index: 1;
+        }
+
+        .model-edge-left {
+            left: 0;
+        }
+
+        .model-edge-right {
+            right: 0;
+        }
+
+        .model-controls {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            z-index: 10;
+        }
+
+        .model-control-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(0,0,0,0.7);
+            border: 1px solid var(--line-color);
+            color: var(--text-main);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .model-control-btn:hover {
+            border-color: var(--accent);
+            background: rgba(255,255,255,0.1);
+        }
+
+        .model-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            pointer-events: none;
+            z-index: 10;
+        }
     </style>
 </head>
-<body class="page-container">
-    <div class="project-page">
-        <a href="index.html" class="back-button">← Back</a>
-        <header class="project-header">
-            <h1 class="project-title">Modular Sneakers</h1>
-            <p class="project-subtitle">Customizable Footwear / Modular Design / Multi-Sport</p>
-            <div class="content-enter project-meta">
-                <div class="meta-item">
-                    <div class="meta-label">Category</div>
-                    <div class="meta-value">Product Design & Innovation</div>
-                </div>
-                <div class="meta-item">
-                    <div class="meta-label">Year</div>
-                    <div class="meta-value">2024</div>
-                </div>
-                <div class="meta-item">
-                    <div class="meta-label">Duration</div>
-                    <div class="meta-value">2 Months</div>
-                </div>
-                <div class="meta-item">
-                    <div class="meta-label">Role</div>
-                    <div class="meta-value">Designer & Engineer</div>
+<body>
+
+    <div class="system-grid"></div>
+    <div class="focus-overlay" id="focus-overlay"></div>
+
+    <header class="tech-header">
+        <a href="index.html" class="brand">
+            <h1>YIFAN ZHAO</h1>
+            <span>// PROJECT_FILE_001</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">INDEX</a>
+            <a href="project-modular-sneakers.html" class="nav-link active">PROJECT</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <div class="hero-image">
+        <img src="Shoes/2/Product gray2.jpg" alt="Hero" data-caption="Modular Sneakers System">
+        <div class="hero-overlay">
+            <div class="content-wrapper" style="padding: 0;">
+                <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.8rem;">
+                    <span>FIG. 01: FINAL ASSEMBLY</span>
+                    <span>SCALE: 1:1</span>
                 </div>
             </div>
-            <div class="content-enter project-tags">
-                <span class="tag">Modular</span>
-                <span class="tag">Sneakers Design</span>
-                <span class="tag">Customization</span>
-                <span class="tag">Rendering</span>
-                <span class="tag">Modeling</span>
-                <span class="tag">3D Printing Model</span>
-            </div>
-        </header>
-        <main class="project-content">
-            <!-- Hero Images Carousel -->
-            <section class="content-enter content-section">
-                <div class="carousel-title">Hero Images</div>
-                <div class="carousel-frame">
-                    <div class="carousel" id="carousel-hero">
-                        <img src="Shoes/1/hero-image1.png" alt="Hero 1" class="active">
-                        <img src="Shoes/1/hero-image2.png" alt="Hero 2">
-                        <img src="Shoes/1/hero-image3.jpg" alt="Hero 3">
-                        <img src="Shoes/1/hero-image4.jpg" alt="Hero 4">
-                        <img src="Shoes/1/hero-image5.jpg" alt="Hero 5">
-                        <button class="carousel-btn prev" onclick="prevSlide('carousel-hero')">‹</button>
-                        <button class="carousel-btn next" onclick="nextSlide('carousel-hero')">›</button>
-                    </div>
-                </div>
-            </section>
-            <!-- Component Carousel -->
-            <section class="content-enter content-section">
-                <div class="carousel-title">Component</div>
-                <div class="carousel-frame">
-                    <div class="carousel" id="carousel-component">
-                        <img src="Shoes/1/Component1.png" alt="Component 1" class="active">
-                        <img src="Shoes/1/Component2.png" alt="Component 2">
-                        <img src="Shoes/1/Component3.png" alt="Component 3">
-                        <img src="Shoes/1/Component4.png" alt="Component 4">
-                        <button class="carousel-btn prev" onclick="prevSlide('carousel-component')">‹</button>
-                        <button class="carousel-btn next" onclick="nextSlide('carousel-component')">›</button>
-                    </div>
-                </div>
-            </section>
-            <!-- 穿插文字：Concept Overview + Key Features -->
-            <section class="content-enter content-section features-timeline">
-                <h2 class="section-title">CONCEPT OVERVIEW</h2>
-                <div class="project-description">
-                    <p>Our modular sneaker is designed with adaptability at its core—a transformative footwear system engineered to meet the evolving demands of multi-sport athletes, urban explorers, and performance-driven users alike. By enabling users to interchange core components of the shoe, we break away from the traditional "one-sport, one-shoe" paradigm and introduce a future-forward, sustainable, and customizable alternative.</p>
-                </div>
-                <h2 class="section-title">KEY FEATURES</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <h3>Interchangeable Components</h3>
-                            <ul>
-                                <li><b>Midsole Units:</b> Select from varying levels of stiffness and energy return based on activity type (e.g., responsive foam for running, firm for court stability, or soft gel for casual use).</li>
-                                <li><b>Air Cushion Modules:</b> Adjustable air pockets can be inserted or removed to suit impact needs, helping reduce joint strain during high-impact activities like basketball or jumping exercises.</li>
-                                <li><b>Outer Shells & Uppers:</b> Breathable mesh for training, water-resistant nylon for outdoor use, or supportive leather for structure—modularity extends to aesthetics and function.</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <h3>Sport-Adaptive Design</h3>
-                            <p>Engineered to accommodate a wide range of motion profiles and load distributions, the shoe transitions seamlessly between sports like running, court sports, cross-training, or even casual walking.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <h3>Tool-Free Customization</h3>
-                            <p>Swapping components is intuitive and quick—requiring no tools or technical know-how. Magnetic fasteners, snap-fit joints, and labeled guides make reconfiguration accessible for any user.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <h3>Sustainable Lifecycle</h3>
-                            <p>Instead of replacing the entire shoe, users can refresh individual parts (e.g., worn soles or stretched uppers), extending the overall product lifespan and reducing waste.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- Additional Reference Photos Carousel -->
-            <section class="content-enter content-section">
-                <div class="carousel-title">Additional Reference Photos</div>
-                <div class="carousel-frame">
-                    <div class="carousel" id="carousel-additional">
-                        <img src="Shoes/1/Additional Reference Photos1.png" alt="Additional 1" class="active">
-                        <img src="Shoes/1/Additional Reference Photos2.png" alt="Additional 2">
-                        <img src="Shoes/1/Additional Reference Photos3.jpg" alt="Additional 3">
-                        <img src="Shoes/1/Additional Reference Photos4.jpg" alt="Additional 4">
-                        <img src="Shoes/1/Additional Reference Photos5.jpg" alt="Additional 5">
-                        <img src="Shoes/1/Additional Reference Photos6.png" alt="Additional 6">
-                        <img src="Shoes/1/Additional Reference Photos7.png" alt="Additional 7">
-                        <img src="Shoes/1/Additional Reference Photos8.png" alt="Additional 8">
-                        <img src="Shoes/1/Additional Reference Photos9.png" alt="Additional 9">
-                        <img src="Shoes/1/Additional Reference Photos10.jpg" alt="Additional 10">
-                        <button class="carousel-btn prev" onclick="prevSlide('carousel-additional')">‹</button>
-                        <button class="carousel-btn next" onclick="nextSlide('carousel-additional')">›</button>
-                    </div>
-                </div>
-            </section>
-            <!-- 穿插文字：User Experience -->
-            <section class="content-enter content-section">
-                <h2 class="section-title">User Experience</h2>
-                <div class="project-description">
-                    <p>With a single base chassis and a library of attachable modules, users can <em>curate their shoe</em> based on their schedule. Morning run? Slide in the high-resilience midsole. Midday basketball? Swap in court-optimized traction pads. Evening city walk? Pop on the lifestyle shell. This adaptability means you no longer need multiple shoes for multiple purposes—just one intelligent system.</p>
-                </div>
-            </section>
-            <!-- Exploded Carousel -->
-            <section class="content-enter content-section">
-                <div class="carousel-title">Exploded Views</div>
-                <div class="carousel-frame">
-                    <div class="carousel" id="carousel-exploded">
-                        <img src="Shoes/2/Exploded view1.jpg" alt="Exploded 1" class="active">
-                        <img src="Shoes/2/Exploded view2.jpg" alt="Exploded 2">
-                        <img src="Shoes/2/Exploded view3.jpg" alt="Exploded 3">
-                        <img src="Shoes/2/Exploded view4.jpg" alt="Exploded 4">
-                        <img src="Shoes/2/Exploded view5.jpg" alt="Exploded 5">
-                        <button class="carousel-btn prev" onclick="prevSlide('carousel-exploded')">‹</button>
-                        <button class="carousel-btn next" onclick="nextSlide('carousel-exploded')">›</button>
-                    </div>
-                </div>
-            </section>
-            <!-- White Mold Carousel -->
-            <section class="content-enter content-section">
-                <div class="carousel-title">White Mold</div>
-                <div class="carousel-frame">
-                    <div class="carousel" id="carousel-white">
-                        <img src="Shoes/2/White mold1.jpg" alt="White 1" class="active">
-                        <img src="Shoes/2/White mold2.jpg" alt="White 2">
-                        <img src="Shoes/2/White mold3.jpg" alt="White 3">
-                        <button class="carousel-btn prev" onclick="prevSlide('carousel-white')">‹</button>
-                        <button class="carousel-btn next" onclick="nextSlide('carousel-white')">›</button>
-                    </div>
-                </div>
-            </section>
-            <!-- 穿插文字：Target Audience -->
-            <section class="content-enter content-section">
-                <h2 class="section-title">Target Audience</h2>
-                <div class="project-description">
-                    <ul>
-                        <li>Multi-sport athletes seeking performance across domains</li>
-                        <li>Urban users looking for functional footwear throughout the day</li>
-                        <li>Environmentally-conscious consumers who value repairability and longevity</li>
-                        <li>Tech-savvy users interested in smart design systems and modular gear</li>
-                    </ul>
-                </div>
-            </section>
-            <!-- Gray Carousel -->
-            <section class="content-enter content-section">
-                <div class="carousel-title">Gray</div>
-                <div class="carousel-frame">
-                    <div class="carousel" id="carousel-gray">
-                        <img src="Shoes/2/Product gray1.jpg" alt="Gray 1" class="active">
-                        <img src="Shoes/2/Product gray2.jpg" alt="Gray 2">
-                        <img src="Shoes/2/Product gray3.jpg" alt="Gray 3">
-                        <img src="Shoes/2/Product gray4.jpg" alt="Gray 4">
-                        <img src="Shoes/2/Product gray5.jpg" alt="Gray 5">
-                        <img src="Shoes/2/Product gray6.jpg" alt="Gray 6">
-                        <button class="carousel-btn prev" onclick="prevSlide('carousel-gray')">‹</button>
-                        <button class="carousel-btn next" onclick="nextSlide('carousel-gray')">›</button>
-                    </div>
-                </div>
-            </section>
-            <!-- Black Carousel -->
-            <section class="content-enter content-section">
-                <div class="carousel-title">Black</div>
-                <div class="carousel-frame">
-                    <div class="carousel" id="carousel-black">
-                        <img src="Shoes/2/Product Black1.jpg" alt="Black 1" class="active">
-                        <img src="Shoes/2/Product Black2.jpg" alt="Black 2">
-                        <img src="Shoes/2/Product Black3.jpg" alt="Black 3">
-                        <button class="carousel-btn prev" onclick="prevSlide('carousel-black')">‹</button>
-                        <button class="carousel-btn next" onclick="nextSlide('carousel-black')">›</button>
-                    </div>
-                </div>
-            </section>
-            <!-- Yellow Carousel -->
-            <section class="content-enter content-section">
-                <div class="carousel-title">Yellow</div>
-                <div class="carousel-frame">
-                    <div class="carousel" id="carousel-yellow">
-                        <img src="Shoes/2/Product Yellow1.jpg" alt="Yellow 1" class="active">
-                        <img src="Shoes/2/Product Yellow2.jpg" alt="Yellow 2">
-                        <img src="Shoes/2/Product Yellow3.jpg" alt="Yellow 3">
-                        <img src="Shoes/2/Product Yellow4.jpg" alt="Yellow 4">
-                        <button class="carousel-btn prev" onclick="prevSlide('carousel-yellow')">‹</button>
-                        <button class="carousel-btn next" onclick="nextSlide('carousel-yellow')">›</button>
-                    </div>
-                </div>
-            </section>
-            <!-- Main Sketch + Sketches 并排展示 -->
-            <section class="content-enter content-section" style="margin-bottom: 0;">
-                <div class="sketch-row">
-                    <div class="main-sketch-col">
-                        <div class="carousel-title">Main Sketch</div>
-                        <div class="carousel-frame main-sketch-frame">
-                            <img src="Shoes/3/main sketch.png" alt="Main Sketch" class="active main-sketch-img">
-                        </div>
-                    </div>
-                    <div class="sketches-col">
-                        <div class="carousel-title">Sketches</div>
-                        <div class="basic-carousel-frame">
-                            <div class="basic-carousel" id="basic-carousel-sketch">
-                                <img src="Shoes/3/sketch2.png" alt="Sketch 2" class="active">
-                                <img src="Shoes/3/sketch3.png" alt="Sketch 3">
-                                <button class="carousel-btn prev" onclick="basicPrevSlide('basic-carousel-sketch')">‹</button>
-                                <button class="carousel-btn next" onclick="basicNextSlide('basic-carousel-sketch')">›</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- 结尾穿插文字：Future Potential + Design Philosophy -->
-            <section class="content-enter content-section">
-                <h2 class="section-title">Design Philosophy</h2>
-                <div class="project-description">
-                    <p>At the heart of the modular sneaker is a belief in <b>empowerment through customization</b>. Rather than forcing users to adapt to the shoe, we designed the shoe to adapt to the user. This reflects a broader shift toward personalization in consumer products—allowing individuals to express their style, preferences, and athletic needs through a single, reconfigurable platform.</p>
-                </div>
-                <h2 class="section-title">Future Potential</h2>
-                <div class="project-description">
-                    <p>This platform opens up the possibility for <b>smart integrations</b>—such as sensors that recommend optimal configurations, or app-based analytics for wear tracking and performance insights. The modular sneaker is not just a product, but a <b>foundation for a dynamic footwear ecosystem</b>.</p>
-                </div>
-            </section>
-        </main>
+        </div>
     </div>
-    <script src="script.js"></script>
-    <script src="cleanest-transitions.js"></script>
+
+    <div class="content-wrapper">
+        
+        <!-- 项目标题区 -->
+        <div style="margin-bottom: 4rem; border-bottom: 1px solid var(--line-color); padding-bottom: 2rem;">
+            <h1 style="font-size: 5rem; margin-bottom: 0.5rem; letter-spacing: -2px;">MODULAR SHOES</h1>
+            <div style="font-family: var(--font-mono); color: var(--text-dim); font-size: 1.2rem;">
+                // Multiverse of the "Modern Sneaker System"
+            </div>
+        </div>
+
+        <div class="content-grid" style="margin-bottom: 6rem;">
+            <div>
+                <h2>SYSTEM_OVERVIEW</h2>
+                <p>Our modular sneaker is designed with adaptability at its core—a transformative footwear system engineered to meet the evolving demands of multi-sport athletes and urban explorers.</p>
+            </div>
+            <div>
+                <h2>TECHNICAL_SPECS</h2>
+                <ul style="list-style: none; padding: 0; font-family: var(--font-mono); font-size: 0.9rem; color: var(--text-dim);">
+                    <li style="border-bottom: 1px solid var(--line-color); padding: 1rem 0; display: flex; justify-content: space-between;">
+                        WEIGHT <span>320g</span>
+                    </li>
+                    <li style="border-bottom: 1px solid var(--line-color); padding: 1rem 0; display: flex; justify-content: space-between;">
+                        MATERIALS <span>TPU / Recycled Foam</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 3D Model Viewer Section -->
+        <div class="model-viewer-section">
+            <div class="model-viewer-container">
+                <model-viewer 
+                    id="sneaker-model"
+                    src="Shoes/model (3)/view模型.gltf"
+                    alt="Modular Sneaker 3D Model"
+                    poster="Shoes/model (3)/poster.webp"
+                    camera-controls
+                    auto-rotate
+                    auto-rotate-delay="1000"
+                    rotation-per-second="30deg"
+                    interaction-policy="allow-when-focused"
+                    touch-action="none"
+                    shadow-intensity="1.8"
+                    shadow-softness="1.0"
+                    exposure="1.3"
+                    environment-image="neutral"
+                    lighting="neutral"
+                    tone-mapping="auto"
+                    min-camera-orbit="auto auto 100%"
+                    max-camera-orbit="auto auto 500%"
+                    field-of-view="45deg"
+                    interaction-prompt="none"
+                    reveal="auto"
+                    style="width: 100%; height: 100%; background-color: transparent;">
+                </model-viewer>
+                
+                <!-- 交互区域限制层 - 阻止边缘区域交互 -->
+                <div class="model-interaction-mask"></div>
+                <div class="model-edge-left"></div>
+                <div class="model-edge-right"></div>
+                
+                <div class="model-controls">
+                    <button class="model-control-btn" onclick="toggleAutoRotate()">AUTO_ROTATE</button>
+                    <button class="model-control-btn" onclick="resetCamera()">RESET_VIEW</button>
+                </div>
+                
+                <div class="model-info">
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>FIG. 02: INTERACTIVE_3D_MODEL</span>
+                        <span>[ DRAG | SCROLL | TOUCH ]</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Experience Section -->
+        <div class="content-wrapper" style="margin-top: 4rem;">
+            <h2>USER_EXPERIENCE</h2>
+            <div style="max-width: 900px; margin: 0 auto;">
+                <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-main); margin-bottom: 3rem;">
+                    With a single base chassis and a library of attachable modules, users can curate their shoe based on their schedule. Morning run? Slide in the high-resilience midsole. Midday basketball? Swap in court-optimized traction pads. Evening city walk? Pop on the lifestyle shell. This adaptability means you no longer need multiple shoes for multiple purposes—just one intelligent system.
+                </p>
+            </div>
+
+            <!-- Photo Folders: Hero, Additional Ref, Components -->
+            <div class="archive-container-fixed" style="margin-top: 3rem;">
+                <div class="archive-row">
+                    <!-- HERO SERIES -->
+                    <div class="active-folder" onclick="openFolderInRow(this, 'hero', 'ux-row-expander')">
+                        <div class="folder-preview" id="preview-hero-ux"></div>
+                        <div class="folder-info"><span class="folder-name">>> HERO_SERIES</span><span class="folder-count">[05]</span></div>
+                    </div>
+                    <!-- ADDITIONAL REF -->
+                    <div class="active-folder" onclick="openFolderInRow(this, 'ref', 'ux-row-expander')">
+                        <div class="folder-preview" id="preview-ref-ux"></div>
+                        <div class="folder-info"><span class="folder-name">>> ADDITIONAL_REF</span><span class="folder-count">[10]</span></div>
+                    </div>
+                    <!-- COMPONENTS -->
+                    <div class="active-folder" onclick="openFolderInRow(this, 'comp', 'ux-row-expander')">
+                        <div class="folder-preview" id="preview-comp-ux"></div>
+                        <div class="folder-info"><span class="folder-name">>> COMPONENTS</span><span class="folder-count">[04]</span></div>
+                    </div>
+                </div>
+                <div id="ux-row-expander" class="folder-expander"></div>
+            </div>
+        </div>
+
+        <!-- Interchangeable Components Section -->
+        <div class="content-wrapper" style="margin-top: 6rem;">
+            <h2>INTERCHANGEABLE_COMPONENTS</h2>
+            
+            <div style="max-width: 900px; margin: 0 auto 4rem;">
+                <div style="margin-bottom: 3rem;">
+                    <h3 style="color: var(--accent);">Midsole Units</h3>
+                    <p>
+                        Select from varying levels of stiffness and energy return based on activity type (e.g., responsive foam for running, firm for court stability, or soft gel for casual use).
+                    </p>
+                </div>
+
+                <div>
+                    <h3 style="color: var(--accent);">Air Cushion Modules</h3>
+                    <p>
+                        Adjustable air pockets can be inserted or removed to suit impact needs, helping reduce joint strain during high-impact activities like basketball or jumping exercises.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Exploded View and Prototype Mold - Side by Side -->
+            <div class="archive-container-fixed" style="margin-top: 4rem;">
+                <div class="archive-row" style="grid-template-columns: 1fr 1fr; max-width: 1000px; margin: 0 auto;">
+                    <!-- EXPLODED VIEW -->
+                    <div class="active-folder" onclick="openFolderInRow(this, 'exploded', 'components-expander')">
+                        <div class="folder-preview" id="preview-exploded-components"></div>
+                        <div class="folder-info"><span class="folder-name">>> EXPLODED_VIEW</span><span class="folder-count">[05]</span></div>
+                    </div>
+                    <!-- PROTOTYPE MOLD -->
+                    <div class="active-folder" onclick="openFolderInRow(this, 'mold', 'components-expander')">
+                        <div class="folder-preview" id="preview-mold-components"></div>
+                        <div class="folder-info"><span class="folder-name">>> PROTOTYPE: MOLD</span><span class="folder-count">[03]</span></div>
+                    </div>
+                </div>
+                <div id="components-expander" class="folder-expander"></div>
+            </div>
+        </div>
+
+        <!-- Design Philosophy Section -->
+        <div class="content-wrapper" style="margin-top: 6rem;">
+            <h2>DESIGN_PHILOSOPHY</h2>
+            
+            <!-- Text Content -->
+            <div style="max-width: 900px; margin: 0 auto 4rem;">
+                <div style="margin-bottom: 3rem;">
+                    <p style="font-size: 1.1rem; line-height: 1.9; color: var(--text-main); margin-bottom: 2rem;">
+                        At the heart of the modular sneaker is a belief in empowerment through customization. Rather than forcing users to adapt to the shoe, we designed the shoe to adapt to the user. This reflects a broader shift toward personalization in consumer products—allowing individuals to express their style, preferences, and athletic needs through a single, reconfigurable platform.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Color & Style Selection Section -->
+            <div style="margin-top: 5rem;">
+                <div style="text-align: center; margin-bottom: 3rem;">
+                    <h3 style="color: var(--accent); font-size: 1.3rem; letter-spacing: 0.1em; margin-bottom: 0.5rem;">COLOR & STYLE SELECTION</h3>
+                </div>
+
+                <!-- Flexible Grid Layout for 4 Options -->
+                <div class="color-selection-grid" style="
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 1.5rem;
+                    max-width: 1400px;
+                    margin: 0 auto;
+                    padding: 0 2rem;
+                ">
+                    <!-- 1. COLOR: NOIR -->
+                    <div class="color-option-card" onclick="openFolderInRow(this, 'black', 'philosophy-color-expander')" style="
+                        border: 1px solid var(--line-color);
+                        background: var(--bg-color);
+                        display: flex;
+                        flex-direction: column;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        position: relative;
+                        overflow: hidden;
+                    ">
+                        <div class="folder-preview" id="preview-black-philosophy" style="
+                            position: relative;
+                            width: 100%;
+                            aspect-ratio: 4/3;
+                            overflow: hidden;
+                            background: #000;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        "></div>
+                        <div class="folder-info" style="
+                            padding: 1.2rem;
+                            border-top: 1px solid var(--line-color);
+                            font-family: var(--font-mono);
+                            display: flex;
+                            flex-direction: column;
+                            gap: 0.3rem;
+                            background: rgba(255,255,255,0.02);
+                        ">
+                            <span class="folder-name" style="color: var(--text-main); font-weight: 600; font-size: 0.85rem; letter-spacing: 0.05em;">COLOR: NOIR</span>
+                            <span class="folder-count" style="color: var(--text-dim); font-size: 0.75rem;">[03]</span>
+                        </div>
+                    </div>
+
+                    <!-- 2. COLOR: GRAYSCALE -->
+                    <div class="color-option-card" onclick="openFolderInRow(this, 'gray', 'philosophy-color-expander')" style="
+                        border: 1px solid var(--line-color);
+                        background: var(--bg-color);
+                        display: flex;
+                        flex-direction: column;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        position: relative;
+                        overflow: hidden;
+                    ">
+                        <div class="folder-preview" id="preview-gray-philosophy" style="
+                            position: relative;
+                            width: 100%;
+                            aspect-ratio: 4/3;
+                            overflow: hidden;
+                            background: #000;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        "></div>
+                        <div class="folder-info" style="
+                            padding: 1.2rem;
+                            border-top: 1px solid var(--line-color);
+                            font-family: var(--font-mono);
+                            display: flex;
+                            flex-direction: column;
+                            gap: 0.3rem;
+                            background: rgba(255,255,255,0.02);
+                        ">
+                            <span class="folder-name" style="color: var(--text-main); font-weight: 600; font-size: 0.85rem; letter-spacing: 0.05em;">COLOR: GRAYSCALE</span>
+                            <span class="folder-count" style="color: var(--text-dim); font-size: 0.75rem;">[06]</span>
+                        </div>
+                    </div>
+
+                    <!-- 3. COLOR: ACCENT -->
+                    <div class="color-option-card" onclick="openFolderInRow(this, 'yellow', 'philosophy-color-expander')" style="
+                        border: 1px solid var(--line-color);
+                        background: var(--bg-color);
+                        display: flex;
+                        flex-direction: column;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        position: relative;
+                        overflow: hidden;
+                    ">
+                        <div class="folder-preview" id="preview-yellow-philosophy" style="
+                            position: relative;
+                            width: 100%;
+                            aspect-ratio: 4/3;
+                            overflow: hidden;
+                            background: #000;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        "></div>
+                        <div class="folder-info" style="
+                            padding: 1.2rem;
+                            border-top: 1px solid var(--line-color);
+                            font-family: var(--font-mono);
+                            display: flex;
+                            flex-direction: column;
+                            gap: 0.3rem;
+                            background: rgba(255,255,255,0.02);
+                        ">
+                            <span class="folder-name" style="color: var(--text-main); font-weight: 600; font-size: 0.85rem; letter-spacing: 0.05em;">COLOR: ACCENT</span>
+                            <span class="folder-count" style="color: var(--text-dim); font-size: 0.75rem;">[04]</span>
+                        </div>
+                    </div>
+
+                    <!-- 4. UPDATE: LACING -->
+                    <div class="color-option-card" onclick="openFolderInRow(this, 'lac', 'philosophy-color-expander')" style="
+                        border: 1px solid var(--line-color);
+                        background: var(--bg-color);
+                        display: flex;
+                        flex-direction: column;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        position: relative;
+                        overflow: hidden;
+                    ">
+                        <div class="folder-preview" id="preview-lac-philosophy" style="
+                            position: relative;
+                            width: 100%;
+                            aspect-ratio: 4/3;
+                            overflow: hidden;
+                            background: #000;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        "></div>
+                        <div class="folder-info" style="
+                            padding: 1.2rem;
+                            border-top: 1px solid var(--line-color);
+                            font-family: var(--font-mono);
+                            display: flex;
+                            flex-direction: column;
+                            gap: 0.3rem;
+                            background: rgba(255,255,255,0.02);
+                        ">
+                            <span class="folder-name" style="color: var(--text-main); font-weight: 600; font-size: 0.85rem; letter-spacing: 0.05em;">UPDATE: LACING</span>
+                            <span class="folder-count" style="color: var(--text-dim); font-size: 0.75rem;">[04]</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="philosophy-color-expander" class="folder-expander"></div>
+                
+                <!-- Future Potential Section -->
+                <div style="max-width: 900px; margin: 4rem auto 0;">
+                    <h3 style="color: var(--accent); margin-bottom: 1rem;">Future Potential</h3>
+                    <p style="font-size: 1.1rem; line-height: 1.9; color: var(--text-main);">
+                        This platform opens up the possibility for smart integrations—such as sensors that recommend optimal configurations, or app-based analytics for wear tracking and performance insights. The modular sneaker is not just a product, but a foundation for a dynamic footwear ecosystem.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="tech-footer">
+        <a href="index.html">RETURN TO ARCHIVE</a>
+        <div>© 2025 YIFAN ZHAO</div>
+    </footer>
+
+    <script src="lightbox.js"></script>
     <script>
-    // 通用轮播逻辑
-    function nextSlide(id) {
-        const carousel = document.getElementById(id);
-        const imgs = carousel.querySelectorAll('img');
-        let idx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
-        imgs[idx].classList.remove('active');
-        idx = (idx + 1) % imgs.length;
-        imgs[idx].classList.add('active');
-    }
-    function prevSlide(id) {
-        const carousel = document.getElementById(id);
-        const imgs = carousel.querySelectorAll('img');
-        let idx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
-        imgs[idx].classList.remove('active');
-        idx = (idx - 1 + imgs.length) % imgs.length;
-        imgs[idx].classList.add('active');
-    }
-    // 自动轮播
-    const carousels = [
-        'carousel-hero','carousel-component','carousel-additional','carousel-exploded','carousel-white','carousel-gray','carousel-black','carousel-yellow','carousel-mainsketch','carousel-sketch'
-    ];
-    carousels.forEach(id => {
-        setInterval(() => { nextSlide(id); }, 3500);
-    });
-    // 页面退出动画
-    document.querySelector('.back-button').addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector('.project-page').classList.add('slide-out');
-        setTimeout(() => {
-            window.location.href = this.href;
-        }, 600);
-    });
-    // 基础Sketches轮播
-    function basicNextSlide(id) {
-        const carousel = document.getElementById(id);
-        const imgs = carousel.querySelectorAll('img');
-        let idx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
-        imgs[idx].classList.remove('active');
-        idx = (idx + 1) % imgs.length;
-        imgs[idx].classList.add('active');
-    }
-    function basicPrevSlide(id) {
-        const carousel = document.getElementById(id);
-        const imgs = carousel.querySelectorAll('img');
-        let idx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
-        imgs[idx].classList.remove('active');
-        idx = (idx - 1 + imgs.length) % imgs.length;
-        imgs[idx].classList.add('active');
-    }
+        // 数据
+        const db = {
+            hero: [
+                'Shoes/1/hero-image1.png', 'Shoes/1/hero-image2.png', 'Shoes/1/hero-image3.jpg', 
+                'Shoes/1/hero-image4.jpg', 'Shoes/1/hero-image5.jpg'
+            ],
+            ref: [
+                'Shoes/1/Additional Reference Photos1.png', 'Shoes/1/Additional Reference Photos2.png',
+                'Shoes/1/Additional Reference Photos3.jpg', 'Shoes/1/Additional Reference Photos4.jpg',
+                'Shoes/1/Additional Reference Photos5.jpg', 'Shoes/1/Additional Reference Photos6.png',
+                'Shoes/1/Additional Reference Photos7.png', 'Shoes/1/Additional Reference Photos8.png',
+                'Shoes/1/Additional Reference Photos9.png', 'Shoes/1/Additional Reference Photos10.jpg'
+            ],
+            comp: [
+                'Shoes/1/Component1.png', 'Shoes/1/Component2.png', 
+                'Shoes/1/Component3.png', 'Shoes/1/Component4.png'
+            ],
+            exploded: [
+                'Shoes/2/Exploded view1.jpg', 'Shoes/2/Exploded view2.jpg', 'Shoes/2/Exploded view3.jpg',
+                'Shoes/2/Exploded view4.jpg', 'Shoes/2/Exploded view5.jpg'
+            ],
+            black: [
+                'Shoes/2/Product Black1.jpg', 'Shoes/2/Product Black2.jpg', 'Shoes/2/Product Black3.jpg'
+            ],
+            gray: [
+                'Shoes/2/Product gray1.jpg', 'Shoes/2/Product gray2.jpg', 'Shoes/2/Product gray3.jpg',
+                'Shoes/2/Product gray4.jpg', 'Shoes/2/Product gray5.jpg', 'Shoes/2/Product gray6.jpg'
+            ],
+            yellow: [
+                'Shoes/2/Product Yellow1.jpg', 'Shoes/2/Product Yellow2.jpg', 
+                'Shoes/2/Product Yellow3.jpg', 'Shoes/2/Product Yellow4.jpg'
+            ],
+            mold: [
+                'Shoes/2/White mold1.jpg', 'Shoes/2/White mold2.jpg', 'Shoes/2/White mold3.jpg'
+            ],
+            lac: [
+                'Shoes/2/lac1.png', 'Shoes/2/lac2.png', 'Shoes/2/lac3.png', 'Shoes/2/lac4.png'
+            ]
+        };
+
+        // 图片文本说明映射
+        const imageCaptions = {
+            hero: [
+                { caption: 'Hero Series - Modular Sneaker System Overview', meta: 'HERO_SERIES // 01' },
+                { caption: 'Hero Series - Product Detail Shot', meta: 'HERO_SERIES // 02' },
+                { caption: 'Hero Series - Lifestyle Application', meta: 'HERO_SERIES // 03' },
+                { caption: 'Hero Series - Design Context', meta: 'HERO_SERIES // 04' },
+                { caption: 'Hero Series - Final Assembly', meta: 'HERO_SERIES // 05' }
+            ],
+            ref: [
+                { caption: 'Additional Reference - Design Inspiration', meta: 'REFERENCE // 01' },
+                { caption: 'Additional Reference - Material Study', meta: 'REFERENCE // 02' },
+                { caption: 'Additional Reference - Form Exploration', meta: 'REFERENCE // 03' },
+                { caption: 'Additional Reference - Detail Reference', meta: 'REFERENCE // 04' },
+                { caption: 'Additional Reference - Context Study', meta: 'REFERENCE // 05' },
+                { caption: 'Additional Reference - Technical Reference', meta: 'REFERENCE // 06' },
+                { caption: 'Additional Reference - Process Documentation', meta: 'REFERENCE // 07' },
+                { caption: 'Additional Reference - Detail Analysis', meta: 'REFERENCE // 08' },
+                { caption: 'Additional Reference - Design Iteration', meta: 'REFERENCE // 09' },
+                { caption: 'Additional Reference - Final Reference', meta: 'REFERENCE // 10' }
+            ],
+            comp: [
+                { caption: 'Component - Modular Midsole Unit', meta: 'COMPONENT // 01' },
+                { caption: 'Component - Air Cushion Module', meta: 'COMPONENT // 02' },
+                { caption: 'Component - Traction Pad System', meta: 'COMPONENT // 03' },
+                { caption: 'Component - Base Chassis', meta: 'COMPONENT // 04' }
+            ],
+            exploded: [
+                { caption: 'Exploded View - Component Breakdown', meta: 'EXPLODED_VIEW // 01' },
+                { caption: 'Exploded View - Assembly Sequence', meta: 'EXPLODED_VIEW // 02' },
+                { caption: 'Exploded View - Internal Structure', meta: 'EXPLODED_VIEW // 03' },
+                { caption: 'Exploded View - Modular System', meta: 'EXPLODED_VIEW // 04' },
+                { caption: 'Exploded View - Complete Breakdown', meta: 'EXPLODED_VIEW // 05' }
+            ],
+            black: [
+                { caption: 'Color Variant - Noir Edition', meta: 'COLOR: NOIR // 01' },
+                { caption: 'Color Variant - Noir Detail', meta: 'COLOR: NOIR // 02' },
+                { caption: 'Color Variant - Noir Application', meta: 'COLOR: NOIR // 03' }
+            ],
+            gray: [
+                { caption: 'Color Variant - Grayscale Edition', meta: 'COLOR: GRAYSCALE // 01' },
+                { caption: 'Color Variant - Grayscale Detail', meta: 'COLOR: GRAYSCALE // 02' },
+                { caption: 'Color Variant - Grayscale Application', meta: 'COLOR: GRAYSCALE // 03' },
+                { caption: 'Color Variant - Grayscale Context', meta: 'COLOR: GRAYSCALE // 04' },
+                { caption: 'Color Variant - Grayscale Lifestyle', meta: 'COLOR: GRAYSCALE // 05' },
+                { caption: 'Color Variant - Grayscale Final', meta: 'COLOR: GRAYSCALE // 06' }
+            ],
+            yellow: [
+                { caption: 'Color Variant - Accent Edition', meta: 'COLOR: ACCENT // 01' },
+                { caption: 'Color Variant - Accent Detail', meta: 'COLOR: ACCENT // 02' },
+                { caption: 'Color Variant - Accent Application', meta: 'COLOR: ACCENT // 03' },
+                { caption: 'Color Variant - Accent Final', meta: 'COLOR: ACCENT // 04' }
+            ],
+            mold: [
+                { caption: 'Prototype Mold - Manufacturing Process', meta: 'PROTOTYPE_MOLD // 01' },
+                { caption: 'Prototype Mold - Mold Detail', meta: 'PROTOTYPE_MOLD // 02' },
+                { caption: 'Prototype Mold - Production Setup', meta: 'PROTOTYPE_MOLD // 03' }
+            ],
+            lac: [
+                { caption: 'Lacing System Update - Detail View', meta: 'LACING_SYSTEM // 01' },
+                { caption: 'Lacing System Update - Application', meta: 'LACING_SYSTEM // 02' },
+                { caption: 'Lacing System Update - Technical Detail', meta: 'LACING_SYSTEM // 03' },
+                { caption: 'Lacing System Update - Final Implementation', meta: 'LACING_SYSTEM // 04' }
+            ]
+        };
+
+        // 获取图片说明的辅助函数
+        function getImageCaption(key, index) {
+            if (imageCaptions[key] && imageCaptions[key][index]) {
+                return imageCaptions[key][index];
+            }
+            return { caption: '', meta: '' };
+        }
+
+        // 自动纠错 Helper
+        function fixImgError(img) {
+            const src = img.getAttribute('src');
+            if (src.endsWith('.jpg')) img.src = src.replace('.jpg', '.png');
+            else if (src.endsWith('.png')) img.src = src.replace('.png', '.jpg');
+            img.onerror = null; 
+        }
+
+        // 预览轮播
+        for (const [key, images] of Object.entries(db)) {
+            // 处理原有的预览区域
+            const container = document.getElementById(`preview-${key}`);
+            if (container) {
+                images.forEach((src, index) => {
+                    const img = document.createElement('img');
+                    img.src = src;
+                    img.onerror = function() { fixImgError(this); };
+                    if (index === 0) img.classList.add('active');
+                    container.appendChild(img);
+                });
+                let current = 0;
+                setInterval(() => {
+                    const imgs = container.querySelectorAll('img');
+                    if (imgs.length > 0) {
+                        imgs[current].classList.remove('active');
+                        current = (current + 1) % imgs.length;
+                        imgs[current].classList.add('active');
+                    }
+                }, 3000 + Math.random() * 1000);
+            }
+            
+            // 处理 UX 区域的预览（Hero, Ref, Comp）
+            if (key === 'hero' || key === 'ref' || key === 'comp') {
+                const uxContainer = document.getElementById(`preview-${key}-ux`);
+                if (uxContainer) {
+                    images.forEach((src, index) => {
+                        const img = document.createElement('img');
+                        img.src = src;
+                        img.onerror = function() { fixImgError(this); };
+                        if (index === 0) img.classList.add('active');
+                        uxContainer.appendChild(img);
+                    });
+                    let current = 0;
+                    setInterval(() => {
+                        const imgs = uxContainer.querySelectorAll('img');
+                        if (imgs.length > 0) {
+                            imgs[current].classList.remove('active');
+                            current = (current + 1) % imgs.length;
+                            imgs[current].classList.add('active');
+                        }
+                    }, 3000 + Math.random() * 1000);
+                }
+            }
+            
+            // 处理 Components 区域的预览（Exploded, Mold）
+            if (key === 'exploded' || key === 'mold') {
+                const compContainer = document.getElementById(`preview-${key}-components`);
+                if (compContainer) {
+                    images.forEach((src, index) => {
+                        const img = document.createElement('img');
+                        img.src = src;
+                        img.onerror = function() { fixImgError(this); };
+                        if (index === 0) img.classList.add('active');
+                        compContainer.appendChild(img);
+                    });
+                    let current = 0;
+                    setInterval(() => {
+                        const imgs = compContainer.querySelectorAll('img');
+                        if (imgs.length > 0) {
+                            imgs[current].classList.remove('active');
+                            current = (current + 1) % imgs.length;
+                            imgs[current].classList.add('active');
+                        }
+                    }, 3000 + Math.random() * 1000);
+                }
+            }
+            
+            // 处理 Philosophy 区域的预览（Black, Gray, Yellow, Lac）
+            if (key === 'black' || key === 'gray' || key === 'yellow' || key === 'lac') {
+                const philosophyContainer = document.getElementById(`preview-${key}-philosophy`);
+                if (philosophyContainer) {
+                    images.forEach((src, index) => {
+                        const img = document.createElement('img');
+                        img.src = src;
+                        img.onerror = function() { fixImgError(this); };
+                        if (index === 0) img.classList.add('active');
+                        philosophyContainer.appendChild(img);
+                    });
+                    let current = 0;
+                    setInterval(() => {
+                        const imgs = philosophyContainer.querySelectorAll('img');
+                        if (imgs.length > 0) {
+                            imgs[current].classList.remove('active');
+                            current = (current + 1) % imgs.length;
+                            imgs[current].classList.add('active');
+                        }
+                    }, 3000 + Math.random() * 1000);
+                }
+            }
+        }
+
+        // === 交互逻辑 ===
+        const overlay = document.getElementById('focus-overlay');
+        let currentOpenExpanderId = null;
+        let currentOpenKey = null;
+
+        function openFolderInRow(folderEl, key, expanderId) {
+            const expander = document.getElementById(expanderId);
+            
+            if (currentOpenKey === key) { closeExpander(expanderId); return; }
+            if (currentOpenExpanderId && currentOpenExpanderId !== expanderId) { closeExpander(currentOpenExpanderId); }
+
+            overlay.classList.add('active');
+            folderEl.classList.add('focused');
+            folderEl.parentElement.style.zIndex = '102';
+
+            const row = folderEl.parentElement;
+            // 同时处理 .active-folder 和 .color-option-card
+            row.querySelectorAll('.active-folder, .color-option-card').forEach(el => el.classList.remove('selected'));
+            folderEl.classList.add('selected');
+
+            expander.innerHTML = '';
+            
+            db[key].forEach((src, index) => {
+                const item = document.createElement('div');
+                item.className = 'expander-item';
+                const img = document.createElement('img');
+                img.src = src;
+                img.onerror = function() { fixImgError(this); };
+                img.className = 'zoomable';
+                
+                // 添加文本说明
+                const captionData = getImageCaption(key, index);
+                if (captionData.caption) {
+                    img.setAttribute('data-caption', captionData.caption);
+                }
+                if (captionData.meta) {
+                    img.setAttribute('data-meta', captionData.meta);
+                }
+                
+                // 设置 alt 属性
+                const fileName = src.split('/').pop().replace(/\.[^/.]+$/, '');
+                img.setAttribute('alt', fileName.toUpperCase().replace(/-/g, ' '));
+
+                item.appendChild(img);
+                expander.appendChild(item);
+            });
+
+            expander.classList.add('active');
+            expander.classList.add('focused');
+            
+            setTimeout(() => {
+                const rect = expander.getBoundingClientRect();
+                const offset = window.pageYOffset + rect.top - (window.innerHeight / 2) + (rect.height / 2);
+                window.scrollTo({ top: offset, behavior: 'smooth' });
+            }, 100);
+            
+            currentOpenExpanderId = expanderId;
+            currentOpenKey = key;
+        }
+
+        function closeExpander(expanderId) {
+            const expander = document.getElementById(expanderId);
+            const activeFolders = document.querySelectorAll('.active-folder');
+            const rows = document.querySelectorAll('.archive-row');
+
+            if (expander) {
+                expander.classList.remove('active');
+                expander.classList.remove('focused');
+                setTimeout(() => { expander.innerHTML = ''; }, 300);
+            }
+            
+            overlay.classList.remove('active');
+            activeFolders.forEach(el => { el.classList.remove('focused'); el.classList.remove('selected'); });
+            rows.forEach(row => row.style.zIndex = '');
+
+            currentOpenExpanderId = null;
+            currentOpenKey = null;
+        }
+        
+        overlay.addEventListener('click', () => {
+            if (currentOpenExpanderId) closeExpander(currentOpenExpanderId);
+        });
+
+
+        // === 3D Model Viewer Controls ===
+        let autoRotateEnabled = true;
+        const modelViewer = document.getElementById('sneaker-model');
+
+        function toggleAutoRotate() {
+            autoRotateEnabled = !autoRotateEnabled;
+            if (modelViewer) {
+                modelViewer.autoRotate = autoRotateEnabled;
+            }
+        }
+
+        function resetCamera() {
+            if (modelViewer) {
+                modelViewer.cameraOrbit = '15deg 80deg 200%';
+                modelViewer.fieldOfView = '45deg';
+                modelViewer.cameraTarget = '0m 0m 0m';
+            }
+        }
+
+        // 监听模型加载完成
+        if (modelViewer) {
+            modelViewer.addEventListener('load', () => {
+                console.log('3D Model loaded successfully');
+                
+                // 设置光照
+                modelViewer.exposure = '1.3';
+                modelViewer.shadowIntensity = '1.8';
+                modelViewer.shadowSoftness = '1.0';
+                
+                // 确保自动旋转开启
+                modelViewer.autoRotate = true;
+                
+                // 等待模型完全加载后居中
+                setTimeout(() => {
+                    if (modelViewer) {
+                        try {
+                            // 使用 fit 方法自动调整
+                            if (modelViewer.fit) {
+                                modelViewer.fit();
+                            }
+                            
+                            // 获取模型边界框并精确居中
+                            if (modelViewer.getBoundingBox) {
+                                const box = modelViewer.getBoundingBox();
+                                if (box) {
+                                    const center = box.getCenter();
+                                    const size = box.getSize();
+                                    
+                                    // 设置相机目标到模型中心
+                                    modelViewer.cameraTarget = `${center.x.toFixed(3)}m ${center.y.toFixed(3)}m ${center.z.toFixed(3)}m`;
+                                    
+                                    // 计算合适的相机距离
+                                    const maxDim = Math.max(size.x, size.y, size.z);
+                                    const distance = Math.max(150, Math.min(250, maxDim * 2.5));
+                                    
+                                    // 设置侧视图角度
+                                    modelViewer.cameraOrbit = `15deg 80deg ${distance}%`;
+                                    modelViewer.fieldOfView = '45deg';
+                                    
+                                    console.log('Model centered:', { center, size, distance });
+                                }
+                            }
+                        } catch (e) {
+                            console.error('Centering failed:', e);
+                            // 使用默认设置
+                            modelViewer.cameraOrbit = '15deg 80deg 200%';
+                            modelViewer.cameraTarget = '0m 0m 0m';
+                            modelViewer.fieldOfView = '45deg';
+                        }
+                    }
+                }, 1000);
+            });
+
+            modelViewer.addEventListener('error', (event) => {
+                console.error('Model loading error:', event);
+            });
+        }
+
     </script>
-    <script src="minimal-cursor.js"></script>
 </body>
-</html> 
+</html>

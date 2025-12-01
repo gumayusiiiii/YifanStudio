@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archive - Yifan Zhao</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style-technical.css">
+    <style>
+        body {
+            background: #0a0a0a;
+            overflow-x: hidden;
+        }
+
+        .content-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem var(--spacing);
+        }
+
+        /* 抽屉展柜区域 */
+        .cabinet-section {
+            max-width: 1100px;
+            margin: 4rem auto 6rem;
+        }
+
+        .cabinet-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 2rem;
+            gap: 1.5rem;
+        }
+
+        .cabinet-title {
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-main);
+        }
+
+        .cabinet-subtitle {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            opacity: 0.8;
+        }
+
+        .drawer-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.25rem 1.75rem;
+        }
+
+        .drawer {
+            position: relative;
+            border-radius: 10px;
+            background: radial-gradient(circle at 0% 0%, rgba(255,255,255,0.06) 0%, transparent 55%),
+                        linear-gradient(135deg, #141414, #070707);
+            box-shadow:
+                0 14px 40px rgba(0,0,0,0.8),
+                inset 0 1px 0 rgba(255,255,255,0.07),
+                inset 0 -2px 6px rgba(0,0,0,0.8);
+            border: 1px solid rgba(255,255,255,0.06);
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+        }
+
+        .drawer.open {
+            box-shadow:
+                0 20px 55px rgba(0,0,0,0.95),
+                inset 0 1px 0 rgba(255,255,255,0.09),
+                inset 0 -3px 10px rgba(0,0,0,0.9);
+            border-color: rgba(255,255,255,0.16);
+            transform: translateY(-3px);
+        }
+
+        .drawer-front {
+            width: 100%;
+            border: none;
+            background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.0));
+            padding: 1rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-family: var(--font-mono);
+            color: var(--text-main);
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .drawer-front-label {
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .drawer-front-label::before {
+            content: '';
+            width: 12px;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0));
+            opacity: 0.7;
+        }
+
+        .drawer-front-meta {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            opacity: 0.9;
+        }
+
+        .drawer-arrow {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            margin-left: 1rem;
+            transition: transform 0.25s ease, color 0.25s ease;
+        }
+
+        .drawer:hover .drawer-arrow {
+            color: var(--accent);
+        }
+
+        .drawer.open .drawer-arrow {
+            transform: rotate(90deg);
+            color: var(--accent);
+        }
+
+        .drawer-body {
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding: 0 1.25rem 0.75rem;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.32s ease, opacity 0.3s ease;
+        }
+
+        .drawer.open .drawer-body {
+            max-height: 260px;
+            opacity: 1;
+        }
+
+        .drawer-items {
+            padding-top: 0.6rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+        }
+
+        .drawer-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            padding: 0.45rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .drawer-item:last-child {
+            border-bottom: none;
+        }
+
+        .drawer-item-title {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            color: var(--text-main);
+        }
+
+        .drawer-item-meta {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-dim);
+        }
+
+        .drawer-item-note {
+            font-family: var(--font-sans);
+            font-size: 0.72rem;
+            color: var(--text-dim);
+            opacity: 0.85;
+        }
+
+        @media (max-width: 900px) {
+            .cabinet-section {
+                margin-top: 3rem;
+            }
+
+            .drawer-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+        }
+    </style>
+</head>
+<body>
+
+    <div class="system-grid"></div>
+
+    <!-- 顶部导航 HUD -->
+    <header class="tech-header">
+        <a href="index.html" class="brand">
+            <h1>YIFAN ZHAO</h1>
+            <span>// PERSONAL_ARCHIVE</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">INDEX</a>
+            <a href="about.html" class="nav-link">ABOUT</a>
+            <a href="archive.html" class="nav-link active">ARCHIVE</a>
+        </div>
+    </header>
+
+    <div class="content-wrapper">
+
+        <!-- 抽屉展柜区域 -->
+        <section class="cabinet-section">
+            <div class="cabinet-section-header">
+                <div class="cabinet-title">INTEREST_CABINET</div>
+                <div class="cabinet-subtitle">
+                    Selected music, films and obsessions arranged like a physical drawer system.
+                </div>
+            </div>
+
+            <div class="drawer-grid">
+                <!-- 音乐抽屉 -->
+                <div class="drawer" data-drawer="music">
+                    <button class="drawer-front" type="button">
+                        <div class="drawer-front-label">MUSIC_SHELF</div>
+                        <div class="drawer-front-meta">
+                            albums / tracks<span class="drawer-arrow">⟶</span>
+                        </div>
+                    </button>
+                    <div class="drawer-body">
+                        <div class="drawer-items">
+                            <div class="drawer-item">
+                                <div class="drawer-item-title">Album Title – Artist Name</div>
+                                <div class="drawer-item-meta">YEAR · COUNTRY · MOOD_TAG</div>
+                                <div class="drawer-item-note">Short note about why this stays on repeat.</div>
+                            </div>
+                            <div class="drawer-item">
+                                <div class="drawer-item-title">Another Album – Another Artist</div>
+                                <div class="drawer-item-meta">YEAR · GENRE</div>
+                                <div class="drawer-item-note">You can replace all sample entries with your own picks.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 电影抽屉 -->
+                <div class="drawer" data-drawer="films">
+                    <button class="drawer-front" type="button">
+                        <div class="drawer-front-label">FILM_ARCHIVE</div>
+                        <div class="drawer-front-meta">
+                            directors / frames<span class="drawer-arrow">⟶</span>
+                        </div>
+                    </button>
+                    <div class="drawer-body">
+                        <div class="drawer-items">
+                            <div class="drawer-item">
+                                <div class="drawer-item-title">Film Title – Director</div>
+                                <div class="drawer-item-meta">YEAR · REGION · FORMAT</div>
+                                <div class="drawer-item-note">One line on what you are learning or stealing from this film.</div>
+                            </div>
+                            <div class="drawer-item">
+                                <div class="drawer-item-title">Another Film – Director</div>
+                                <div class="drawer-item-meta">YEAR · GENRE</div>
+                                <div class="drawer-item-note">Maybe note a specific scene, cut or lighting moment.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 阅读 / 视觉抽屉 -->
+                <div class="drawer" data-drawer="reading">
+                    <button class="drawer-front" type="button">
+                        <div class="drawer-front-label">READING_STACK</div>
+                        <div class="drawer-front-meta">
+                            books / essays<span class="drawer-arrow">⟶</span>
+                        </div>
+                    </button>
+                    <div class="drawer-body">
+                        <div class="drawer-items">
+                            <div class="drawer-item">
+                                <div class="drawer-item-title">Book or Essay Title – Author</div>
+                                <div class="drawer-item-meta">TOPIC · YEAR</div>
+                                <div class="drawer-item-note">What this changed in the way you see objects, spaces or stories.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 杂项兴趣抽屉 -->
+                <div class="drawer" data-drawer="others">
+                    <button class="drawer-front" type="button">
+                        <div class="drawer-front-label">ODD_OBSESSIONS</div>
+                        <div class="drawer-front-meta">
+                            systems / textures<span class="drawer-arrow">⟶</span>
+                        </div>
+                    </button>
+                    <div class="drawer-body">
+                        <div class="drawer-items">
+                            <div class="drawer-item">
+                                <div class="drawer-item-title">Small fixation or side project</div>
+                                <div class="drawer-item-meta">SOFTWARE · MATERIAL · TOOL</div>
+                                <div class="drawer-item-note">A place for game mechanics, UI patterns, objects, or anything else.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        </div>
+
+    <footer class="tech-footer">
+        <div>© 2025 YIFAN ZHAO</div>
+        <div>
+            <a href="mailto:yzhao09@risd.edu">CONTACT_VIA_EMAIL</a>
+        </div>
+    </footer>
+
+    <script>
+        // 抽屉交互：点击抽屉面板开合
+        const drawers = document.querySelectorAll('.drawer');
+
+        drawers.forEach((drawer) => {
+            const front = drawer.querySelector('.drawer-front');
+
+            front.addEventListener('click', () => {
+                const isOpen = drawer.classList.contains('open');
+
+                // 收起所有抽屉
+                drawers.forEach(d => d.classList.remove('open'));
+
+                // 切换当前抽屉
+                if (!isOpen) {
+                    drawer.classList.add('open');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

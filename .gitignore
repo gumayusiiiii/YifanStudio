@@ -1,0 +1,30 @@
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 临时文件和备份
+*.bak
+*-backup.html
+*-test.html
+test-*.html
+dummy
+，.txt
+
+# 开发工具脚本（可选，如果不需要上传）
+# start-server.bat
+# start-server.ps1
+
+# 个人文件（如果不想上传）
+# resume.pdf
+
+# 日志文件
+*.log
+
