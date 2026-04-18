@@ -31,6 +31,27 @@
             justify-content: center;
             box-shadow: 0 0 40px rgba(0,0,0,0.85);
             overflow-y: auto;
+            scrollbar-width: thin; /* Firefox */
+            scrollbar-color: rgba(255,255,255,0.28) rgba(255,255,255,0.06);
+        }
+
+        /* Scrollbar styling (WebKit/Blink) */
+        .hero-cover::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .hero-cover::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.06);
+        }
+
+        .hero-cover::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.22);
+            border-radius: 999px;
+            border: 2px solid rgba(0,0,0,0.65); /* creates inset + keeps it subtle */
+        }
+
+        .hero-cover::-webkit-scrollbar-thumb:hover {
+            background: rgba(255,255,255,0.32);
         }
         .hero-scroll-stack {
             display: flex;
@@ -140,10 +161,116 @@
             opacity: 0.9;
             white-space: nowrap;
         }
+
+        /* Launch panel */
+        .launch-panel {
+            margin-top: 1.25rem;
+            margin-bottom: 0.9rem;
+            border: 1px solid var(--line-color);
+            background: rgba(255,255,255,0.01);
+            padding: 1.25rem 1.25rem 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .launch-panel .launch-left {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            min-width: 0;
+        }
+        .launch-kicker {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.18em;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+        .launch-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+        .launch-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-shrink: 0;
+        }
+        .launch-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 0.85rem 1rem;
+            border: 1px solid var(--line-color);
+            color: var(--text-main);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            background: rgba(255,255,255,0.02);
+            transition: background 0.2s ease, border-color 0.2s ease;
+            white-space: nowrap;
+        }
+        .launch-btn:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(255,255,255,0.25);
+        }
+
+        /* Online indicator (breathing green) */
+        .online-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: #00ff66;
+            box-shadow: 0 0 10px rgba(0,255,102,0.55);
+            animation: breathe 1.8s ease-in-out infinite;
+            flex: 0 0 auto;
+        }
+
+        @keyframes breathe {
+            0%, 100% {
+                transform: scale(0.92);
+                opacity: 0.55;
+                box-shadow: 0 0 8px rgba(0,255,102,0.35);
+            }
+            50% {
+                transform: scale(1.18);
+                opacity: 1;
+                box-shadow: 0 0 14px rgba(0,255,102,0.75);
+            }
+        }
+        .launch-url {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.12em;
+            color: #6a6a6a;
+            user-select: all;
+            white-space: nowrap;
+        }
         @media (max-width: 900px) {
             .dnd-overview-row {
                 flex-direction: column;
                 gap: 1.5rem;
+            }
+            .launch-panel {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .launch-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+            .launch-url {
+                white-space: normal;
+                word-break: break-all;
             }
         }
         .dnd-world-grid {
@@ -159,39 +286,9 @@
             border: 1px solid var(--line-color);
             background: #050505;
         }
-        .dnd-flow-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-        .dnd-flow-card {
-            border: 1px solid var(--line-color);
-            padding: 1rem;
-            background: rgba(255,255,255,0.01);
-        }
-        .dnd-flow-card img {
-            width: 100%;
-            aspect-ratio: 4 / 3;
-            object-fit: contain;
-            background: #000;
-            margin-bottom: 0.75rem;
-        }
-        .dnd-flow-card h3 {
-            font-size: 0.9rem;
-            letter-spacing: 0.18em;
-            margin-bottom: 0.4rem;
-            color: var(--text-main);
-            text-transform: uppercase;
-        }
-        .dnd-flow-card p {
-            font-size: 0.9rem;
-            color: var(--text-dim);
-            line-height: 1.7;
-        }
         @media (max-width: 900px) {
             .dnd-world-grid,
-            .dnd-flow-grid {
+            .dnd-world-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -207,24 +304,38 @@
             <span>// PROJECT_FILE</span>
         </a>
         <div class="nav-links">
-            <a href="index.html" class="nav-link">INDEX</a>
-            <a href="about.html" class="nav-link">ABOUT</a>
-            <a href="archive.html" class="nav-link">ARCHIVE</a>
+            <a href="index.html" class="nav-link" data-i18n="nav.index">INDEX</a>
+            <a href="about.html" class="nav-link" data-i18n="nav.about">ABOUT</a>
+            <a href="archive.html" class="nav-link" data-i18n="nav.archive">ARCHIVE</a>
         </div>
     </header>
 
     <div class="content-wrapper">
 
+        <!-- Launch the interactive Flask app (local) -->
+        <div class="launch-panel">
+            <div class="launch-left">
+                <div class="launch-kicker" data-i18n="dnd.launch_kicker">INTERACTIVE_BUILD</div>
+                <div class="launch-title" data-i18n="dnd.launch_title">Launch YourDND</div>
+            </div>
+            <div class="launch-actions">
+                <a class="launch-btn" href="http://127.0.0.1:8080/" target="_blank" rel="noreferrer">
+                    <span class="online-dot" aria-hidden="true"></span>
+                    OPEN_APP
+                </a>
+                <div class="launch-url">127.0.0.1:8080</div>
+            </div>
+        </div>
+
         <!-- Hero -->
         <div class="hero-image">
             <div class="hero-cover">
                 <div class="hero-scroll-stack">
-                    <img src="DND/Cover.png" alt="AI-driven DND text adventure cover">
-                    <img src="DND/hero1.png" alt="Dungeon overview sketch 1">
-                    <img src="DND/hero2.png" alt="Dungeon overview sketch 2">
-                    <img src="DND/hero3.png" alt="Dungeon overview sketch 3">
-                    <img src="DND/DH1.png" alt="DND character illustration 1">
-                    <img src="DND/DH2.png" alt="DND character illustration 2">
+                    <img src="DND/1.png?v=20260406" alt="YourDND showcase 1">
+                    <img src="DND/2.png?v=20260406" alt="YourDND showcase 2">
+                    <img src="DND/3.png?v=20260406" alt="YourDND showcase 3">
+                    <img src="DND/4.png?v=20260406-0505" alt="YourDND showcase 4">
+                    <img src="DND/5.png?v=20260406-0506" alt="YourDND showcase 5">
                 </div>
             </div>
             <div class="hero-overlay">
@@ -261,20 +372,20 @@
 
         <!-- System Overview -->
         <div class="section-header">
-            <h2>SYSTEM_OVERVIEW</h2>
-            <p>
+            <h2 data-i18n="dnd.sys_h">SYSTEM_OVERVIEW</h2>
+            <p data-i18n="dnd.sys_p">
                 An AI-driven Dungeon Master that combines stable world lore, encounter logic, and a constrained
                 narrative voice—aiming to feel authored and intentional rather than random chatbot output.
             </p>
         </div>
         <div class="dnd-overview-row">
             <div class="dnd-text-block">
-                <p>
+                <p data-i18n-html="dnd.text_p1">
                     The engine organizes a campaign into three layers: <strong>world lore</strong> (locations, factions, rules),
                     <strong>session memory</strong> (party choices, relationships, unresolved hooks), and a <strong>scene manager</strong>
                     that decides what kind of beat the player should experience next.
                 </p>
-                <p>
+                <p data-i18n="dnd.text_p2">
                     Instead of letting the model improvise everything, each response is grounded in retrieved notes and
                     encounter templates—keeping tone consistent while still allowing for surprise.
                 </p>
@@ -283,57 +394,19 @@
 
         <!-- World Building -->
         <div class="section-header">
-            <h2>WORLD_BUILDING</h2>
-            <p>
+            <p data-i18n="dnd.world_p">
                 Key locations and factions were first visualized as analog-style dungeon notes before being encoded
                 into the AI system as structured lore.
             </p>
         </div>
 
-        <!-- Dungeon Flow -->
-        <div class="section-header">
-            <h2>DUNGEON_FLOW</h2>
-        </div>
-        <div class="dnd-flow-grid">
-            <div class="dnd-flow-card">
-                <img src="DND/rw1.png" alt="DND flow sketch 1">
-                <h3>ENTRY_STATE</h3>
-                <p>Establishes tone, party stakes, and initial affordances without overwhelming the player.</p>
-            </div>
-            <div class="dnd-flow-card">
-                <img src="DND/rw2.png" alt="DND flow sketch 2">
-                <h3>BRANCHED_PATHS</h3>
-                <p>Multiple viable routes encoded as soft rails—players can backtrack or jump tracks.</p>
-            </div>
-            <div class="dnd-flow-card">
-                <img src="DND/rw3.png" alt="DND flow sketch 3">
-                <h3>ESCALATION</h3>
-                <p>Risk and stakes climb over time, but failure routes are written as content, not dead-ends.</p>
-            </div>
-            <div class="dnd-flow-card">
-                <img src="DND/rw4.png" alt="DND flow sketch 4">
-                <h3>NPC_MEMORY</h3>
-                <p>Key characters track prior interactions so the AI can respond consistently in later scenes.</p>
-            </div>
-            <div class="dnd-flow-card">
-                <img src="DND/rw5.png" alt="DND flow sketch 5">
-                <h3>LOOPING_NODES</h3>
-                <p>Certain hubs can be revisited with different outcomes as the party’s state evolves.</p>
-            </div>
-            <div class="dnd-flow-card">
-                <img src="DND/rw6.png" alt="DND flow sketch 6">
-                <h3>FINAL_BEAT</h3>
-                <p>Closes the dungeon while leaving narrative threads the engine can pick up in future arcs.</p>
-            </div>
-        </div>
-
     </div>
 
     <footer class="tech-footer">
-        <a href="index.html">RETURN TO ARCHIVE</a>
-        <div>© 2025 YIFAN ZHAO</div>
+        <a href="index.html" data-i18n="footer.return">RETURN TO ARCHIVE</a>
+        <div data-i18n="footer.copyright">© 2025 YIFAN ZHAO</div>
     </footer>
-
+    <script src="i18n.js"></script>
 </body>
 </html>
 

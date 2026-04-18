@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-i18n-title="gallery.title">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,8 +15,8 @@
         <div class="nav-content">
             <h1 class="nav-name">YifanStudio</h1>
             <div class="nav-links">
-                <a href="gallery.html" class="nav-link-transition nav-link active">GALLERY</a>
-                <a href="about.html" class="nav-link-transition nav-link">ABOUT</a>
+                <a href="gallery.html" class="nav-link-transition nav-link active" data-i18n="nav.gallery">GALLERY</a>
+                <a href="about.html" class="nav-link-transition nav-link" data-i18n="nav.about">ABOUT</a>
             </div>
         </div>
     </nav>
@@ -55,11 +55,11 @@
         <a href="index.html" class="view-all-link">
             <div class="view-all-content">
                 <div class="view-all-main">
-                    <h3>Explore Complete Portfolio</h3>
-                    <p>Browse all projects in a comprehensive archive view with detailed categorization and search functionality.</p>
+                    <h3 data-i18n="gallery.explore_h">Explore Complete Portfolio</h3>
+                    <p data-i18n="gallery.explore_p">Browse all projects in a comprehensive archive view with detailed categorization and search functionality.</p>
                 </div>
                 <div class="view-all-indicator">
-                    <span class="indicator-text">View All Works</span>
+                    <span class="indicator-text" data-i18n="gallery.view_all">View All Works</span>
                     <span class="indicator-arrow">→</span>
                 </div>
             </div>
@@ -81,6 +81,7 @@
     <!-- JavaScript -->
     <script src="projects-data.js"></script>
     <script src="script.js"></script>
+    <script src="i18n.js"></script>
     <script src="cleanest-transitions.js"></script>
     <script src="minimal-cursor.js"></script>
 </body>

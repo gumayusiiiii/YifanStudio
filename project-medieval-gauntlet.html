@@ -77,24 +77,19 @@
         .material-name { font-family: var(--font-mono); color: var(--accent); margin-bottom: 0.5rem; }
         .material-desc { font-size: 0.8rem; color: var(--text-dim); }
 
-        /* 小 3D 模型窗口 */
-        .material-header-with-model {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
+        /* 3D 模型 — 全宽、中等展示高度 */
+        .gauntlet-model-stage {
             margin-bottom: 2rem;
         }
 
         .mini-model-container {
-            width: 300px;
-            height: 225px;
-            min-width: 300px;
+            width: 100%;
+            height: clamp(200px, 30vh, 320px);
+            min-height: 200px;
             position: relative;
             background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             overflow: hidden;
-            flex-shrink: 0;
         }
 
         .mini-model-container model-viewer {
@@ -106,14 +101,9 @@
         }
 
         @media (max-width: 768px) {
-            .material-header-with-model {
-                flex-direction: column;
-                align-items: flex-start;
-            }
             .mini-model-container {
-                width: 100%;
-                max-width: 400px;
-                height: 300px;
+                height: clamp(180px, 28vh, 280px);
+                min-height: 170px;
             }
         }
 
@@ -252,8 +242,8 @@
             <span>// PROJECT_FILE_002</span>
         </a>
         <div class="nav-links">
-            <a href="index.html" class="nav-link">INDEX</a>
-            <a href="project-medieval-gauntlet.html" class="nav-link active">PROJECT</a>
+            <a href="index.html" class="nav-link" data-i18n="nav.index">INDEX</a>
+            <a href="project-medieval-gauntlet.html" class="nav-link active" data-i18n="nav.project">PROJECT</a>
         </div>
     </header>
 
@@ -284,8 +274,8 @@
         
         <!-- 项目标题区 -->
         <div style="margin-bottom: 4rem; border-bottom: 1px solid var(--line-color); padding-bottom: 2rem;">
-            <h1 style="font-size: 5rem; margin-bottom: 0.5rem; letter-spacing: -2px;">MEDIEVAL GAUNTLET</h1>
-            <div style="font-family: var(--font-mono); color: var(--text-dim); font-size: 1.2rem;">
+            <h1 style="font-size: 5rem; margin-bottom: 0.5rem; letter-spacing: -2px;" data-i18n="gauntlet.title">MEDIEVAL GAUNTLET</h1>
+            <div style="font-family: var(--font-mono); color: var(--text-dim); font-size: 1.2rem;" data-i18n="gauntlet.subtitle">
                 // Handcrafted Wearable Armor / Metalwork / Mechanical Design
             </div>
         </div>
@@ -293,17 +283,19 @@
         <!-- 1. 概述 -->
         <div class="content-grid">
             <div>
-                <h2>CRAFT_PHILOSOPHY</h2>
-                <p>This project is an exploration of historical craftsmanship through modern making. By hand-forging each plate, I sought to understand the ergonomic challenges faced by medieval armorers.</p>
-                <p>The goal was not just visual replication, but functional authenticity—ensuring full range of motion while maintaining protective coverage.</p>
+                <h2 data-i18n="gauntlet.craft_h">CRAFT_PHILOSOPHY</h2>
+                <p data-i18n="gauntlet.craft_p1">This project is an exploration of historical craftsmanship through modern making. By hand-forging each plate, I sought to understand the ergonomic challenges faced by medieval armorers.</p>
+                <p data-i18n="gauntlet.craft_p2">The goal was not just visual replication, but functional authenticity—ensuring full range of motion while maintaining protective coverage.</p>
             </div>
             <div>
-                <div class="material-header-with-model">
-                    <h2 style="margin: 0;">MATERIAL_MATRIX</h2>
+                <div class="gauntlet-model-stage">
                     <div class="mini-model-container">
                         <model-viewer 
                             id="mini-gauntlet-model"
                             alt="Medieval Gauntlet 3D Model"
+                            camera-orbit="45deg 72deg auto"
+                            min-camera-orbit="auto 52deg auto"
+                            max-camera-orbit="auto 88deg auto"
                             camera-controls
                             auto-rotate
                             auto-rotate-delay="1000"
@@ -320,19 +312,19 @@
                 <div class="material-grid">
                     <div class="material-item">
                         <span class="material-name">IRON</span>
-                        <span class="material-desc">Primary structure for impact resistance</span>
+                        <span class="material-desc" data-i18n="gauntlet.mat_iron">Primary structure for impact resistance</span>
                     </div>
                     <div class="material-item">
                         <span class="material-name">ALUMINUM</span>
-                        <span class="material-desc">Weight reduction in non-critical areas</span>
+                        <span class="material-desc" data-i18n="gauntlet.mat_alum">Weight reduction in non-critical areas</span>
                     </div>
                     <div class="material-item">
                         <span class="material-name">LEATHER</span>
-                        <span class="material-desc">Inner glove foundation & flexibility</span>
+                        <span class="material-desc" data-i18n="gauntlet.mat_leath">Inner glove foundation & flexibility</span>
                     </div>
                     <div class="material-item">
                         <span class="material-name">RIVETS</span>
-                        <span class="material-desc">Articulated joint connections</span>
+                        <span class="material-desc" data-i18n="gauntlet.mat_rivet">Articulated joint connections</span>
                     </div>
                 </div>
             </div>
@@ -340,7 +332,7 @@
 
         <!-- Hero Images Gallery -->
         <div class="hero-gallery">
-            <h2>PRODUCT_GALLERY</h2>
+            <h2 data-i18n="gauntlet.gallery_h">PRODUCT_GALLERY</h2>
             
             <!-- 主图片 -->
             <div class="hero-gallery-main">
@@ -369,15 +361,15 @@
         <a href="project-modular-sneakers.html" style="display: flex; align-items: center; gap: 1rem;">
             <span style="font-size: 2rem;">←</span>
             <div>
-                <div style="font-size: 0.7rem; color: var(--text-dim);">PREVIOUS PROJECT</div>
-                <div>MODULAR SNEAKERS</div>
+                <div style="font-size: 0.7rem; color: var(--text-dim);" data-i18n="gauntlet.prev">PREVIOUS PROJECT</div>
+                <div data-i18n="proj.sneakers">MODULAR SNEAKERS</div>
             </div>
         </a>
         
         <a href="project-mechanism.html" style="display: flex; align-items: center; gap: 1rem;">
             <div>
-                <div style="font-size: 0.7rem; color: var(--text-dim); text-align: right;">NEXT PROJECT</div>
-                <div>MECHANISM STUDY</div>
+                <div style="font-size: 0.7rem; color: var(--text-dim); text-align: right;" data-i18n="gauntlet.next">NEXT PROJECT</div>
+                <div data-i18n="proj.mechanism">MECHANISM STUDY</div>
             </div>
             <span style="font-size: 2rem;">→</span>
         </a>
@@ -398,7 +390,7 @@
         // 小 3D 模型加载
         const miniModelViewer = document.getElementById('mini-gauntlet-model');
         if (miniModelViewer) {
-            miniModelViewer.src = 'Gauntlet/GT/2025_11_30.glb';
+            miniModelViewer.src = 'Gauntlet/GutM.glb';
             
             miniModelViewer.addEventListener('load', () => {
                 console.log('Mini 3D Model loaded successfully');
@@ -413,5 +405,6 @@
             });
         }
     </script>
+    <script src="i18n.js"></script>
 </body>
 </html>

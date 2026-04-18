@@ -40,9 +40,15 @@ start-server.bat
 
 Then visit: `http://localhost:8000`
 
-## Deployment
+## Deployment (GitHub Pages)
 
-This site is deployed on GitHub Pages. The repository is configured to automatically deploy from the `main` branch.
+- **Repository:** [gumayusiiiii/YifanStudio](https://github.com/gumayusiiiii/YifanStudio)
+- **Live site:** after Pages is enabled, the homepage is the portfolio grid at **`index.html`** →  
+  `https://gumayusiiiii.github.io/YifanStudio/`
+- Push to **`master`** (or **`main`**): GitHub Actions workflow `.github/workflows/deploy-github-pages.yml` deploys the repo root as static hosting.
+- In the repo: **Settings → Pages → Build and deployment → Source:** select **GitHub Actions** (not “Deploy from branch”) if you use the workflow above.
+
+See `GITHUB_DEPLOYMENT.md` for step-by-step setup in Chinese.
 
 ## Technologies
 
@@ -50,4 +56,5 @@ This site is deployed on GitHub Pages. The repository is configured to automatic
 - Vanilla JavaScript
 - Model Viewer (for 3D models)
 - Lightbox.js (for image galleries)
+
 

@@ -28,3 +28,12 @@ dummy
 # 日志文件
 *.log
 
+# 子项目缓存 / 本地 Python 库（勿提交，减小仓库与 Pages 体积）
+DND/Guma-master/.cache/
+DND/Guma-master/.pythonlibs/
+DND/Guma-master/**/__pycache__/
+**/.cache/pip/
+*.sqlite
+*.sqlite-journal
+
+

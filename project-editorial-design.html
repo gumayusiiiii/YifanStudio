@@ -258,9 +258,9 @@
             <span>// PROJECT_FILE</span>
         </a>
         <div class="nav-links">
-            <a href="index.html" class="nav-link">INDEX</a>
-            <a href="about.html" class="nav-link">ABOUT</a>
-            <a href="archive.html" class="nav-link">ARCHIVE</a>
+            <a href="index.html" class="nav-link" data-i18n="nav.index">INDEX</a>
+            <a href="about.html" class="nav-link" data-i18n="nav.about">ABOUT</a>
+            <a href="archive.html" class="nav-link" data-i18n="nav.archive">ARCHIVE</a>
         </div>
     </header>
 
@@ -280,8 +280,8 @@
                 </div>
             </div>
             <div class="hero-summary">
-                <h1>SHARED HEATER</h1>
-                <p>From the earliest campfires, warmth and human connection have been inseparable. However, modern heaters are often directional and isolating.</p>
+                <h1 data-i18n="heater.title">SHARED HEATER</h1>
+                <p data-i18n="heater.desc">From the earliest campfires, warmth and human connection have been inseparable. However, modern heaters are often directional and isolating.</p>
                 <div class="hero-meta-list">
                     <div><span>CATEGORY</span><strong>SOCIAL INNOVATION</strong></div>
                     <div><span>DATE</span><strong>2024.01</strong></div>
@@ -299,8 +299,8 @@
         <!-- 1. 核心理念 + 3D 模型 -->
         <div class="narrative-block" style="margin-top: 0;">
             <div>
-                <h2>DESIGN_INSIGHT</h2>
-                <p><b>Shared Heater</b> re-engineers the conventional heating experience into a 360-degree social centerpiece—safe, electric, and inviting. It draws people into a comfortable radius, encouraging spontaneous conversation.</p>
+                <h2 data-i18n="heater.insight_h">DESIGN_INSIGHT</h2>
+                <p data-i18n-html="heater.insight_p"><b>Shared Heater</b> re-engineers the conventional heating experience into a 360-degree social centerpiece—safe, electric, and inviting. It draws people into a comfortable radius, encouraging spontaneous conversation.</p>
             </div>
             <div>
                 <div class="heater-model-frame">
@@ -333,8 +333,8 @@
         <!-- Form Exploration & Final Product Image Block -->
         <div style="margin: 4rem 0 6rem;">
             <div class="section-header" style="margin-top: 0;">
-                <h2>FORM_EXPLORATION</h2>
-                <p>The radial fin layout projects heat in every direction, turning the device into a social focal point—much like a modern campfire.</p>
+                <h2 data-i18n="heater.form_h">FORM_EXPLORATION</h2>
+                <p data-i18n="heater.form_p">The radial fin layout projects heat in every direction, turning the device into a social focal point—much like a modern campfire.</p>
             </div>
             <div class="scenario-grid">
                 <div class="scenario-item">
@@ -352,8 +352,8 @@
             </div>
 
             <div class="section-header" style="margin-top: 4rem;">
-                <h2>FINAL_PRODUCT</h2>
-                <p>The final design offers a cleaner, safer, and more portable alternative to traditional fire pits—rekindling the timeless ritual of gathering around shared warmth.</p>
+                <h2 data-i18n="heater.final_h">FINAL_PRODUCT</h2>
+                <p data-i18n="heater.final_p">The final design offers a cleaner, safer, and more portable alternative to traditional fire pits—rekindling the timeless ritual of gathering around shared warmth.</p>
             </div>
             <div class="dual-gallery">
                 <div class="dual-gallery-block">
@@ -413,15 +413,15 @@
         <a href="project-hull-model.html" style="display: flex; align-items: center; gap: 1rem;">
             <span style="font-size: 2rem;">←</span>
             <div>
-                <div style="font-size: 0.7rem; color: var(--text-dim);">PREVIOUS PROJECT</div>
-                <div>HULL MODEL</div>
+                <div style="font-size: 0.7rem; color: var(--text-dim);" data-i18n="gauntlet.prev">PREVIOUS PROJECT</div>
+                <div data-i18n="proj.hull">HULL MODEL</div>
             </div>
         </a>
         
         <a href="project-wend1.html" style="display: flex; align-items: center; gap: 1rem;">
             <div>
-                <div style="font-size: 0.7rem; color: var(--text-dim); text-align: right;">NEXT PROJECT</div>
-                <div>1 WEND1</div>
+                <div style="font-size: 0.7rem; color: var(--text-dim); text-align: right;" data-i18n="gauntlet.next">NEXT PROJECT</div>
+                <div data-i18n="proj.wend1">1 WEND1</div>
             </div>
             <span style="font-size: 2rem;">→</span>
         </a>
@@ -584,5 +584,6 @@
             }
         }
     </script>
+    <script src="i18n.js"></script>
 </body>
 </html>

@@ -364,8 +364,8 @@
             <span>// PROJECT_FILE_001</span>
         </a>
         <div class="nav-links">
-            <a href="index.html" class="nav-link">INDEX</a>
-            <a href="project-modular-sneakers.html" class="nav-link active">PROJECT</a>
+            <a href="index.html" class="nav-link" data-i18n="nav.index">INDEX</a>
+            <a href="project-modular-sneakers.html" class="nav-link active" data-i18n="nav.project">PROJECT</a>
         </div>
     </header>
 
@@ -386,16 +386,16 @@
         
         <!-- 项目标题区 -->
         <div style="margin-bottom: 4rem; border-bottom: 1px solid var(--line-color); padding-bottom: 2rem;">
-            <h1 style="font-size: 5rem; margin-bottom: 0.5rem; letter-spacing: -2px;">MODULAR SHOES</h1>
-            <div style="font-family: var(--font-mono); color: var(--text-dim); font-size: 1.2rem;">
+            <h1 style="font-size: 5rem; margin-bottom: 0.5rem; letter-spacing: -2px;" data-i18n="sneakers.title">MODULAR SHOES</h1>
+            <div style="font-family: var(--font-mono); color: var(--text-dim); font-size: 1.2rem;" data-i18n="sneakers.subtitle">
                 // Multiverse of the "Modern Sneaker System"
             </div>
         </div>
 
         <div class="content-grid" style="margin-bottom: 6rem;">
             <div>
-                <h2>SYSTEM_OVERVIEW</h2>
-                <p>Our modular sneaker is designed with adaptability at its core—a transformative footwear system engineered to meet the evolving demands of multi-sport athletes and urban explorers.</p>
+                <h2 data-i18n="sneakers.sys_h">SYSTEM_OVERVIEW</h2>
+                <p data-i18n="sneakers.sys_p">Our modular sneaker is designed with adaptability at its core—a transformative footwear system engineered to meet the evolving demands of multi-sport athletes and urban explorers.</p>
             </div>
             <div>
                 <h2>TECHNICAL_SPECS</h2>
@@ -459,9 +459,9 @@
 
         <!-- User Experience Section -->
         <div class="content-wrapper" style="margin-top: 4rem;">
-            <h2>USER_EXPERIENCE</h2>
+            <h2 data-i18n="sneakers.ux_h">USER_EXPERIENCE</h2>
             <div style="max-width: 900px; margin: 0 auto;">
-                <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-main); margin-bottom: 3rem;">
+                <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-main); margin-bottom: 3rem;" data-i18n="sneakers.ux_p">
                     With a single base chassis and a library of attachable modules, users can curate their shoe based on their schedule. Morning run? Slide in the high-resilience midsole. Midday basketball? Swap in court-optimized traction pads. Evening city walk? Pop on the lifestyle shell. This adaptability means you no longer need multiple shoes for multiple purposes—just one intelligent system.
                 </p>
             </div>
@@ -711,8 +711,8 @@
     </div>
 
     <footer class="tech-footer">
-        <a href="index.html">RETURN TO ARCHIVE</a>
-        <div>© 2025 YIFAN ZHAO</div>
+        <a href="index.html" data-i18n="footer.return">RETURN TO ARCHIVE</a>
+        <div data-i18n="footer.copyright">© 2025 YIFAN ZHAO</div>
     </footer>
 
     <script src="lightbox.js"></script>
@@ -1095,5 +1095,6 @@
         }
 
     </script>
+    <script src="i18n.js"></script>
 </body>
 </html>

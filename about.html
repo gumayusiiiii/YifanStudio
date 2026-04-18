@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-i18n-title="about.title">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,12 +47,12 @@
     <!-- 顶部导航 HUD -->
     <header class="tech-header">
         <a href="index.html" class="brand">
-            <h1>YIFAN ZHAO</h1>
-            <span>// PERSONNEL_FILE</span>
+            <h1 data-i18n="nav.name">YIFAN ZHAO</h1>
+            <span data-i18n="about.personnel">// PERSONNEL_FILE</span>
         </a>
         <div class="nav-links">
-            <a href="index.html" class="nav-link">INDEX</a>
-            <a href="about.html" class="nav-link active">ABOUT</a>
+            <a href="index.html" class="nav-link" data-i18n="nav.index">INDEX</a>
+            <a href="about.html" class="nav-link active" data-i18n="nav.about">ABOUT</a>
         </div>
     </header>
 
@@ -74,13 +74,13 @@
                         <span>ID:</span> <span style="color: var(--accent);">YZ-001</span>
                     </div>
                     <div style="border-bottom: 1px solid var(--line-color); padding: 0.5rem 0; display: flex; justify-content: space-between;">
-                        <span>ROLE:</span> <span style="color: var(--accent);">INDUSTRIAL DESIGNER / FILM MAKER</span>
+                        <span>ROLE:</span> <span style="color: var(--accent);" data-i18n="about.role">INDUSTRIAL DESIGNER / FILM MAKER</span>
                     </div>
                     <div style="border-bottom: 1px solid var(--line-color); padding: 0.5rem 0; display: flex; justify-content: space-between;">
-                        <span>LOC:</span> <span style="color: var(--accent);">PROVIDENCE, RI</span>
+                        <span>LOC:</span> <span style="color: var(--accent);" data-i18n="about.loc">PROVIDENCE, RI</span>
                     </div>
                     <div style="padding: 0.5rem 0; display: flex; justify-content: space-between;">
-                        <span>STATUS:</span> <span style="color: #0f0;">ACTIVE</span>
+                        <span>STATUS:</span> <span style="color: #0f0;" data-i18n="about.status">ACTIVE</span>
                     </div>
                     <div style="padding: 0.5rem 0; display: flex; justify-content: space-between;">
                         <span>EMAIL:</span> <span style="color: var(--accent);">yzhao09@risd.edu</span>
@@ -88,7 +88,7 @@
                 </div>
 
                 <div style="margin-top: 2rem;">
-                    <a href="resume.pdf" download style="display: block; text-align: center; border: 1px solid var(--line-color); padding: 1rem; color: var(--text-main); font-size: 0.8rem; transition: all 0.2s;">
+                    <a href="resume.pdf" download style="display: block; text-align: center; border: 1px solid var(--line-color); padding: 1rem; color: var(--text-main); font-size: 0.8rem; transition: all 0.2s;" data-i18n="about.resume">
                         [ DOWNLOAD_RESUME ]
                     </a>
                 </div>
@@ -99,17 +99,17 @@
                 <h1 style="font-size: 4rem; margin-bottom: 2rem;">YIFAN ZHAO<br>赵一凡</h1>
                 
                 <div style="font-size: 1.2rem; line-height: 1.8; color: var(--text-main); border-left: 2px solid var(--accent); padding-left: 2rem; margin-bottom: 4rem;">
-                    <p>I approach challenges from multiple angles and excel at sparking innovative breakthroughs at the start of projects.</p>
-                    <p>With a background spanning <strong>Industrial Design</strong>, <strong>Film/Video</strong>, and <strong>Programming</strong>, I build systems that bridge the physical and digital worlds.</p>
+                    <p data-i18n="about.bio1">I approach challenges from multiple angles and excel at sparking innovative breakthroughs at the start of projects.</p>
+                    <p data-i18n-html="about.bio2">With a background spanning <strong>Industrial Design</strong>, <strong>Film/Video</strong>, and <strong>Programming</strong>, I build systems that bridge the physical and digital worlds.</p>
                 </div>
 
                 <!-- 技能矩阵 -->
-                <h2>SKILL_MATRIX</h2>
+                <h2 data-i18n="about.skill_matrix">SKILL_MATRIX</h2>
                 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line-color); border: 1px solid var(--line-color); margin-bottom: 4rem;">
                     
                     <!-- Design -->
                     <div class="meta-item">
-                        <div class="meta-label">DESIGN & MODELING</div>
+                        <div class="meta-label" data-i18n="about.skill_design">DESIGN & MODELING</div>
                         <ul style="list-style: none; padding: 0; margin: 0; font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-main);">
                             <li>Rhino / SolidWorks</li>
                             <li>Fusion 360</li>
@@ -120,7 +120,7 @@
 
                     <!-- Engineering -->
                     <div class="meta-item">
-                        <div class="meta-label">ENGINEERING & DEV</div>
+                        <div class="meta-label" data-i18n="about.skill_eng">ENGINEERING & DEV</div>
                         <ul style="list-style: none; padding: 0; margin: 0; font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-main);">
                             <li>Python / C++</li>
                             <li>Arduino / Embedded</li>
@@ -131,7 +131,7 @@
 
                     <!-- Craft -->
                     <div class="meta-item">
-                        <div class="meta-label">CRAFT & FABRICATION</div>
+                        <div class="meta-label" data-i18n="about.skill_craft">CRAFT & FABRICATION</div>
                         <ul style="list-style: none; padding: 0; margin: 0; font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-main);">
                             <li>Woodworking</li>
                             <li>Metal Machining</li>
@@ -142,7 +142,7 @@
 
                     <!-- Media -->
                     <div class="meta-item">
-                        <div class="meta-label">MEDIA & ARTS</div>
+                        <div class="meta-label" data-i18n="about.skill_media">MEDIA & ARTS</div>
                         <ul style="list-style: none; padding: 0; margin: 0; font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-main);">
                             <li>Filmmaking</li>
                             <li>Video Editing (PR/AE)</li>
@@ -153,19 +153,19 @@
                 </div>
 
                 <!-- 教育背景 -->
-                <h2>EDUCATION_LOG</h2>
+                <h2 data-i18n="about.edu_log">EDUCATION_LOG</h2>
                 <div style="margin-top: 2rem;">
                     <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
                         <span style="font-weight: 600; color: var(--accent);">RHODE ISLAND SCHOOL OF DESIGN</span>
                         <span style="font-family: var(--font-mono); color: var(--text-dim);">2021 - 2026 (EXP)</span>
                     </div>
-                    <p style="font-size: 0.9rem; margin-bottom: 2rem;">B.F.A. Industrial Design / FAV (Film/Animation/Video)</p>
+                    <p style="font-size: 0.9rem; margin-bottom: 2rem;" data-i18n="about.risd_degree">B.F.A. Industrial Design / FAV (Film/Animation/Video)</p>
 
                     <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
                         <span style="font-weight: 600; color: var(--accent);">BROWN UNIVERSITY</span>
                         <span style="font-family: var(--font-mono); color: var(--text-dim);">2023 - 2024</span>
                     </div>
-                    <p style="font-size: 0.9rem;">Exchange Scholar (Computer Science & Engineering)</p>
+                    <p style="font-size: 0.9rem;" data-i18n="about.brown_degree">Exchange Scholar (Computer Science & Engineering)</p>
                 </div>
 
             </div>
@@ -174,7 +174,7 @@
     </div>
 
     <footer class="tech-footer">
-        <div>© 2025 YIFAN ZHAO</div>
+        <div data-i18n="footer.copyright">© 2025 YIFAN ZHAO</div>
         <div></div>
     </footer>
 
@@ -204,6 +204,6 @@
             });
         })();
     </script>
-
+    <script src="i18n.js"></script>
 </body>
 </html>

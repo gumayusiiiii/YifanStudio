@@ -1,5 +1,18 @@
 # GitHub Pages 部署指南
 
+## 本仓库对应关系（当前项目）
+
+| 项目 | 地址 |
+|------|------|
+| GitHub 仓库 | https://github.com/gumayusiiiii/YifanStudio |
+| 默认分支 | `master`（若你改用 `main`，推送后同样会触发部署） |
+| 访客打开的**首页** | 仓库根目录的 **`index.html`**（作品网格 / 新版档案主页） |
+| 上线后的站点根地址 | **https://gumayusiiiii.github.io/YifanStudio/** |
+
+说明：GitHub Pages 对目录访问默认返回 `index.html`，因此别人点开仓库对应的 Pages 链接时，看到的就是当前这份作品集首页，无需再设子路径。
+
+---
+
 ## 快速开始
 
 ### 方法 1: 使用 GitHub Desktop（最简单）
@@ -50,21 +63,30 @@ git remote add origin https://github.com/YOUR_USERNAME/yifan-portfolio.git
 git push -u origin main
 ```
 
-#### 步骤 3: 启用 GitHub Pages
+#### 步骤 3: 启用 GitHub Pages（二选一）
 
-1. 在 GitHub 上打开你的仓库
-2. 点击 **Settings**（设置）
-3. 左侧菜单找到 **Pages**
-4. **Source** 选择：`Deploy from a branch`
-5. **Branch** 选择：`main`
-6. **Folder** 选择：`/ (root)`
-7. 点击 **Save**
+**方式 A — 使用 GitHub Actions（推荐，与本仓库中的工作流一致）**
+
+1. 将代码推送到 `master` 或 `main`
+2. 打开仓库 **Settings → Pages**
+3. **Build and deployment** 里 **Source** 选择：**GitHub Actions**
+4. 首次推送后，打开 **Actions** 标签页，确认 **Deploy to GitHub Pages** 工作流成功（绿色勾）
+5. 几分钟后访问：`https://gumayusiiiii.github.io/YifanStudio/`
+
+**方式 B — 直接从分支发布（不使用 Actions）**
+
+1. **Settings → Pages**
+2. **Source** 选择：`Deploy from a branch`
+3. **Branch** 选：`master`，**Folder**：`/ (root)`
+4. 保存后同样访问：`https://gumayusiiiii.github.io/YifanStudio/`
+
+> 若已选方式 A，请勿再同时用方式 B，以免混淆；任选其一即可。
 
 #### 步骤 4: 等待部署
 
 等待 1-3 分钟，然后访问：
 ```
-https://YOUR_USERNAME.github.io/yifan-portfolio/
+https://gumayusiiiii.github.io/YifanStudio/
 ```
 
 ## 后续更新
@@ -115,4 +137,5 @@ GitHub Pages 会自动更新（通常 1-3 分钟）。
 1. 检查 GitHub Actions 标签页，查看部署日志
 2. 在仓库 Issues 中查看常见问题
 3. 访问 GitHub Pages 文档：https://docs.github.com/en/pages
+
 

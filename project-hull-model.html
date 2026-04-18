@@ -130,9 +130,9 @@
             <span>// PROJECT_FILE</span>
         </a>
         <div class="nav-links">
-            <a href="index.html" class="nav-link">INDEX</a>
-            <a href="about.html" class="nav-link">ABOUT</a>
-            <a href="archive.html" class="nav-link">ARCHIVE</a>
+            <a href="index.html" class="nav-link" data-i18n="nav.index">INDEX</a>
+            <a href="about.html" class="nav-link" data-i18n="nav.about">ABOUT</a>
+            <a href="archive.html" class="nav-link" data-i18n="nav.archive">ARCHIVE</a>
         </div>
     </header>
 
@@ -161,8 +161,8 @@
 
         <!-- Side Views -->
         <div class="section-header">
-            <h2>FORM_VIEWS</h2>
-            <p>Three angles capture the way light runs along the ribs, revealing how small changes in section dramatically alter the perception of volume.</p>
+            <h2 data-i18n="hull.views_h">FORM_VIEWS</h2>
+            <p data-i18n="hull.views_p">Three angles capture the way light runs along the ribs, revealing how small changes in section dramatically alter the perception of volume.</p>
         </div>
         <div class="side-gallery">
             <img src="Hull Model/side1.png" alt="Hull model side view 1">
@@ -171,20 +171,13 @@
         </div>
 
         <!-- Narrative -->
-        <div class="section-header">
-            <h2>HULL_STUDY</h2>
-            <p>Carving an ancient sailing hull from discarded workshop offcuts, treating waste wood as a canvas for form, proportion, and light.</p>
-        </div>
-        <div class="hull-text-block">
-            <p>Working only with a carving knife, sandpaper, and a hand saw, this model turns scrap stock into a refined, tapering hull. The absence of power tools forces slower decisions—every cut leaves a trace of the maker’s hand.</p>
-            <p>The final object reads as both artifact and diagram: a study of waterline, keel, and frame relationships, but also a quiet sculpture about time, erosion, and the memory of built vessels.</p>
-        </div>
+        <!-- Narrative removed -->
 
     </div>
 
     <footer class="tech-footer">
-        <a href="index.html">RETURN TO ARCHIVE</a>
-        <div>© 2025 YIFAN ZHAO</div>
+        <a href="index.html" data-i18n="footer.return">RETURN TO ARCHIVE</a>
+        <div data-i18n="footer.copyright">© 2025 YIFAN ZHAO</div>
     </footer>
 
     <script>
@@ -220,7 +213,7 @@
             });
         });
     </script>
-
+    <script src="i18n.js"></script>
 </body>
 </html>
 

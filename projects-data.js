@@ -97,7 +97,7 @@ const projects = [
     link: "project-mobile-app.html",
     placeholderText: "MOBILE APP",
     placeholderColor: "#777",
-    cover: "Mouse/pho1.png"
+    cover: "Mouse/MouseE.png"
   },
   {
     title: "Gaze",

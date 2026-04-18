@@ -55,9 +55,13 @@
             background: rgba(10,10,10,0.4);
         }
         .hero-summary h1 {
-            font-size: 2.8rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 2.35rem;
+            font-weight: 600;
             margin: 0;
-            letter-spacing: 0.3em;
+            letter-spacing: 0.12em;
+            line-height: 1.1;
+            text-transform: uppercase;
         }
         .hero-meta-list {
             margin-top: 1.5rem;
@@ -257,9 +261,9 @@
             <span>// PROJECT_FILE</span>
         </a>
         <div class="nav-links">
-            <a href="index.html" class="nav-link">INDEX</a>
-            <a href="about.html" class="nav-link">ABOUT</a>
-            <a href="archive.html" class="nav-link">ARCHIVE</a>
+            <a href="index.html" class="nav-link" data-i18n="nav.index">INDEX</a>
+            <a href="about.html" class="nav-link" data-i18n="nav.about">ABOUT</a>
+            <a href="archive.html" class="nav-link" data-i18n="nav.archive">ARCHIVE</a>
         </div>
     </header>
 
@@ -285,8 +289,8 @@
                 </div>
             </div>
             <div class="hero-summary">
-                <h1>MECHANISM STUDY</h1>
-                <p>Hand-fabricated linkage exploring how force, proportion, and riveted joints choreograph motion without electronics. Every member was cut, drilled, and tuned manually to amplify the tactile qualities of mechanical articulation.</p>
+                <h1 data-i18n="mech.title">MECHANISM STUDY</h1>
+                <p data-i18n="mech.desc">Hand-fabricated linkage exploring how force, proportion, and riveted joints choreograph motion without electronics. Every member was cut, drilled, and tuned manually to amplify the tactile qualities of mechanical articulation.</p>
                 <div class="hero-meta-list">
                     <div><span>CATEGORY</span><strong>MECHANICAL STUDY</strong></div>
                     <div><span>YEAR</span><strong>2022</strong></div>
@@ -297,39 +301,16 @@
         </div>
 
         <div class="text-columns">
-            <p><strong>1 // STRUCTURE</strong><br>Aluminum rails define the neutral axis while iron straps articulate around it. Each strap is manually bent, introducing subtle deviations that give the motion a human cadence.</p>
-            <p><strong>2 // MOTION</strong><br>Riveted pivots create instant centers that hold their geometry even after repeated stress cycles. The absence of bearings makes the tactile feedback audible—every movement has a sound and weight.</p>
+            <p><strong data-i18n="mech.struct_h">1 // STRUCTURE</strong><br><span data-i18n="mech.struct_p">Aluminum rails define the neutral axis while iron straps articulate around it. Each strap is manually bent, introducing subtle deviations that give the motion a human cadence.</span></p>
+            <p><strong data-i18n="mech.motion_h">2 // MOTION</strong><br><span data-i18n="mech.motion_p">Riveted pivots create instant centers that hold their geometry even after repeated stress cycles. The absence of bearings makes the tactile feedback audible—every movement has a sound and weight.</span></p>
         </div>
 
         
-
-        <div class="section-header">
-            <h2>FABRICATION PROCESS</h2>
-            <p>Every component is fabricated with hand tools—cutoff saw, drill press, custom bending jigs. Edges remain slightly imperfect to keep the evidence of making visible.</p>
-        </div>
-        <div class="process-grid">
-            <div class="process-card">
-                <img src="Mechanism/proc/proc1.png" alt="layout">
-                <h3>LAYOUT</h3>
-                <p>Rail lengths plotted to maintain equal travel while staying within a 400 mm envelope.</p>
-            </div>
-            <div class="process-card">
-                <img src="Mechanism/proc/proc2.png" alt="riveting">
-                <h3>RIVETING</h3>
-                <p>Cold rivets hammered in sequence to lock iron straps without warping the aluminum base.</p>
-            </div>
-            <div class="process-card">
-                <img src="Mechanism/proc/proc3.png" alt="tuning">
-                <h3>TUNING</h3>
-                <p>Fine adjustments of hole diameter and washer stacks to remove backlash and keep the motion parallel.</p>
-            </div>
-        </div>
-
     </div>
 
     <footer class="tech-footer">
-        <div>© 2025 YIFAN ZHAO</div>
-        <a href="index.html">RETURN TO ARCHIVE</a>
+        <div data-i18n="footer.copyright">© 2025 YIFAN ZHAO</div>
+        <a href="index.html" data-i18n="footer.return">RETURN TO ARCHIVE</a>
     </footer>
 
     <script>
@@ -374,5 +355,6 @@
             startAuto();
         })();
     </script>
+    <script src="i18n.js"></script>
 </body>
 </html>

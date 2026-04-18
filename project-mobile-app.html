@@ -6,142 +6,283 @@
     <title>Inclusive, Barrier-Free Mouse Design - Project File</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style-technical.css">
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
     <style>
-        .hero-image {
-            position: relative;
+
+        /* == Floating three-column model stage == */
+        .models-showcase { margin-top: 1.5rem; }
+
+        .models-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            padding: 1rem 0 0;
+        }
+
+        .model-column { display: flex; flex-direction: column; }
+
+        .model-viewer-wrap {
             width: 100%;
-            height: 70vh;
-            min-height: 520px;
-            border-bottom: 1px solid var(--line-color);
-            overflow: hidden;
-            background: radial-gradient(circle at 20% 0%, #151515 0, #050505 55%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            aspect-ratio: 4 / 3;
         }
-        .hero-cover {
-            position: relative;
-            width: 82%;
-            max-width: 960px;
-            height: 82%;
-            max-height: 620px;
-            border: 1px solid var(--line-color);
-            background: #000;
-            box-shadow: 0 0 40px rgba(0,0,0,0.85);
-            overflow: hidden;
-        }
-        .hero-cover img {
-            position: absolute;
-            inset: 0;
+
+        .model-viewer-wrap model-viewer {
             width: 100%;
             height: 100%;
-            object-fit: contain;        /* 不再裁剪，完整显示鼠标形状 */
-            padding: 1.5rem;            /* 留出一点内边距，避免贴边 */
-            background: #000;
-            opacity: 0;
-            transition: opacity 0.6s ease;
+            background-color: transparent;
+            --poster-color: transparent;
         }
-        .hero-cover img.active {
-            opacity: 1;
+
+        /* Product labels — no dividing line */
+        .product-labels-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 0.25rem 0 0.75rem;
         }
-        .hero-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 2rem var(--spacing);
-            background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            letter-spacing: 0.15em;
-            display: flex;
-            justify-content: space-between;
+
+        .product-label-col { padding: 0.4rem 0 0.6rem; }
+
+        .product-en {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--text-main);
+            letter-spacing: -0.01em;
+            margin-bottom: 0.15rem;
+        }
+
+        .product-desc {
+            font-size: 0.63rem;
+            color: var(--text-dim);
+            letter-spacing: 0.18em;
             text-transform: uppercase;
         }
-        .mouse-meta-grid {
+
+        /* == Three image-frame galleries == */
+        .galleries-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 1rem;
-            margin-top: 3rem;
         }
-        .mouse-meta-card {
-            border: 1px solid var(--line-color);
-            padding: 1.25rem;
-        }
-        .mouse-meta-card span {
-            display: block;
-            font-size: 0.75rem;
+
+        .gallery-frame { background-color: var(--bg-color); }
+
+        .frame-header {
+            font-size: 0.6rem;
             color: var(--text-dim);
-            letter-spacing: 0.2em;
+            letter-spacing: 0.18em;
             margin-bottom: 0.6rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid var(--line-color);
+            text-transform: uppercase;
+            display: flex;
+            justify-content: space-between;
         }
-        .mouse-meta-card strong {
-            font-size: 1.05rem;
-            letter-spacing: 0.1em;
-        }
-        .section-header {
-            margin: 4rem 0 2rem;
-        }
-        .section-header h2 {
-            font-size: 1.6rem;
-            letter-spacing: 0.3em;
-            color: var(--text-main);
-            margin-bottom: 0.5rem;
-        }
-        .section-header p {
-            color: var(--text-dim);
-            max-width: 760px;
-            line-height: 1.8;
-        }
-        .mouse-text-block {
-            max-width: 860px;
-            line-height: 1.9;
-            color: var(--text-main);
-        }
-        .mouse-gallery-row {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 1.5rem;
-            margin-top: 2rem;
-            align-items: stretch;
-        }
-        .mouse-forms-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 1rem;
-        }
-        .mouse-forms-grid img {
-            width: 100%;
-            max-height: 260px;
-            aspect-ratio: 4 / 3;
-            object-fit: contain;               /* 显示完整形状，避免被裁剪 */
-            border: 1px solid var(--line-color);
-            background: #000;
-            padding: 0.75rem;                  /* 留出少量内边距，保持呼吸感 */
-        }
-        .mouse-sketches-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 1rem;
-        }
-        .mouse-sketches-grid img {
+
+        .frame-img-main {
             width: 100%;
             aspect-ratio: 4 / 3;
             object-fit: contain;
+            background: #050505;
             border: 1px solid var(--line-color);
-            background: #000;
+            padding: 0.6rem;
+            display: block;
+            margin-bottom: 0.5rem;
+            cursor: zoom-in;
+            transition: border-color 0.2s ease, opacity 0.2s ease;
         }
+
+        .frame-img-main:hover { border-color: var(--text-dim); opacity: 0.88; }
+
+        .frame-sub-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.4rem;
+        }
+
+        .frame-sub-row img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: contain;
+            background: #050505;
+            border: 1px solid var(--line-color);
+            padding: 0.3rem;
+            display: block;
+            cursor: zoom-in;
+            transition: border-color 0.2s ease, opacity 0.2s ease;
+        }
+
+        .frame-sub-row img:hover { border-color: var(--text-dim); opacity: 0.88; }
+
+        /* == Lightbox == */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.96);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-out;
+        }
+
+        .lightbox-overlay.active { display: flex; }
+
+        .lightbox-overlay img {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            cursor: default;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 1.4rem;
+            right: 1.6rem;
+            background: none;
+            border: none;
+            color: #555;
+            cursor: pointer;
+            padding: 0.4rem;
+            line-height: 0;
+            transition: color 0.2s ease;
+        }
+
+        .lightbox-close:hover { color: #ccc; }
+        .lightbox-close svg { display: block; }
+
+        /* =========================================
+           Project title — large & prominent
+        ========================================= */
+        .project-intro {
+            margin: 4.5rem 0 0;
+            border-left: 3px solid var(--text-main);
+            padding-left: 1.5rem;
+        }
+
+        .project-intro h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: 2.6rem;
+            font-weight: 600;
+            color: var(--text-main);
+            letter-spacing: -0.025em;
+            line-height: 1.15;
+            margin: 0;
+        }
+
+        /* =========================================
+           Combined layout: text LEFT, gallery RIGHT
+        ========================================= */
+        .sections-with-gallery {
+            display: grid;
+            grid-template-columns: 1fr 0.42fr;
+            gap: 4rem;
+            align-items: start;
+            margin-top: 2.5rem;
+        }
+
+        /* Sticky right gallery */
+        .combined-gallery {
+            position: sticky;
+            top: 80px;
+        }
+
+        .combined-gallery-header {
+            font-size: 0.6rem;
+            color: var(--text-dim);
+            letter-spacing: 0.18em;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid var(--line-color);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        /* 2-column grid of 6 images */
+        .combined-gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.4rem;
+        }
+
+        .combined-gallery-grid img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: contain;
+            background: #050505;
+            border: 1px solid var(--line-color);
+            padding: 0.3rem;
+            display: block;
+            cursor: zoom-in;
+            transition: border-color 0.2s ease, opacity 0.2s ease;
+        }
+
+        .combined-gallery-grid img:hover {
+            border-color: var(--text-dim);
+            opacity: 0.88;
+        }
+
+        /* Section headings within left column */
+        .section-label {
+            margin: 3rem 0 1.2rem;
+        }
+
+        .section-label:first-child { margin-top: 0; }
+
+        .section-label h2 {
+            font-size: 1.4rem;
+            letter-spacing: 0.28em;
+            color: var(--text-main);
+        }
+
+        .mouse-text-block {
+            line-height: 1.9;
+            color: var(--text-main);
+        }
+
+        .mouse-text-block ol {
+            margin-top: 1rem;
+            padding-left: 1.5rem;
+        }
+
+        .mouse-text-block li { margin-bottom: 0.5rem; }
+        .mouse-text-block p + p { margin-top: 1rem; }
+
+        /* == Mobile == */
         @media (max-width: 900px) {
-            .mouse-gallery-row {
+            .models-row,
+            .product-labels-row,
+            .galleries-row {
                 grid-template-columns: 1fr;
+                gap: 1rem;
             }
-            .mouse-forms-grid {
+
+            .sections-with-gallery {
                 grid-template-columns: 1fr;
+                gap: 2rem;
             }
+
+            .combined-gallery {
+                position: static;
+            }
+
+            .project-intro h1 { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
+
+    <!-- Lightbox overlay -->
+    <div class="lightbox-overlay" id="lightbox-overlay">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Close">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
+                 stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+                <line x1="3" y1="3" x2="19" y2="19"/>
+                <line x1="19" y1="3" x2="3" y2="19"/>
+            </svg>
+        </button>
+        <img id="lightbox-img" src="" alt="Preview">
+    </div>
 
     <div class="system-grid"></div>
 
@@ -151,98 +292,223 @@
             <span>// PROJECT_FILE</span>
         </a>
         <div class="nav-links">
-            <a href="index.html" class="nav-link">INDEX</a>
-            <a href="about.html" class="nav-link">ABOUT</a>
-            <a href="archive.html" class="nav-link">ARCHIVE</a>
+            <a href="index.html" class="nav-link" data-i18n="nav.index">INDEX</a>
+            <a href="about.html" class="nav-link" data-i18n="nav.about">ABOUT</a>
+            <a href="archive.html" class="nav-link" data-i18n="nav.archive">ARCHIVE</a>
         </div>
     </header>
 
     <div class="content-wrapper">
 
-        <!-- Hero -->
-        <div class="hero-image">
-            <div class="hero-cover" id="mouse-hero-cover">
-                <img src="Mouse/pho1.png" alt="Barrier-free mouse view 1" class="active">
-                <img src="Mouse/pho2.png" alt="Barrier-free mouse view 2">
-                <img src="Mouse/pho3.png" alt="Barrier-free mouse view 3">
+        <!-- Three floating 3D models -->
+        <div class="models-showcase">
+            <div class="models-row">
+
+                <div class="model-column">
+                    <div class="model-viewer-wrap">
+                        <model-viewer
+                            src="Mouse/%E5%8A%9E%E5%85%AC%E9%BC%A0%E6%A0%87/WorkM.glb"
+                            camera-orbit="150deg 72deg auto"
+                            min-camera-orbit="auto 55deg auto"
+                            max-camera-orbit="auto 82deg auto"
+                            camera-controls
+                            auto-rotate
+                            rotation-per-second="7deg"
+                            auto-rotate-delay="2000"
+                            interaction-prompt="none"
+                            shadow-intensity="0.8"
+                            exposure="0.9">
+                        </model-viewer>
+                    </div>
+                </div>
+
+                <div class="model-column">
+                    <div class="model-viewer-wrap">
+                        <model-viewer
+                            src="Mouse/%E5%84%BF%E7%AB%A5%E9%BC%A0%E6%A0%87/ChildM.glb"
+                            camera-orbit="150deg 72deg auto"
+                            min-camera-orbit="auto 55deg auto"
+                            max-camera-orbit="auto 82deg auto"
+                            camera-controls
+                            auto-rotate
+                            rotation-per-second="7deg"
+                            auto-rotate-delay="2000"
+                            interaction-prompt="none"
+                            shadow-intensity="0.8"
+                            exposure="0.9">
+                        </model-viewer>
+                    </div>
+                </div>
+
+                <div class="model-column">
+                    <div class="model-viewer-wrap">
+                        <model-viewer
+                            src="Mouse/%E7%A7%91%E6%8A%80%E9%BC%A0%E6%A0%87/GamingM.glb"
+                            camera-orbit="150deg 72deg auto"
+                            min-camera-orbit="auto 55deg auto"
+                            max-camera-orbit="auto 82deg auto"
+                            camera-controls
+                            auto-rotate
+                            rotation-per-second="7deg"
+                            auto-rotate-delay="2000"
+                            interaction-prompt="none"
+                            shadow-intensity="0.8"
+                            exposure="0.9">
+                        </model-viewer>
+                    </div>
+                </div>
+
             </div>
-            <div class="hero-overlay">
-                <span>FIG. 01 / ASSISTIVE_DEVICE</span>
-                <span>BARRIER-FREE MOUSE</span>
+
+            <!-- Product labels -->
+            <div class="product-labels-row">
+                <div class="product-label-col">
+                    <div class="product-en">Work</div>
+                    <div class="product-desc">Office Mouse</div>
+                </div>
+                <div class="product-label-col">
+                    <div class="product-en">Child</div>
+                    <div class="product-desc">Children's Mouse</div>
+                </div>
+                <div class="product-label-col">
+                    <div class="product-en">Gaming</div>
+                    <div class="product-desc">Tech Mouse</div>
+                </div>
             </div>
+
+            <!-- Three image frames (1 main + 3 sub each) -->
+            <!-- updated overview images: 办公鼠标.png / 儿童鼠标.png / 科技鼠标.png -->
+            <div class="galleries-row">
+
+                <div class="gallery-frame">
+                    <div class="frame-header">
+                        <span>FIG. / WORK_MOUSE</span><span>×04</span>
+                    </div>
+                    <img class="frame-img-main"
+                         src="Mouse/%E5%8A%9E%E5%85%AC%E9%BC%A0%E6%A0%87/%E5%8A%9E%E5%85%AC%E9%BC%A0%E6%A0%87.png"
+                         alt="Work mouse — overview">
+                    <div class="frame-sub-row">
+                        <img src="Mouse/%E5%8A%9E%E5%85%AC%E9%BC%A0%E6%A0%87/%E5%8A%9E%E5%85%AC%E9%BC%A0%E6%A0%87%E4%BE%A7.png" alt="Work — side">
+                        <img src="Mouse/%E5%8A%9E%E5%85%AC%E9%BC%A0%E6%A0%87/%E5%8A%9E%E5%85%AC%E9%BC%A0%E6%A0%87%E5%89%8D%E6%96%B9.png" alt="Work — front">
+                        <img src="Mouse/%E5%8A%9E%E5%85%AC%E9%BC%A0%E6%A0%87/%E5%8A%9E%E5%85%AC%E9%BC%A0%E6%A0%87%E5%90%8E.png" alt="Work — rear">
+                    </div>
+                </div>
+
+                <div class="gallery-frame">
+                    <div class="frame-header">
+                        <span>FIG. / CHILD_MOUSE</span><span>×04</span>
+                    </div>
+                    <!-- updated: 儿童鼠标.png (was 儿童总.png) -->
+                    <img class="frame-img-main"
+                         src="Mouse/%E5%84%BF%E7%AB%A5%E9%BC%A0%E6%A0%87/%E5%84%BF%E7%AB%A5%E9%BC%A0%E6%A0%87.png"
+                         alt="Child mouse — overview">
+                    <div class="frame-sub-row">
+                        <img src="Mouse/%E5%84%BF%E7%AB%A5%E9%BC%A0%E6%A0%87/%E5%84%BF%E7%AB%A5%E4%BE%A7.png" alt="Child — side">
+                        <img src="Mouse/%E5%84%BF%E7%AB%A5%E9%BC%A0%E6%A0%87/%E5%84%BF%E7%AB%A5%E5%89%8D.png" alt="Child — front">
+                        <img src="Mouse/%E5%84%BF%E7%AB%A5%E9%BC%A0%E6%A0%87/%E5%84%BF%E7%AB%A5%E5%90%8E.png" alt="Child — rear">
+                    </div>
+                </div>
+
+                <div class="gallery-frame">
+                    <div class="frame-header">
+                        <span>FIG. / GAMING_MOUSE</span><span>×04</span>
+                    </div>
+                    <!-- updated: 科技鼠标.png (was 科技鼠标1.png) -->
+                    <img class="frame-img-main"
+                         src="Mouse/%E7%A7%91%E6%8A%80%E9%BC%A0%E6%A0%87/%E7%A7%91%E6%8A%80%E9%BC%A0%E6%A0%87.png"
+                         alt="Gaming mouse — overview">
+                    <div class="frame-sub-row">
+                        <img src="Mouse/%E7%A7%91%E6%8A%80%E9%BC%A0%E6%A0%87/%E7%A7%91%E6%8A%80%E9%BC%A0%E6%A0%87%E4%BE%A7.png" alt="Gaming — side">
+                        <img src="Mouse/%E7%A7%91%E6%8A%80%E9%BC%A0%E6%A0%87/%E7%A7%91%E6%8A%80%E9%BC%A0%E6%A0%87%E5%89%8D.png" alt="Gaming — front">
+                        <img src="Mouse/%E7%A7%91%E6%8A%80%E9%BC%A0%E6%A0%87/%E7%A7%91%E6%8A%80%E9%BC%A0%E6%A0%87%E5%90%8E.png" alt="Gaming — rear">
+                    </div>
+                </div>
+
+            </div>
+        </div><!-- /models-showcase -->
+
+        <!-- =====================================================
+             Project title — large, left-accented
+        ===================================================== -->
+        <div class="project-intro">
+            <h1 data-i18n-html="mouse.intro_h">Mouse for hand<br>function disabilities</h1>
         </div>
 
-        <!-- Meta / Tagline -->
-        <div class="section-header">
-            <h2>Mouse for hand function disabilities</h2>
-        </div>
+        <!-- =====================================================
+             Text sections LEFT + combined gallery RIGHT
+        ===================================================== -->
+        <div class="sections-with-gallery">
 
-        <!-- Access Needs -->
-        <div class="section-header">
-            <h2>ACCESS_NEEDS</h2>
-        </div>
-        <div class="mouse-text-block">
-            <p>
-                This project re-imagines the form and interaction logic of the conventional computer mouse
-                for people with hand impairments. Field research—interviews, observation, and video documentation—
-                revealed three core pain points:
-            </p>
-            <ol>
-                <li><strong>Excessive travel distance</strong> — standard buttons sit beyond the users' comfortable reach.</li>
-                <li><strong>Dispersed force points</strong> — clicks require strength that impaired fingers cannot concentrate.</li>
-                <li><strong>One-size-fits-all geometry</strong> — commercial shells fail to conform to palms altered by injury or deformity.</li>
-            </ol>
-        </div>
+            <!-- Left: both text sections -->
+            <div class="sections-left">
 
-        <!-- Mouse Template -->
-        <div class="section-header">
-            <h2>MOUSE_TEMPLATE</h2>
-        </div>
-        <div class="mouse-forms-grid">
-            <img src="Mouse/xuan1.png" alt="Form exploration 1">
-            <img src="Mouse/xuan2.png" alt="Form exploration 2">
-            <img src="Mouse/xuan3.png" alt="Form exploration 3">
-        </div>
+                <div class="mouse-text-block">
+                    <p data-i18n="mouse.desc">
+                        This project re-imagines the form and interaction logic of the conventional computer mouse
+                        for people with hand impairments. Field research—interviews, observation, and video documentation—
+                        revealed three core pain points:
+                    </p>
+                    <ol>
+                        <li><strong>Excessive travel distance</strong> — standard buttons sit beyond the users' comfortable reach.</li>
+                        <li><strong>Dispersed force points</strong> — clicks require strength that impaired fingers cannot concentrate.</li>
+                        <li><strong>One-size-fits-all geometry</strong> — commercial shells fail to conform to palms altered by injury or deformity.</li>
+                    </ol>
+                </div>
 
-        <!-- Value -->
-        <div class="section-header">
-            <h2>VALUE_&_NEXT</h2>
-        </div>
-        <div class="mouse-text-block">
-            <p>
-                This design meets the fundamental need for <strong>seamless digital interaction</strong> among users with physical 
-                disabilities and offers a reusable parametric workflow for inclusive consumer electronics.
-            </p>
-            <p>
-                Through systematic research, validation, and iteration, the project embodies the principle that 
-                <strong>"design is care"</strong>—turning empathy into tangible improvements in everyday life.
-            </p>
-        </div>
+                <div class="section-label">
+                    <h2>VALUE_&amp;_NEXT</h2>
+                </div>
+                <div class="mouse-text-block">
+                    <p>
+                        This design meets the fundamental need for <strong>seamless digital interaction</strong> among users with physical
+                        disabilities and offers a reusable parametric workflow for inclusive consumer electronics.
+                    </p>
+                    <p>
+                        Through systematic research, validation, and iteration, the project embodies the principle that
+                        <strong>"design is care"</strong>—turning empathy into tangible improvements in everyday life.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Right: single combined gallery (sticky) -->
+            <div class="combined-gallery">
+                <div class="combined-gallery-header">FIG. / DOCUMENTATION ×06</div>
+                <div class="combined-gallery-grid">
+                    <img src="Mouse/pho1.png"  alt="Research 1">
+                    <img src="Mouse/pho2.png"  alt="Research 2">
+                    <img src="Mouse/pho3.png"  alt="Research 3">
+                    <img src="Mouse/xuan1.png" alt="Process 1">
+                    <img src="Mouse/xuan2.png" alt="Process 2">
+                    <img src="Mouse/xuan3.png" alt="Process 3">
+                </div>
+            </div>
+
+        </div><!-- /sections-with-gallery -->
 
     </div>
 
     <footer class="tech-footer">
-        <a href="index.html">RETURN TO ARCHIVE</a>
-        <div>© 2025 YIFAN ZHAO</div>
+        <a href="index.html" data-i18n="footer.return">RETURN TO ARCHIVE</a>
+        <div data-i18n="footer.copyright">© 2025 YIFAN ZHAO</div>
     </footer>
 
     <script>
-        // Hero 自动轮播 - Barrier-Free Mouse
-        document.addEventListener('DOMContentLoaded', () => {
-            const cover = document.getElementById('mouse-hero-cover');
-            if (!cover) return;
-            const slides = Array.from(cover.querySelectorAll('img'));
-            if (slides.length <= 1) return;
+        const overlay = document.getElementById('lightbox-overlay');
+        const lbImg   = document.getElementById('lightbox-img');
+        const lbClose = document.getElementById('lightbox-close');
 
-            let index = 0;
-            setInterval(() => {
-                slides[index].classList.remove('active');
-                index = (index + 1) % slides.length;
-                slides[index].classList.add('active');
-            }, 3500); // 每 3.5 秒切换一张
-        });
+        function openLightbox(src) { lbImg.src = src; overlay.classList.add('active'); }
+        function closeLightbox()   { overlay.classList.remove('active'); lbImg.src = ''; }
+
+        document.querySelectorAll(
+            '.frame-img-main, .frame-sub-row img, .combined-gallery-grid img'
+        ).forEach(img => img.addEventListener('click', () => openLightbox(img.src)));
+
+        overlay.addEventListener('click', e => { if (e.target === overlay) closeLightbox(); });
+        lbClose.addEventListener('click', closeLightbox);
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
     </script>
-
+    <script src="i18n.js"></script>
 </body>
 </html>
-

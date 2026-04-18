@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-i18n-title="index.title">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -222,6 +222,16 @@
             aspect-ratio: 3 / 1; /* 比 row-half 略矮一些 */
         }
 
+        /* ART? 并排次要项：宽度不变（col-6），高度压扁 */
+        .grid-cell.art-secondary-pair {
+            aspect-ratio: 2.25 / 1;
+        }
+
+        /* 1 Wend1 橱窗：裁切区域靠右，主体偏右时仍落在视觉中心 */
+        .grid-cell.wend1-showcase .cell-image img {
+            object-position: 78% center;
+        }
+
         /* 优化图片显示 - 避免裁切 */
         .cell-image {
             display: flex;
@@ -313,8 +323,107 @@
             justify-content: space-between;
         }
 
-        /* === 6. 移动端适配 === */
+        /* === 6. 分类区块标题 (Section Headers) — Inter 醒目、仍简约 === */
+        .section-header {
+            grid-column: span 12;
+            background-color: var(--bg-color);
+            padding: 1.15rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            left: 1.5rem;
+            right: 1.5rem;
+            bottom: 0;
+            height: 1px;
+            background: linear-gradient(90deg, var(--line-color) 0%, transparent 100%);
+        }
+
+        .section-name {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.94);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .section-index {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: #6a6a6a;
+            letter-spacing: 0.14em;
+        }
+
+        /* 主打区块：略大一档 + 左侧线 */
+        .section-header.primary {
+            padding: 1.35rem 1.5rem;
+            border-left: 2px solid rgba(255, 255, 255, 0.35);
+            padding-left: calc(1.5rem - 2px);
+        }
+
+        .section-header.primary .section-name {
+            font-size: 1.12rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            color: #fff;
+        }
+
+        .section-header.primary .section-index {
+            font-size: 0.78rem;
+            color: #8a8a8a;
+        }
+
+        .section-header.primary::after {
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, transparent 62%);
+        }
+
+        /* 主打区块内的项目标题放大 */
+        .grid-cell.featured-cell .project-title {
+            font-size: 1.9rem;
+        }
+
+        /* === 7. 移动端适配 === */
         @media (max-width: 900px) {
+            /* 全局间距调整 */
+            :root {
+                --spacing: 1rem;
+            }
+            
+            /* Header 移动端优化 */
+            header {
+                padding: 1rem;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            
+            .brand h1 {
+                font-size: 1rem;
+            }
+            
+            .brand span {
+                font-size: 0.65rem;
+            }
+            
+            .brand-with-about {
+                gap: 1rem;
+            }
+            
+            .about-link {
+                font-size: 0.7rem;
+            }
+            
+            .sys-status {
+                display: none; /* 手机隐藏顶部状态栏 */
+            }
+            
+            /* 项目网格改为单列 */
             .project-grid {
                 display: flex;
                 flex-direction: column;
@@ -322,20 +431,98 @@
                 background: transparent;
                 border: none;
             }
+
+            .archive-container {
+                padding: 1rem;
+            }
             
             .grid-cell {
                 aspect-ratio: 4/3 !important; /* 手机统一比例 */
                 border: 1px solid var(--line-color);
+                width: 100%;
             }
+
+            .grid-cell.art-secondary-pair {
+                aspect-ratio: 2 / 1 !important; /* ART? 两卡保持扁一些 */
+            }
+            
+            .cell-content {
+                padding: 1rem;
+            }
+            
             .cell-image img {
                 opacity: 0.7; /* 手机端图片稍微亮一点 */
             }
+            
             .cell-footer {
                 opacity: 1;
                 transform: translateY(0);
             }
-            .sys-status {
-                display: none; /* 手机隐藏顶部状态栏 */
+            
+            .project-title {
+                font-size: 1.2rem;
+            }
+            
+            .project-tags {
+                font-size: 0.7rem;
+            }
+            
+            .cell-header {
+                font-size: 0.65rem;
+                padding-bottom: 0.5rem;
+            }
+
+            .section-header {
+                padding: 0.85rem 1rem;
+            }
+
+            .section-header.primary {
+                padding: 1rem 1rem;
+                padding-left: calc(1rem - 2px);
+            }
+
+            .section-header.primary .section-name {
+                font-size: 0.95rem;
+            }
+
+            .section-name {
+                font-size: 0.82rem;
+                letter-spacing: 0.16em;
+            }
+
+            .section-index {
+                display: none;
+            }
+
+            .grid-cell.featured-cell .project-title {
+                font-size: 1.2rem;
+            }
+        }
+        
+        /* 小屏幕进一步优化 */
+        @media (max-width: 480px) {
+            .brand h1 {
+                font-size: 0.9rem;
+            }
+            
+            .brand span {
+                font-size: 0.6rem;
+            }
+            
+            .about-link {
+                font-size: 0.65rem;
+            }
+            
+            .grid-cell {
+                aspect-ratio: 3/2 !important;
+            }
+            
+            .cell-content {
+                padding: 0.75rem;
+            }
+            
+            .project-title {
+                font-size: 1rem;
             }
         }
     </style>
@@ -346,21 +533,21 @@
     <header>
         <div class="brand-with-about">
             <div class="brand">
-                <h1>YIFAN ZHAO</h1>
-                <span>// INDUSTRIAL_DESIGN_ARCHIVE</span>
+                <h1 data-i18n="nav.name">YIFAN ZHAO</h1>
+                <span data-i18n="index.subtitle">// INDUSTRIAL_DESIGN_ARCHIVE</span>
             </div>
-            <a href="about.html" class="about-link">ABOUT</a>
-            <a href="archive.html" class="about-link">ARCHIVE</a>
+            <a href="about.html" class="about-link" data-i18n="nav.about">ABOUT</a>
+            <a href="archive.html" class="about-link" data-i18n="nav.archive">ARCHIVE</a>
         </div>
         <div class="sys-status">
             <div class="status-item">
                 <div class="status-dot"></div>
-                SYSTEM_ONLINE
+                <span data-i18n="index.status_online">SYSTEM_ONLINE</span>
             </div>
-            <div class="status-item">
+            <div class="status-item" data-i18n="index.status_loc">
                 LOC: PROVIDENCE, RI
             </div>
-            <div class="status-item">
+            <div class="status-item" data-i18n="index.status_updated">
                 UPDATED: 2025.01
             </div>
         </div>
@@ -368,9 +555,17 @@
 
     <div class="archive-container">
         <div class="project-grid">
-            
-            <!-- 1. Modular Sneakers (Product) - 大图 -->
-            <a href="project-modular-sneakers.html" class="grid-cell col-8 row-half">
+
+            <!-- ─────────────────────────────────────────── -->
+            <!-- SECTION 01 · PROBLEM / SOLUTION  [PRIMARY]  -->
+            <!-- ─────────────────────────────────────────── -->
+            <div class="section-header primary">
+                <span class="section-name" data-i18n="index.sec_ps">// PROBLEM / SOLUTION</span>
+                <span class="section-index">×03</span>
+            </div>
+
+            <!-- Modular Sneakers — hero 大图 -->
+            <a href="project-modular-sneakers.html" class="grid-cell col-8 row-half featured-cell">
                 <div class="crosshair ch-tl"></div>
                 <div class="cell-image">
                     <img src="Shoes/2/Product gray2.jpg" alt="Modular Sneakers">
@@ -381,13 +576,55 @@
                         <span>[PRODUCT]</span>
                     </div>
                     <div class="cell-footer">
-                        <div class="project-title">Modular Sneakers</div>
-                        <div class="project-tags">3D_PRINTING // SYSTEM_DESIGN</div>
+                        <div class="project-title" data-i18n="proj.sneakers">Modular Sneakers</div>
+                        <div class="project-tags" data-i18n="proj.sneakers_tags">3D_PRINTING // SYSTEM_DESIGN</div>
                     </div>
                 </div>
             </a>
 
-            <!-- 2. Medieval Gauntlet (Craft) - 标准图 -->
+            <!-- Shared Heater — 右侧配图 -->
+            <a href="project-editorial-design.html" class="grid-cell col-4 featured-cell">
+                <div class="cell-image">
+                    <img src="Heater/cover1.png" alt="Heater" class="img-contain">
+                </div>
+                <div class="cell-content">
+                    <div class="cell-header">
+                        <span>ID: 006</span>
+                        <span>[SOCIAL_INNOVATION]</span>
+                    </div>
+                    <div class="cell-footer">
+                        <div class="project-title" data-i18n="proj.heater">Shared Heater</div>
+                        <div class="project-tags" data-i18n="proj.heater_tags">PRODUCT // THERMAL</div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Barrier-Free Mouse — 全宽横幅 -->
+            <a href="project-mobile-app.html" class="grid-cell col-12 gaze-cell featured-cell">
+                <div class="cell-image">
+                    <img src="Mouse/MouseE.png?v=20260328-2" alt="Mouse Design" class="img-contain" fetchpriority="high" decoding="async">
+                </div>
+                <div class="cell-content">
+                    <div class="cell-header">
+                        <span>ID: 010</span>
+                        <span>[UX_DESIGN]</span>
+                    </div>
+                    <div class="cell-footer">
+                        <div class="project-title" data-i18n="proj.mouse">Barrier-Free Mouse</div>
+                        <div class="project-tags" data-i18n="proj.mouse_tags">ACCESSIBILITY // UX</div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- ─────────────────────────────────────────── -->
+            <!-- SECTION 02 · HANDMADE                       -->
+            <!-- ─────────────────────────────────────────── -->
+            <div class="section-header">
+                <span class="section-name" data-i18n="index.sec_handmade">// HANDMADE</span>
+                <span class="section-index">×03</span>
+            </div>
+
+            <!-- Gauntlet — 三等分一行，避免空白灰格 -->
             <a href="project-medieval-gauntlet.html" class="grid-cell col-4">
                 <div class="cell-image">
                     <img src="Gauntlet/Hero image1.jpg" alt="Gauntlet">
@@ -398,13 +635,13 @@
                         <span>[CRAFT]</span>
                     </div>
                     <div class="cell-footer">
-                        <div class="project-title">Medieval Gauntlet</div>
-                        <div class="project-tags">METALWORK // ARMOR</div>
+                        <div class="project-title" data-i18n="proj.gauntlet">Medieval Gauntlet</div>
+                        <div class="project-tags" data-i18n="proj.gauntlet_tags">METALWORK // ARMOR</div>
                     </div>
                 </div>
             </a>
 
-            <!-- 3. Mechanism (Engineering) - 标准图 -->
+            <!-- Mechanism -->
             <a href="project-mechanism.html" class="grid-cell col-4">
                 <div class="crosshair ch-br"></div>
                 <div class="cell-image">
@@ -416,13 +653,13 @@
                         <span>[ENGINEERING]</span>
                     </div>
                     <div class="cell-footer">
-                        <div class="project-title">Mechanism Study</div>
-                        <div class="project-tags">LINKAGE // KINETIC</div>
+                        <div class="project-title" data-i18n="proj.mechanism">Mechanism Study</div>
+                        <div class="project-tags" data-i18n="proj.mechanism_tags">LINKAGE // KINETIC</div>
                     </div>
                 </div>
             </a>
 
-            <!-- 4. Panton Chair (Sculpture) - 标准图 -->
+            <!-- Panton Chair -->
             <a href="project-miniature-panton-chair.html" class="grid-cell col-4">
                 <div class="cell-image">
                     <img src="Panton/chair1.png" alt="Panton Chair" class="img-contain">
@@ -433,67 +670,24 @@
                         <span>[SCULPTURE]</span>
                     </div>
                     <div class="cell-footer">
-                        <div class="project-title">Miniature Panton</div>
-                        <div class="project-tags">WOOD_CARVING</div>
+                        <div class="project-title" data-i18n="proj.panton">Miniature Panton</div>
+                        <div class="project-tags" data-i18n="proj.panton_tags">WOOD_CARVING</div>
                     </div>
                 </div>
             </a>
 
-            <!-- 5. Hull Model (Wood) - 标准图 -->
-            <a href="project-hull-model.html" class="grid-cell col-4">
-                <div class="cell-image">
-                    <img src="Hull Model/side1.png" alt="Hull Model" class="img-contain">
-                </div>
-                <div class="cell-content">
-                    <div class="cell-header">
-                        <span>ID: 005</span>
-                        <span>[MODEL]</span>
-                    </div>
-                    <div class="cell-footer">
-                        <div class="project-title">Hull Model</div>
-                        <div class="project-tags">TRADITIONAL_CRAFT</div>
-                    </div>
-                </div>
-            </a>
+            <!-- ─────────────────────────────────────────── -->
+            <!-- SECTION 03 · DIGITAL / AI                   -->
+            <!-- ─────────────────────────────────────────── -->
+            <div class="section-header">
+                <span class="section-name" data-i18n="index.sec_digital">// DIGITAL / AI</span>
+                <span class="section-index">×01</span>
+            </div>
 
-            <!-- 6. Shared Heater (Social) - 大图 -->
-            <a href="project-editorial-design.html" class="grid-cell col-8 row-half">
+            <!-- DND -->
+            <a href="project-packaging.html" class="grid-cell col-12 gaze-cell">
                 <div class="cell-image">
-                    <img src="Heater/cover1.png" alt="Heater" class="img-contain">
-                </div>
-                <div class="cell-content">
-                    <div class="cell-header">
-                        <span>ID: 006</span>
-                        <span>[SOCIAL_INNOVATION]</span>
-                    </div>
-                    <div class="cell-footer">
-                        <div class="project-title">Shared Heater</div>
-                        <div class="project-tags">PRODUCT // THERMAL</div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- 7. 1 Wend1 (Video) - 标准图 -->
-            <a href="project-wend1.html" class="grid-cell col-4">
-                <div class="cell-image">
-                    <img src="1wend1/Stills1.png" alt="Video">
-                </div>
-                <div class="cell-content">
-                    <div class="cell-header">
-                        <span>ID: 007</span>
-                        <span>[FILM]</span>
-                    </div>
-                    <div class="cell-footer">
-                        <div class="project-title">1 Wend1</div>
-                        <div class="project-tags">VIDEO_ART</div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- 8. DND Game (AI) - 标准图 -->
-            <a href="project-packaging.html" class="grid-cell col-4">
-                <div class="cell-image">
-                    <img src="DND/Logo.png" alt="DND" class="img-contain">
+                    <img src="DND/poster.png" alt="DND" class="img-contain">
                 </div>
                 <div class="cell-content">
                     <div class="cell-header">
@@ -501,14 +695,39 @@
                         <span>[INTERACTIVE]</span>
                     </div>
                     <div class="cell-footer">
-                        <div class="project-title">DND Adventure</div>
-                        <div class="project-tags">AI // GAME_DESIGN</div>
+                        <div class="project-title" data-i18n="proj.dnd">DND Adventure</div>
+                        <div class="project-tags" data-i18n="proj.dnd_tags">AI // GAME_DESIGN</div>
                     </div>
                 </div>
             </a>
 
-            <!-- 9. Self Portrait (Video) - 标准图 -->
-            <a href="project-motion-graphics.html" class="grid-cell col-4">
+            <!-- ─────────────────────────────────────────── -->
+            <!-- SECTION 04 · ACTION!                        -->
+            <!-- ─────────────────────────────────────────── -->
+            <div class="section-header">
+                <span class="section-name" data-i18n="index.sec_action">// ACTION!</span>
+                <span class="section-index">×02</span>
+            </div>
+
+            <!-- 1 Wend1 -->
+            <a href="project-wend1.html" class="grid-cell col-6 wend1-showcase">
+                <div class="cell-image">
+                    <img src="1wend1/Stills1.png" alt="1 Wend1">
+                </div>
+                <div class="cell-content">
+                    <div class="cell-header">
+                        <span>ID: 007</span>
+                        <span>[FILM]</span>
+                    </div>
+                    <div class="cell-footer">
+                        <div class="project-title" data-i18n="proj.wend1">1 Wend1</div>
+                        <div class="project-tags" data-i18n="proj.wend1_tags">VIDEO_ART</div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Self Portrait -->
+            <a href="project-motion-graphics.html" class="grid-cell col-6">
                 <div class="cell-image">
                     <img src="self portrait/self p.png" alt="Portrait">
                 </div>
@@ -518,31 +737,21 @@
                         <span>[FILM]</span>
                     </div>
                     <div class="cell-footer">
-                        <div class="project-title">Self Portrait</div>
-                        <div class="project-tags">EXPERIMENTAL</div>
+                        <div class="project-title" data-i18n="proj.portrait">Self Portrait</div>
+                        <div class="project-tags" data-i18n="proj.portrait_tags">EXPERIMENTAL</div>
                     </div>
                 </div>
             </a>
 
-            <!-- 10. Mouse Design (UX) - 标准图 -->
-            <a href="project-mobile-app.html" class="grid-cell col-4">
-                <div class="cell-image">
-                    <img src="Mouse/pho1.png" alt="Mouse Design" class="img-contain">
-                </div>
-                <div class="cell-content">
-                    <div class="cell-header">
-                        <span>ID: 010</span>
-                        <span>[UX_DESIGN]</span>
-                    </div>
-                    <div class="cell-footer">
-                        <div class="project-title">Barrier-Free Mouse</div>
-                        <div class="project-tags">ACCESSIBILITY // UX</div>
-                    </div>
-                </div>
-            </a>
+            <!-- ─────────────────────────────────────────── -->
+            <!-- SECTION 05 · ART?  (Gaze + Hull 并排等宽)      -->
+            <!-- ─────────────────────────────────────────── -->
+            <div class="section-header">
+                <span class="section-name" data-i18n="index.sec_art">// ART?</span>
+                <span class="section-index">×02</span>
+            </div>
 
-            <!-- 11. Gaze (Art) -->
-            <a href="project-gaze.html" class="grid-cell col-12 row-half gaze-cell">
+            <a href="project-gaze.html" class="grid-cell col-6 art-secondary-pair">
                 <div class="cell-image">
                     <img src="paint/GIF.PNG" alt="Gaze animated cover" class="img-contain">
                 </div>
@@ -552,8 +761,23 @@
                         <span>[ART]</span>
                     </div>
                     <div class="cell-footer">
-                        <div class="project-title">Gaze</div>
-                        <div class="project-tags">CHARCOAL // PORTRAIT</div>
+                        <div class="project-title" data-i18n="proj.gaze">Gaze</div>
+                        <div class="project-tags" data-i18n="proj.gaze_tags">CHARCOAL // PORTRAIT</div>
+                    </div>
+                </div>
+            </a>
+            <a href="project-hull-model.html" class="grid-cell col-6 art-secondary-pair">
+                <div class="cell-image">
+                    <img src="Hull Model/side1.png" alt="Hull Model" class="img-contain">
+                </div>
+                <div class="cell-content">
+                    <div class="cell-header">
+                        <span>ID: 005</span>
+                        <span>[MODEL]</span>
+                    </div>
+                    <div class="cell-footer">
+                        <div class="project-title" data-i18n="proj.hull">Hull Model</div>
+                        <div class="project-tags" data-i18n="proj.hull_tags">TRADITIONAL_CRAFT</div>
                     </div>
                 </div>
             </a>
@@ -562,11 +786,10 @@
     </div>
 
     <footer>
-        <div>© 2025 YIFAN ZHAO</div>
+        <div data-i18n="footer.copyright">© 2025 YIFAN ZHAO</div>
         <div style="display: flex; gap: 2rem;">
-            <a href="about.html" style="color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s;">ABOUT</a>
-            <a href="mailto:yzhao09@risd.edu" style="color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s;">CONTACT</a>
-            <a href="gallery-old.html" style="color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s;">GALLERY_VIEW <span style="font-size: 0.7em; opacity: 0.6;">(OLD VERSION)</span></a>
+            <a href="about.html" style="color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s;" data-i18n="nav.about">ABOUT</a>
+            <a href="mailto:yzhao09@risd.edu" style="color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s;" data-i18n="footer.contact">CONTACT</a>
         </div>
     </footer>
 
@@ -598,5 +821,6 @@
             observer.observe(cell);
         });
     </script>
+    <script src="i18n.js"></script>
 </body>
 </html>
